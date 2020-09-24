@@ -1,27 +1,40 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 import './App.css';
+import { Row, Col, Navbar } from "react-bootstrap";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>aw right!</p>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Sidebar from '../components/Sidebar'
+import Error404 from "../components/Error404"
+import Error405 from "../components/Error405"
+
+const MyRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (<>
+    <Navbar style={{backgroundColor:"black", color:"white",borderBottom:"3px solid Silver"}}>
+      oi
+    </Navbar>
+      <Row >
+        <Col xs={2} id="sidebar-wrapper" style={{ backgroundColor: "whitesmoke",borderRight:"1px solid Silver"}} class="sidebarcss">
+          <Sidebar />
+        </Col>
+        <Col xs={10} id="page-content-wrapper">
+          <Component {...props} />
+        </Col>
+      </Row>
+  </>)
+  } />
+)
+
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <MyRoute exact path='/404' component={Error404} />
+          <MyRoute exact path='*' component={Error405} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
