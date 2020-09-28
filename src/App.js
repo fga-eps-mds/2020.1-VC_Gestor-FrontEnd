@@ -7,6 +7,8 @@ import RelatorioDeDados from "./components/pages/RelatorioDeDados"
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus"
 import Option1 from "./components/pages/Option1"
 import Option2 from "./components/pages/Option2"
+import PostagemMenu from './components/components/PostagemMenu';
+import Postagem from './components/pages/Postagem'
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
@@ -49,6 +51,8 @@ class App extends React.Component {
           <MyRoute exact path='/RelatorioDeStatus' component={RelatorioDeStatus} />
           <MyRoute exact path='/Option1' component={Option1} />
           <MyRoute exact path='/Option2' component={Option2} />
+          <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
+          <MyRoute exact path='/Postagem' component={Postagem} />
           <MyRoute exact path='*' component={RelatorioDeStatus} />
         </Switch>
       </BrowserRouter>
