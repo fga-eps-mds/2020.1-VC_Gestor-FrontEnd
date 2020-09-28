@@ -1,0 +1,76 @@
+
+.button-anuncio {
+    position: relative;
+    padding: 10px 25px;
+    background-color: #0F4C75;
+    border: none;
+    color: #FFF;
+    font-weight: 300;
+    cursor: pointer;
+    display: inline-block;
+    width: 270px;
+    height: 45px;
+    border-radius: 6px;
+}
+.button-anuncio:hover {
+    background-color: #70B4E6;
+}
+.menu-anuncio {
+    position: relative;
+    padding: 10px 15px;
+    border: none;
+    background-color: #FFF;
+    color: #FFF;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    justify-content: start;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}
+  
+.Abas-contain {
+    margin: 0;
+    padding: 10px;
+    color: #323232;
+    cursor: pointer;
+    text-align: center;
+    font-size: 17px;
+}
+
+.Abas-contain-active {
+    border: 1px solid #5EB2F2;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: start;
+    margin: 0;
+}
+.card-body {
+    margin: 0;
+}
+.conteudo {
+
+}
+.titulo-conteudo {
+    margin-top: 22px;
+    font-size: 17px;
+    position: relative;
+    padding: 10px 25px;
+    background-color: #5EB2F2;
+    border: none;
+    color: #FFF;
+    font-weight: 300;
+    cursor: pointer;
+    display: inline-block;
+    width: 270px;
+    height: 45px;
+    border-radius: 6px;
+    width: 125px;
+
+}
