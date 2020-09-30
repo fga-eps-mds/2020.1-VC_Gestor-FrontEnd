@@ -9,6 +9,7 @@ import Option1 from "./components/pages/Option1"
 import Option2 from "./components/pages/Option2"
 import PostagemMenu from './components/components/PostagemMenu';
 import Postagem from './components/pages/Postagem'
+import Tabela from './components/pages/Tabela'
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
@@ -53,6 +54,8 @@ class App extends React.Component {
           <MyRoute exact path='/Option2' component={Option2} />
           <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
           <MyRoute exact path='/Postagem' component={Postagem} />
+          <MyRoute exact path='/Postagem' component={Postagem} />
+          <MyRoute exact path='/tabela' component={Tabela} />
           <MyRoute exact path='*' component={RelatorioDeStatus} />
         </Switch>
       </BrowserRouter>
