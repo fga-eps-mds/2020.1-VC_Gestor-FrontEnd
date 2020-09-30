@@ -1,11 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-class Tabela extends React.Component {
+// await api.port('posts', { post_id, title, description, status });
 
+class Tabela extends React.Component {
 
   render() {
     return (<>
+
       <Card style={{ width: '100%' }}>
         <Card.Body>
             {/* aqi vem o titulo */}

@@ -9,7 +9,7 @@ import Option1 from "./components/pages/Option1"
 import Option2 from "./components/pages/Option2"
 import PostagemMenu from './components/components/PostagemMenu';
 import Postagem from './components/pages/Postagem'
-import Tabela from './components/pages/Tabela'
+import Tabela from './components/pages/tabela'
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
