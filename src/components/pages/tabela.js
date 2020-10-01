@@ -45,6 +45,7 @@ class Tabela extends React.Component {
                         <th scope="col">Anunciante</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Likes</th>
 
                     </tr>
                 </thead>
@@ -60,6 +61,7 @@ class Tabela extends React.Component {
                     <td >{post.user.name} {post.user.surname}</td>
                     <td >{post.place.place_name}</td>
                     <td >{post.status}</td>
+                    <td >{post.likes}</td>
                     </tr>
 
                     </>
