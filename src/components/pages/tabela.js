@@ -57,8 +57,8 @@ class Tabela extends React.Component {
                     <td >{post.post_id}</td>
                     <td >{post.title}</td>
                     <td >{post.description}</td>
-                  <td >{post.user.name} {post.user.surname}</td>
-                    <td >{JSON.stringify(post.place)}</td>
+                    <td >{post.user.name} {post.user.surname}</td>
+                    <td >{post.place.place_name}</td>
                     <td >{post.status}</td>
                     </tr>
 
