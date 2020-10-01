@@ -1,12 +1,32 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
+import api from '../../services/api';
+
 // await api.port('posts', { post_id, title, description, status });
 
 class Tabela extends React.Component {
 
+  state = { posts: [] };
+
+  async componentDidMount() {
+    const response = await api.get(`posts`);
+
+    this.setState({ posts: response.data });
+
+    console.log( response.data );
+
+  }
+
   render() {
+
+    const { posts } = this.state;
+
+    console.log(posts);
+
     return (<>
+
+
 
       <Card style={{ width: '100%' }}>
         <Card.Body>
@@ -21,6 +41,7 @@ class Tabela extends React.Component {
                     <tr>
                         <th scope="col">#Id</th>
                         <th scope="col">Titulo</th>
+                        <th scope="col">Descrição</th>
                         <th scope="col">Anunciante</th>
                         <th scope="col">Departamento</th>
                         <th scope="col">Status</th>
@@ -28,27 +49,29 @@ class Tabela extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Computador quebrado na sala s10</td>
-                        <td>Joao</td>
-                        <td>Manuntencao</td>
-                        <td>Em Aberto</td>
+                  
+                  {posts.map(post => (
+                    <>
+
+                    <tr key={post.id}>
+                    <td >{post.post_id}</td>
+                    <td >{post.title}</td>
+                    <td >{post.description}</td>
+                  <td >{post.user.name} {post.user.surname}</td>
+                    <td >{JSON.stringify(post.place)}</td>
+                    <td >{post.status}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Bebedouro nao funciona</td>
-                        <td>Luiza</td>
-                        <td>Manuntencao</td>
-                        <td>Em Processo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Elevador estragado</td>
-                        <td>Pedro</td>
-                        <td>Engenharia</td>
-                        <td>Concluido</td>
-                    </tr>
+
+                    </>
+
+                  ))}
+
+
+
+
+
+
+
                 </tbody>
             </table>
           </Card.Text>
