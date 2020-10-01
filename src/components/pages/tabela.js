@@ -9,20 +9,25 @@ class Tabela extends React.Component {
 
   state = { posts: [] };
 
+
+
   async componentDidMount() {
-    const response = await api.get(`posts`);
 
-    this.setState({ posts: response.data });
+    const limit = 10;
+    const page = 0;
+    const response = await api.get(`posts?limit=${limit}&page=${page}`);
 
-    console.log( response.data );
+    console.log( response.data.rows );
+
+    this.setState({ posts: response.data.rows });
+
+
 
   }
 
   render() {
 
     const { posts } = this.state;
-
-    console.log(posts);
 
     return (<>
 
