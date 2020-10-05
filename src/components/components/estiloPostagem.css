@@ -5,7 +5,7 @@
     background-color: #0F4C75;
     border: none;
     color: #FFF;
-    font-weight: 300;
+    font-weight: 300px;
     cursor: pointer;
     display: unset;
     width: 200px;
@@ -58,9 +58,6 @@
     margin: 0;
     border: none;
 }
-.conteudo {
-
-}
 .titulo-conteudo {
     margin-top: 22px;
     font-size: 17px;
@@ -69,11 +66,10 @@
     background-color: #5EB2F2;
     border: none;
     color: #FFF;
-    font-weight: 300;
+    font-weight: 300px;
     cursor: pointer;
     display: inline-block;
-    width: 200px;
+    width: 120px;
     height: 45px;
     border-radius: 6px;
-    width: 125px;
 }

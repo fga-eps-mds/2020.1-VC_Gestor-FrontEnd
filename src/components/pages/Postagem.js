@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 import PostagemMenu from '../components/PostagemMenu'
+import Tabela3 from './TabelaPosts'
+import { faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 class Postagem extends Component {
 constructor(props) {
@@ -11,7 +15,7 @@ constructor(props) {
   render() {
     const content = {
       Aba1: '',
-      Aba2: 'Tabela da caixa de entrada',
+      Aba2: <Tabela3/>,
       Aba3: 'Processos em abertos',
       Aba4: 'Processos concluidos',
     };
@@ -35,7 +39,9 @@ constructor(props) {
           </nav>
             <Card.Body className="conteudo">
             <div>
-              <p className="titulo-conteudo">Mais</p>
+              <p className="titulo-conteudo">
+                Mais
+                <FontAwesomeIcon icon={faAngleDown} style={{ width: "15px", marginLeft: "10px", marginRight: "5px"}}/></p>
               <p>{content[this.state.active]}</p>
             </div>
             </Card.Body>

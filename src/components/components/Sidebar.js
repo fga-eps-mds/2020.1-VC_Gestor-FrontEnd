@@ -76,6 +76,9 @@ class Sidebar extends React.Component {
                 },{
                     title: "Tabela",
                     href: "/tabela"
+                },{
+                    title: "Tabela Posts",
+                    href: "/TabelaPosts"
                 }]
         }]
         this.state = {

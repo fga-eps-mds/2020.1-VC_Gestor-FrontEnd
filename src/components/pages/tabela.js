@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
+
 import api from '../../services/api';
 
 // await api.port('posts', { post_id, title, description, status });
@@ -9,25 +10,23 @@ class Tabela extends React.Component {
 
   state = { posts: [] };
 
-
-
   async componentDidMount() {
-
-    const limit = 10;
+    const limit = 100;
     const page = 0;
+    // const response2 = await api.put(`posts/${id}`, { status: 'modificar' });
     const response = await api.get(`posts?limit=${limit}&page=${page}`);
-
-    console.log( response.data.rows );
+    // console.log( response2.data );
+    console.log( response.data );
+    console.log (response.headers);
+    console.log (limit);
 
     this.setState({ posts: response.data.rows });
-
-
-
   }
 
-  render() {
 
+  render() {
     const { posts } = this.state;
+
 
     return (<>
 
@@ -41,6 +40,7 @@ class Tabela extends React.Component {
             </Card.Header>
             {/* aqui o corpo da tabela */}
           <Card.Text>
+
             <table class="table table-sm">
                 <thead>
                     <tr>
@@ -58,7 +58,6 @@ class Tabela extends React.Component {
                   
                   {posts.map(post => (
                     <>
-
                     <tr key={post.id}>
                     <td >{post.post_id}</td>
                     <td >{post.title}</td>
@@ -68,17 +67,7 @@ class Tabela extends React.Component {
                     <td >{post.status}</td>
                     <td >{post.likes}</td>
                     </tr>
-
-                    </>
-
-                  ))}
-
-
-
-
-
-
-
+                    </>))}
                 </tbody>
             </table>
           </Card.Text>
