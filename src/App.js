@@ -5,7 +5,8 @@ import { Row, Col, Navbar, NavDropdown } from "react-bootstrap";
 import Sidebar from './components/components/Sidebar'
 import RelatorioDeDados from "./components/pages/RelatorioDeDados"
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus"
-import Option1 from "./components/pages/Option1"
+import BeneficiosCriar from "./components/pages/BeneficiosCriar"
+// import Option1 from "./components/pages/Option1"
 import Option2 from "./components/pages/Option2"
 
 
@@ -47,7 +48,7 @@ class App extends React.Component {
         <Switch>
           <MyRoute exact path='/RelatorioDeDados' component={RelatorioDeDados} />
           <MyRoute exact path='/RelatorioDeStatus' component={RelatorioDeStatus} />
-          <MyRoute exact path='/Option1' component={Option1} />
+          <MyRoute exact path='/BeneficiosCriar' component={BeneficiosCriar} />
           <MyRoute exact path='/Option2' component={Option2} />
           <MyRoute exact path='*' component={RelatorioDeStatus} />
         </Switch>

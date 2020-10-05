@@ -60,8 +60,8 @@ class Sidebar extends React.Component {
             title: "Benefícios",
             icon: faTrophy,
             options :[{
-                title: "Option 1",
-                href: "/option1"
+                title: "Criar",
+                href: "/BeneficiosCriar"
             },{
                 title: "Option 2",
                 href: "/option2"
