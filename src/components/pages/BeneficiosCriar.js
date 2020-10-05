@@ -1,15 +1,16 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { Component } from "react";
+import { Card, Form } from "react-bootstrap";
+import Forms from "../components/Forms";
 
-class BeneficiosCriar extends React.Component {
+class CriarBeneficios extends React.Component {
 
   render() {
     return (<>
-      <Card style={{ width: '100%' }}>
-        <Card.Body>
-          <Card.Header>Criar Benefícios</Card.Header>
+      <Card style={{ width: '100%' , display: "flex", justifyContent: 'center', alignItems: 'center' }}>
+        <Card.Body style={{width: '70%'}}> 
+          <Card.Header>Criação de Benefícios</Card.Header>
           <Card.Text>
-            Option1 Option1 Option1 Option1 Option1 Option1
+            <Forms></Forms>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -18,4 +19,4 @@ class BeneficiosCriar extends React.Component {
   }
 }
 
-export default BeneficiosCriar;
+export default CriarBeneficios;
