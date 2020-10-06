@@ -1,52 +1,72 @@
 import React, { Component } from "react"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import FormControl from 'react-bootstrap/FormControl'
 
 class Forms extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = {
+        title: '',
+        description: '',
+        price: 1000000 ,
+        redeemWay: '' ,
+        quantity: 10
+      };
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
     handleChange(event) {
-      this.setState({value: event.target.value});
+      this.setState({title: event.target.value});
+      this.setState({description: event.target.value});
+      this.setState({price: event.target.value});
+      this.setState({redeemWay: event.target.value});
+      this.setState({quantity: event.target.value});
     }
   
     handleSubmit(event) {
-      alert('Enviado' + this.state.value);
-      event.preventDefault();
+      alert('Criado');
     }
   
     render() {
       return (
-        <Form ref="form" onSubmit={this.handleSubmit}>
-            <Form.Group controlId="exampleForm.ControlInput1">
+        <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="title">
                 <Form.Label>Título</Form.Label>
                 <Form.Control type="text" placeholder="Título do Benefício" />
             </Form.Group>
 
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Descrição</Form.Label>
-                <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" />
+            <Form.Group controlId="price">
+              <Form.Label>Preço</Form.Label>
+              <Form.Control type="text" placeholder="Preço" />
             </Form.Group>
 
-            <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Preço</Form.Label>
-                <Form.Control type="text" placeholder="Preço" />
+
+            <Form.Group controlId="quantity">
+              <Form.Label>Quantidade</Form.Label>
+              <Form.Control as="select" custom>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+              </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="exampleForm.ControlInput1" onChange={this.handleChange}>
-                <Form.Label>Quantidade</Form.Label>
-                <Form.Control type="text" placeholder="Quantidade" />
-            </Form.Group>
-
-            <Form.Group controlId="exampleForm.ControlInput1" onChange={this.handleChange}>
+            <Form.Group controlId="redeemWay">
                 <Form.Label>Meio de Resgate</Form.Label>
                 <Form.Control type="text" placeholder="Meio de Resgate do Benefício" />
+            </Form.Group>
+
+            <Form.Group controlId="description">
+                <Form.Label>Descrição</Form.Label>
+                <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" />
             </Form.Group>
 
             <Button type="submit" size="lg" block>

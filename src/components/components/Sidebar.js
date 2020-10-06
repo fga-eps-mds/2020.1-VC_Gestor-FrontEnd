@@ -60,7 +60,7 @@ class Sidebar extends React.Component {
             title: "Benefícios",
             icon: faTrophy,
             options :[{
-                title: "Criar",
+                title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
                 title: "Option 2",
