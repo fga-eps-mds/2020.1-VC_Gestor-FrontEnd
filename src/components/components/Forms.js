@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import api from '../../services/api'
+
 
 class Forms extends React.Component {
     constructor(props) {
@@ -27,10 +29,9 @@ class Forms extends React.Component {
   
     async handleSubmit(event) {
       const requestOptions = {
-        method: 'POST',
         body: JSON.stringify(this.state)
       };
-      const response = await fetch('https://localhost:3003/benefits', requestOptions);
+      const response = await api.post('benefits', requestOptions);
     }
   
     render() {
