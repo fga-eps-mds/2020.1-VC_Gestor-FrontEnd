@@ -25,8 +25,12 @@ class Forms extends React.Component {
       this.setState({quantity: event.target.value});
     }
   
-    handleSubmit(event) {
-      alert('Criado');
+    async handleSubmit(event) {
+      const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(this.state)
+      };
+      const response = await fetch('https://localhost:3003/benefits', requestOptions);
     }
   
     render() {
