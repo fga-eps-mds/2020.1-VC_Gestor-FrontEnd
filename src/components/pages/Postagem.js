@@ -9,14 +9,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class Postagem extends Component {
 constructor(props) {
   super(props);
-  this.state = {active: 'aTab'};
+  this.state = {
+    active: 'aTab',
+    tabela: <Tabela3/>
+  };
 }
 
   render() {
     const content = {
       Aba1: '',
       Aba2: <Tabela3/>,
-      Aba3: 'Processos em abertos',
+      Aba3: 'Processos finalizados',
       Aba4: 'Processos concluidos',
     };
 
@@ -45,7 +48,7 @@ constructor(props) {
               <p>{content[this.state.active]}</p>
             </div>
             </Card.Body>
-
+    {console.log(this.state.tabela.postsNew)}
 
           </Card.Text>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         </Card.Body>

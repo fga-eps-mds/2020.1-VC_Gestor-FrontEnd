@@ -4,6 +4,7 @@ import api from '../../services/api';
 import "./tabela.css"
 import { faUserCircle, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Postagem from "./Postagem";
 
 
 
@@ -24,7 +25,9 @@ class TabelaPosts extends React.Component {
       showModal: false,
       handleClose: false,
       handleShow: true,
-      status: 'Aguardando'
+      postsNew: [],
+      postsClosed: [],
+      ordem: ['asc']
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,7 +54,8 @@ class TabelaPosts extends React.Component {
       pageCount: Math.ceil(response.length / this.state.perPage),
       tableData:response.data.rows.slice(0, this.state.perPage),
       totalPages: arrayPages,
-      numRows: numRows
+      numRows: numRows,
+      postsNew:response.data.rows.filter((e)=>{return e.status === 'Em andamento'})
     });
   }
 
@@ -76,11 +80,16 @@ class TabelaPosts extends React.Component {
 
     handleClose = () => this.setState({showModal: false})
     handleSubmit = (e) => {
-       alert('O estado do post foi alterado para: ' + this.state.status);
-       api.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
+       if(this.state.modalInf.status === this.state.status) {
+         alert('O estadado atual continua o mesmo');
+       } else {
+        alert('O estado do post foi alterado para: ' + this.state.status);
+        api.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
+      }
      }
     handleChange = (event) => {
       event.preventDefault()
+      alert(event.target.value)
       this.setState({status: event.target.value});
       }
 
@@ -105,7 +114,7 @@ class TabelaPosts extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   <label>
                     Alterar estado para:<br/>
-                <select select={this.state.modalInf.status} onChange={this.handleChange}>
+                    <select onChange={this.handleChange}>
                     <option value="Aguardando">Aguardando</option>
                     <option value="Em andamento">Em andamento</option>
                     <option value="Resolvido">Resolvido</option>
@@ -123,11 +132,51 @@ class TabelaPosts extends React.Component {
     }
 
     mostrarModal(e){
-      // console.log(e)
       this.setState({
         showModal: true,
         modalInf: e
       });
+    }
+
+    finalizados(){
+      this.setState({
+        tableData: this.state.posts.filter((e)=>{return e.status === 'Em andamento'})
+      });
+    }
+
+    ordenar(type) {
+      if(this.state.ordem === 'asc'){
+        this.setState({
+          posts: this.state.posts.sort((a, b) => {
+            return a[type] > b[type] ? 1 : -1
+          }),
+          ordem: 'desc'
+        });
+      } else {
+        this.setState({
+          posts: this.state.posts.sort((a, b) => {
+            return a[type] < b[type] ? 1 : -1
+          }),
+          ordem: 'asc'
+        });
+      }
+      return this.loadMoreData();
+    }
+
+    showPagination(){
+      return (
+        <Pagination className='pagination'>
+        <Pagination.First onClick={() => this.currentPage(0)}/>
+        <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
+           this.currentPage(this.state.paginaAtual - 1) : null}/>
+        {this.state.totalPages.map(page => (
+          <Pagination.Item key={page} on={page}
+            onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
+        ))}
+        <Pagination.Next />
+        <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
+      </Pagination>
+      )
     }
 
 
@@ -149,14 +198,13 @@ class TabelaPosts extends React.Component {
             <table class="table">
                 <thead>
                     <tr className="table-cab">
-                        <th scope="col">#Id</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Descrição</th>
+                        <th scope="col" onClick={() => this.ordenar('post_id')}>#Id</th>
+                        <th scope="col" onClick={() => this.ordenar('title')}>Titulo</th>
+                        <th scope="col" onClick={() => this.ordenar('description')}>Descrição</th>
                         <th scope="col">Anunciante</th>
                         <th scope="col">Departamento</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Likes</th>
-
+                        <th scope="col" onClick={() => this.ordenar('status')}>Status</th>
+                        <th scope="col" onClick={() => this.ordenar('likes')}>Likes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,19 +223,13 @@ class TabelaPosts extends React.Component {
                   <h2>{post.id}</h2>
                     </>))}
                 </tbody>
-            </table>
-                  <Pagination className='pagination'>
-                    <Pagination.First onClick={() => this.currentPage(0)}/>
-                    <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
-                       this.currentPage(this.state.paginaAtual - 1) : null}/>
-                    {this.state.totalPages.map(page => (
-                      <Pagination.Item key={page} on={page}
-                        onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
-                    ))}
-                    <Pagination.Next />
-                    <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-                  </Pagination>
+            </table> 
                   {this.state.showModal ? this.modelContent() : null}
+                  <div>
+                    <button onClick={() => this.finalizados()}>filtro</button>
+                  </div>
+                  {tableData.length >= this.state.perPage ? this.showPagination() : null}
+                  <h2>{tableData.length}</h2>
           </Card.Text>
         </Card.Body>
       </Card>
