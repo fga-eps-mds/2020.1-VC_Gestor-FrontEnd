@@ -6,8 +6,8 @@ class CriarBeneficios extends React.Component {
 
   render() {
     return (<>
-      <Card style={{ width: '100%' , display: "flex", justifyContent: 'center', alignItems: 'center' }}>
-        <Card.Body style={{width: '70%'}}> 
+      <Card style={{ width: "100%" , display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Card.Body style={{width: "70%"}}> 
           <Card.Header>Criação de Benefícios</Card.Header>
           <Card.Text>
             <Forms></Forms>
