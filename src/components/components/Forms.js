@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import api from '../../services/api'
@@ -11,7 +11,7 @@ class Forms extends React.Component {
         title: '',
         description: '',
         price: 1000000 ,
-        redeemWay: '' ,
+        redeem_way: '' ,
         quantity: 10
       };
   
@@ -20,18 +20,34 @@ class Forms extends React.Component {
     }
   
     handleChange(event) {
-      this.setState({title: event.target.value});
-      this.setState({description: event.target.value});
-      this.setState({price: event.target.value});
-      this.setState({redeemWay: event.target.value});
-      this.setState({quantity: event.target.value});
+      switch(event.target.id){
+        case  "title":
+          this.setState({title: event.target.value});
+          break;
+        case "description":
+          this.setState({description: event.target.value});
+          break;
+        case "price":
+          this.setState({price: event.target.value});
+          break;
+        case "redeem_way":
+          this.setState({redeem_way: event.target.value});
+          break;
+        case "quantity":
+          this.setState({quantity: event.target.value});
+          break;
+        default: break;
+      }
     }
   
     async handleSubmit(event) {
-      const requestOptions = {
-        body: JSON.stringify(this.state)
-      };
-      const response = await api.post('benefits', requestOptions);
+      event.preventDefault();
+
+      const benefit = this.state;
+
+      const response = await api.post('benefits',  benefit );
+
+      console.log(response);
     }
   
     render() {
@@ -39,18 +55,18 @@ class Forms extends React.Component {
         <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="title">
                 <Form.Label>Título</Form.Label>
-                <Form.Control type="text" placeholder="Título do Benefício" />
+                <Form.Control type="text" placeholder="Título do Benefício" value={this.state.title} onChange={this.handleChange} />
             </Form.Group>
 
             <Form.Group controlId="price">
               <Form.Label>Preço</Form.Label>
-              <Form.Control type="text" placeholder="Preço" />
+              <Form.Control type="text" placeholder="Preço" value={this.state.price} onChange={this.handleChange} />
             </Form.Group>
 
 
             <Form.Group controlId="quantity">
               <Form.Label>Quantidade</Form.Label>
-              <Form.Control as="select" custom>
+              <Form.Control as="select" value={this.state.quantity} onChange={this.handleChange} custom>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -64,14 +80,14 @@ class Forms extends React.Component {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="redeemWay">
+            <Form.Group controlId="redeem_way">
                 <Form.Label>Meio de Resgate</Form.Label>
-                <Form.Control type="text" placeholder="Meio de Resgate do Benefício" />
+                <Form.Control type="text" placeholder="Meio de Resgate do Benefício" value={this.state.redeem_way} onChange={this.handleChange} />
             </Form.Group>
 
             <Form.Group controlId="description">
                 <Form.Label>Descrição</Form.Label>
-                <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" />
+                <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" value={this.state.description} onChange={this.handleChange} />
             </Form.Group>
 
             <Button type="submit" size="lg" block>

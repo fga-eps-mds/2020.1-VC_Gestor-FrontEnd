@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Card, Form } from "react-bootstrap";
+import React from "react";
+import { Card } from "react-bootstrap";
 import Forms from "../components/Forms";
 
 class CriarBeneficios extends React.Component {
