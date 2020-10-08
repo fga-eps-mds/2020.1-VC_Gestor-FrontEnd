@@ -34,7 +34,7 @@ constructor(props) {
             <PostagemMenu active={this.state.active}
               onChange={active => this.setState({active})}>
               <div className='button-anuncio'key="Aba1">Anúncio</div>
-                <div key="Aba2">Caixa de Entrada</div>
+              <div key="Aba2">Caixa de Entrada</div>
               <div key="Aba3">Em Aberto</div>
               <div key="Aba4">Finalizados</div>
             </PostagemMenu>

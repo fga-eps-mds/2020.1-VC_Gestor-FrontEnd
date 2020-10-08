@@ -1,12 +1,15 @@
 .table{
+    display: inline-block;
+    position: relative;
     font-family: 'Roboto', sans-serif;
     align-items: center;  
     background-color: #fff;
     border: none;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    margin: 0 0 0;
+    margin: 10px 10px 10px;
     padding: 20px 0 28px;
+    width: 79%;
 }
 .table-cab{
     background-color: #0F4C75;
@@ -28,11 +31,11 @@ tr:nth-child(odd):hover{
 }
 
 .modal {
-    width: 500px;
+    width: 800px;
     height: 400px;
     display: flex;
     position: absolute;
-    margin: 100px 100px 200px;
+    margin: 100px 100px 200px 500px;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
@@ -42,7 +45,7 @@ tr:nth-child(odd):hover{
     position: relative;
     display: block;
     font-size: 14px;
-    padding: 10px;
+    padding: 15px;
     background: #0F4C75;
     color: #fff;
     border: none;
@@ -71,4 +74,17 @@ tr:nth-child(odd):hover{
 }
 .table-cab .a{
     cursor: pointer;
+}
+.pagination {
+    justify-content: center;
+    position: relative;
+}
+
+.menu-txt{
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+.menu-txt-fim{
+    margin-bottom: 15px;
+    padding-bottom: 10px;
 }

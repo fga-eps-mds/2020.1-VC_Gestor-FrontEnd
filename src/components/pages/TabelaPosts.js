@@ -5,8 +5,6 @@ import "./tabela.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-
 class TabelaPosts extends React.Component {
   
   constructor(props){
@@ -14,7 +12,7 @@ class TabelaPosts extends React.Component {
     this.state = { 
       posts: [],
       tableData: [],
-      perPage:5,
+      perPage:10,
       totalPages: [],
       paginaAtual: 0,
       slice: 0,
@@ -86,7 +84,7 @@ class TabelaPosts extends React.Component {
      }
     handleChange = (event) => {
       event.preventDefault()
-      alert(event.target.value)
+      // alert(event.target.value)
       this.setState({status: event.target.value});
       }
 
@@ -137,7 +135,19 @@ class TabelaPosts extends React.Component {
 
     finalizados(){
       this.setState({
+        tableData: this.state.posts.filter((e)=>{return e.status === 'Revisado'})
+      });
+    }
+
+    emAndamento(){
+      this.setState({
         tableData: this.state.posts.filter((e)=>{return e.status === 'Em andamento'})
+      });
+    }
+
+    Aguardando(){
+      this.setState({
+        tableData: this.state.posts.filter((e)=>{return e.status === 'Não revisado'})
       });
     }
 
@@ -160,21 +170,6 @@ class TabelaPosts extends React.Component {
       return this.loadMoreData();
     }
 
-    showPagination(){
-      return (
-        <Pagination className='pagination'>
-        <Pagination.First onClick={() => this.currentPage(0)}/>
-        <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
-           this.currentPage(this.state.paginaAtual - 1) : null}/>
-        {this.state.totalPages.map(page => (
-          <Pagination.Item key={page} on={page}
-            onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
-        ))}
-        <Pagination.Next />
-        <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-      </Pagination>
-      )
-    }
 
 
   render() {
@@ -190,7 +185,64 @@ class TabelaPosts extends React.Component {
           <Card.Header>
             </Card.Header>
             {/* aqui o corpo da tabela */}
-          <Card.Text>
+          <Card.Text style={{ width: '100%' }} className="Card-txt">
+
+
+
+          <nav className='menu-anuncio'>
+              <div inputMode className='button-anuncio'key="Aba1">Anunciantes</div>
+              <div key="Aba2" className="menu-txt">
+              <input type="checkbox"defaultChecked={true}  style={{ margin: "8px" }}/>
+              Registrados
+              </div>
+              <div key="Aba3" className="menu-txt-fim">
+              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Anônimos</div>
+              <div className='button-anuncio'key="Aba1">Categoria</div>
+              <div key="Aba2" className="menu-txt">
+              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Limpeza</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Segurança</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                  Infraestrutura</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                  Transportes</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Serviços Tercerizados</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Meio Ambiente</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Jardinagem</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Alimentação nos Campi</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Saúde e Seguridade</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Outros</div>
+              <div key="Aba3" className="menu-txt-fim">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Anônimos</div>
+              <div className='button-anuncio'key="Aba1">Status</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Aguardando</div>
+              <div key="Aba2" className="menu-txt">
+                <input type="checkbox"defaultChecked={false} style={{ margin: "8px" }} onClick={() => this.finalizados()}/>
+                Em andamento</div>
+              <div key="Aba3" className="menu-txt">
+                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
+                Resolvido</div>
+          </nav>
 
             <table class="table">
                 <thead>
@@ -222,7 +274,18 @@ class TabelaPosts extends React.Component {
                 </tbody>
             </table> 
                   {this.state.showModal ? this.modelContent() : null}
-                  {tableData.length >= this.state.perPage ? this.showPagination() : null}
+                  {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
+                  <Pagination className='pagination'>
+                    <Pagination.First onClick={() => this.currentPage(0)}/>
+                    <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
+                      this.currentPage(this.state.paginaAtual - 1) : null}/>
+                    {this.state.totalPages.map(page => (
+                      <Pagination.Item key={page} on={page}
+                        onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
+                    ))}
+                    <Pagination.Next />
+                    <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
+                  </Pagination>
           </Card.Text>
         </Card.Body>
       </Card>
