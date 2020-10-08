@@ -73,12 +73,6 @@ class Sidebar extends React.Component {
             options :[{                
                     title: "Postagens",
                     href: "/Postagem"
-                },{
-                    title: "Tabela",
-                    href: "/tabela"
-                },{
-                    title: "Tabela Posts",
-                    href: "/TabelaPosts"
                 }]
         }]
         this.state = {

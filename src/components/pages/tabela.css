@@ -5,10 +5,8 @@
     border: none;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    box-sizing: border-box;
-    margin: 40px 0 0;
+    margin: 0 0 0;
     padding: 20px 0 28px;
-    width: 600px;
 }
 .table-cab{
     background-color: #0F4C75;
@@ -70,4 +68,7 @@ tr:nth-child(odd):hover{
     width: 100%;
     margin: 0;
     padding: 1.875rem 0 0;
+}
+.table-cab .a{
+    cursor: pointer;
 }

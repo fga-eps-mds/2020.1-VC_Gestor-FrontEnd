@@ -1,10 +1,9 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
-import api from '../../services/api';
-import "./tabela.css"
-import { faUserCircle, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Postagem from "./Postagem";
+import api from "../../services/api";
+import "./tabela.css";
+import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
@@ -33,8 +32,6 @@ class TabelaPosts extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 }
 
-
-
   async componentDidMount() {
     const limit = 100;
     const page = 0;
@@ -43,7 +40,7 @@ class TabelaPosts extends React.Component {
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
     const total = Math.ceil(response.data.count/this.state.perPage)
     const numRows = response.data.count;
-    console.log( response.data);
+    // console.log( response.data);
     const arrayPages = [];
     for (let i = 0; i < total; i++){
       arrayPages.push(i);
@@ -198,13 +195,13 @@ class TabelaPosts extends React.Component {
             <table class="table">
                 <thead>
                     <tr className="table-cab">
-                        <th scope="col" onClick={() => this.ordenar('post_id')}>#Id</th>
-                        <th scope="col" onClick={() => this.ordenar('title')}>Titulo</th>
-                        <th scope="col" onClick={() => this.ordenar('description')}>Descrição</th>
+                        <th scope="col" className="a" onClick={() => this.ordenar('post_id')}>#Id</th>
+                        <th scope="col" className="a" onClick={() => this.ordenar('title')}>Titulo</th>
+                        <th scope="col" className="a" onClick={() => this.ordenar('description')}>Descrição</th>
                         <th scope="col">Anunciante</th>
                         <th scope="col">Departamento</th>
-                        <th scope="col" onClick={() => this.ordenar('status')}>Status</th>
-                        <th scope="col" onClick={() => this.ordenar('likes')}>Likes</th>
+                        <th scope="col" className="a" onClick={() => this.ordenar('status')}>Status</th>
+                        <th scope="col" className="a" onClick={() => this.ordenar('likes')}>Likes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -225,11 +222,7 @@ class TabelaPosts extends React.Component {
                 </tbody>
             </table> 
                   {this.state.showModal ? this.modelContent() : null}
-                  <div>
-                    <button onClick={() => this.finalizados()}>filtro</button>
-                  </div>
                   {tableData.length >= this.state.perPage ? this.showPagination() : null}
-                  <h2>{tableData.length}</h2>
           </Card.Text>
         </Card.Body>
       </Card>

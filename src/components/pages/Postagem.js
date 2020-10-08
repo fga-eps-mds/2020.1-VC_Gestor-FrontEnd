@@ -11,7 +11,6 @@ constructor(props) {
   super(props);
   this.state = {
     active: 'aTab',
-    tabela: <Tabela3/>
   };
 }
 
@@ -48,8 +47,6 @@ constructor(props) {
               <p>{content[this.state.active]}</p>
             </div>
             </Card.Body>
-    {console.log(this.state.tabela.postsNew)}
-
           </Card.Text>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         </Card.Body>
       </Card>

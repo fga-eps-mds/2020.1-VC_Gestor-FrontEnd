@@ -1,16 +1,15 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Row, Col, Navbar, NavDropdown } from "react-bootstrap";
-
-import Sidebar from './components/components/Sidebar'
-import RelatorioDeDados from "./components/pages/RelatorioDeDados"
-import RelatorioDeStatus from "./components/pages/RelatorioDeStatus"
-import Option1 from "./components/pages/Option1"
-import Option2 from "./components/pages/Option2"
-import PostagemMenu from './components/components/PostagemMenu';
-import Postagem from './components/pages/Postagem'
-import Tabela from './components/pages/tabela'
-import TabelaPosts from './components/pages/TabelaPosts'
+import Sidebar from "./components/components/Sidebar";
+import RelatorioDeDados from "./components/pages/RelatorioDeDados";
+import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
+import Option1 from "./components/pages/Option1";
+import Option2 from "./components/pages/Option2";
+import PostagemMenu from "./components/components/PostagemMenu";
+import Postagem from "./components/pages/Postagem";
+import Tabela from "./components/pages/tabela";
+import TabelaPosts from "./components/pages/TabelaPosts";
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
