@@ -70,7 +70,16 @@ class Sidebar extends React.Component {
             index:3,
             title: "Postagens",
             icon: faBullhorn,
-            options :[]
+            options :[{                
+                    title: "Postagens",
+                    href: "/Postagem"
+                },{
+                    title: "Tabela",
+                    href: "/tabela"
+                },{
+                    title: "Postagens",
+                    href: "/TabelaPosts"
+                }]
         }]
         this.state = {
             selected:-1

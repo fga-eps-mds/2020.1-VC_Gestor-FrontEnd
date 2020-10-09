@@ -1,13 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Row, Col, Navbar, NavDropdown } from "react-bootstrap";
+import Sidebar from "./components/components/Sidebar";
+import RelatorioDeDados from "./components/pages/RelatorioDeDados";
+import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
+import Option1 from "./components/pages/Option1";
+import Option2 from "./components/pages/Option2";
+import PostagemMenu from "./components/components/PostagemMenu";
+import Postagem from "./components/pages/Postagem";
+import Tabela from "./components/pages/tabela";
+import TabelaPosts from "./components/pages/TabelaPosts";
 
-import Sidebar from './components/components/Sidebar'
-import RelatorioDeDados from "./components/pages/RelatorioDeDados"
-import RelatorioDeStatus from "./components/pages/RelatorioDeStatus"
-import BeneficiosCriar from "./components/pages/BeneficiosCriar"
-// import Option1 from "./components/pages/Option1"
-import Option2 from "./components/pages/Option2"
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
@@ -50,6 +53,11 @@ class App extends React.Component {
           <MyRoute exact path='/RelatorioDeStatus' component={RelatorioDeStatus} />
           <MyRoute exact path='/BeneficiosCriar' component={BeneficiosCriar} />
           <MyRoute exact path='/Option2' component={Option2} />
+          <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
+          <MyRoute exact path='/Postagem' component={Postagem} />
+          <MyRoute exact path='/Postagem' component={Postagem} />
+          <MyRoute exact path='/tabela' component={Tabela} />
+          <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
           <MyRoute exact path='*' component={RelatorioDeStatus} />
         </Switch>
       </BrowserRouter>
