@@ -12,6 +12,7 @@ import Tabela from "./components/pages/tabela";
 import TabelaPosts from "./components/pages/TabelaPosts";
 
 
+
 const MyRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (<>
     <Navbar style={{ backgroundColor: "#0F4C75", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
@@ -50,7 +51,7 @@ class App extends React.Component {
         <Switch>
           <MyRoute exact path='/RelatorioDeDados' component={RelatorioDeDados} />
           <MyRoute exact path='/RelatorioDeStatus' component={RelatorioDeStatus} />
-          <MyRoute exact path='/Option1' component={Option1} />
+          <MyRoute exact path='/BeneficiosCriar' component={BeneficiosCriar} />
           <MyRoute exact path='/Option2' component={Option2} />
           <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
           <MyRoute exact path='/Postagem' component={Postagem} />
