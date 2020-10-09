@@ -1,0 +1,80 @@
+.card {
+    background-color: whitesmoke;
+    margin: 0;
+    border: none;
+    width: 50%;
+    display: "flex";
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border-radius: 20px; */
+}
+ 
+.card-header_ {
+   /*
+    margin: 0;
+ */
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border-radius: 20%; 
+    width: 100%;
+    background-color: #438ABB !important;
+    box-sizing: border-box;
+    color: #f3f3f3;
+    text-align: center !important;
+}
+
+.text {
+    width: 100%;/**/
+    height: 60%;
+    background-color: #ffffff;
+    display: flex;
+    /* align-items: center; */
+   justify-content: center;
+    /* position: absolute; */
+    /* border-radius: 15px; */
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+}
+ /**/
+.h3 {
+
+}
+
+.forms {
+    /*width: 100%;
+    background-color: red;*/
+}
+
+#title_{
+    margin: 10PX 20px 0 20px;
+    width: 100%;
+}
+
+#price_{
+    margin: 10px 20px 0 20px;
+    width: 25%;
+}
+
+#quantity_{
+    margin: 10px 20px 0 20px;
+    width: 20%;
+}
+
+#redeem_way_{
+    margin: 10px 20px 0 20px;
+    width: 25%;
+}
+
+#description_{
+    align-items: left;
+    margin: 10px 20px 10px 20px;
+    width: 100%;
+}
+#button_{
+    align-items: center;
+    margin: 10px 20px 10px 20px;
+    width: 100%;
+}
+
+
