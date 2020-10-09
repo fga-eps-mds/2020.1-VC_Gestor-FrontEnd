@@ -4,14 +4,15 @@ import Button from 'react-bootstrap/Button'
 import api from '../../services/api'
 import { Row } from "react-bootstrap";
 
+
 class Forms extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        title: '',
-        description: '',
+        title: "",
+        description: "",
         price: 1000000 ,
-        redeem_way: '' ,
+        redeem_way: "" ,
         quantity: 10
       };
   
@@ -45,9 +46,7 @@ class Forms extends React.Component {
 
       const benefit = this.state;
 
-      const response = await api.post('benefits',  benefit );
-
-      console.log(response);
+      const response = await api.post("benefits",  benefit );
     }
   
     render() {
@@ -109,4 +108,4 @@ class Forms extends React.Component {
     }
   }
 
-  export default Forms
+  export default Forms;

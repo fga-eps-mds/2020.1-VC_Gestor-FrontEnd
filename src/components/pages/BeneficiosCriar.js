@@ -7,11 +7,13 @@ class CriarBeneficios extends React.Component {
 
   render() {
     return (<>
+            
       <Card className="card">
       <Card.Header className="card-header_"><h3>Criação de Benefícios</h3></Card.Header>
         <Card.Text className="text">
           <Forms className="forms" />
         </Card.Text>
+
       </Card>
     </>
     );
