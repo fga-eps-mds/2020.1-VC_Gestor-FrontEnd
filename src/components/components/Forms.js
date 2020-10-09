@@ -1,7 +1,8 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import api from "../../services/api";
+import React from "react"
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import api from '../../services/api'
+import { Row } from "react-bootstrap";
 
 
 class Forms extends React.Component {
@@ -50,21 +51,25 @@ class Forms extends React.Component {
   
     render() {
       return (
-        <Form onSubmit={this.handleSubmit}>
-            <Form.Group controlId="title">
-                <Form.Label>Título</Form.Label>
-                <Form.Control type="text" placeholder="Título do Benefício" value={this.state.title} onChange={this.handleChange} />
-            </Form.Group>
 
-            <Form.Group controlId="price">
+        <Form onSubmit={this.handleSubmit} >
+       
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className="row">
+              <Form.Group controlId="title" id="title_">
+                  <Form.Label>Título</Form.Label>
+                  <Form.Control style={{ width:"100%" }}  type="text" placeholder="Título do Benefício" value={this.state.title} onChange={this.handleChange} />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group controlId="price" id="price_">
               <Form.Label>Preço</Form.Label>
               <Form.Control type="text" placeholder="Preço" value={this.state.price} onChange={this.handleChange} />
             </Form.Group>
 
-
-            <Form.Group controlId="quantity">
+              <Form.Group controlId="quantity" id="quantity_">
               <Form.Label>Quantidade</Form.Label>
-              <Form.Control as="select" value={this.state.quantity} onChange={this.handleChange} custom>
+              <Form.Control  as="select" value={this.state.quantity} onChange={this.handleChange} custom>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -78,20 +83,24 @@ class Forms extends React.Component {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="redeem_way">
+              <Form.Group controlId="redeem_way" id="redeem_way_">
                 <Form.Label>Meio de Resgate</Form.Label>
                 <Form.Control type="text" placeholder="Meio de Resgate do Benefício" value={this.state.redeem_way} onChange={this.handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="description">
-                <Form.Label>Descrição</Form.Label>
-                <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" value={this.state.description} onChange={this.handleChange} />
-            </Form.Group>
-
-            <Button type="submit" size="lg" block>
-                Enviar
-            </Button>
-            
+            </div>
+            <div className="row">
+              <Form.Group controlId="description" id="description_">
+                  <Form.Label>Descrição</Form.Label>
+                  <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" cols="6" value={this.state.description} onChange={this.handleChange} />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Button id="button_" type="submit" size="lg" block>
+                  Enviar
+              </Button>
+            </div>
+            </div>
+           
         </Form>
 
         
