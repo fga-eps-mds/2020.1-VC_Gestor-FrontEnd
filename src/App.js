@@ -10,7 +10,7 @@ import PostagemMenu from "./components/components/PostagemMenu";
 import Postagem from "./components/pages/Postagem";
 import Tabela from "./components/pages/tabela";
 import TabelaPosts from "./components/pages/TabelaPosts";
-
+import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
