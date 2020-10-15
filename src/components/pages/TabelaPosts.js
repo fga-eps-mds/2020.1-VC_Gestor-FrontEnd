@@ -4,6 +4,7 @@ import api from "../../services/api";
 import "./tabela.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Redirect } from "react-router-dom";
 
 class TabelaPosts extends React.Component {
   
@@ -273,7 +274,10 @@ class TabelaPosts extends React.Component {
                     </>))}
                 </tbody>
             </table> 
-                  {this.state.showModal ? this.modelContent() : null}
+                  {this.state.showModal ? <Redirect to={{
+                      pathname: `/Anuncio/${this.state.modalInf.post_id}`,
+                      state: {
+                      id: this.state.modalInf.post_id}}}/> : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
                   <Pagination className='pagination'>
                     <Pagination.First onClick={() => this.currentPage(0)}/>
@@ -286,6 +290,16 @@ class TabelaPosts extends React.Component {
                     <Pagination.Next />
                     <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
                   </Pagination>
+                  <div>
+                    <ul>
+                      <li><Link to={{
+                        pathname: `/Anuncio`,
+                        state: {
+                          titulo: 'titulos'
+                        }
+                      }}>ir para pagina</Link></li>
+                    </ul>
+                  </div>
           </Card.Text>
         </Card.Body>
       </Card>

@@ -10,6 +10,8 @@ import PostagemMenu from "./components/components/PostagemMenu";
 import Postagem from "./components/pages/Postagem";
 import Tabela from "./components/pages/tabela";
 import TabelaPosts from "./components/pages/TabelaPosts";
+import BeneficiosCriar from "./components/pages/BeneficiosCriar";
+import Anuncio from "./components/pages/Anuncio";
 
 
 
@@ -58,6 +60,7 @@ class App extends React.Component {
           <MyRoute exact path='/Postagem' component={Postagem} />
           <MyRoute exact path='/tabela' component={Tabela} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
+          <MyRoute exact path='/Anuncio/:post_id' component={Anuncio} />
           <MyRoute exact path='*' component={RelatorioDeStatus} />
         </Switch>
       </BrowserRouter>

@@ -1,0 +1,14 @@
+.card-corpo {
+    display:flex;
+    justify-content:left;
+    background-color: beige;
+    display:flex;
+}
+
+.card-Titulo{
+    display:flex;
+    justify-content:left;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+}
