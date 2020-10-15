@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
 import api from "../../services/api";
-import "./tabela.css";
+import "../components/estiloPostagem.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -24,7 +24,9 @@ class TabelaPosts extends React.Component {
       handleShow: true,
       postsNew: [],
       postsClosed: [],
-      ordem: ['asc']
+      ordem: ['asc'],
+      check: false,
+      conjuntoA: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,7 +40,7 @@ class TabelaPosts extends React.Component {
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
     const total = Math.ceil(response.data.count/this.state.perPage)
     const numRows = response.data.count;
-    // console.log( response.data);
+    console.log( response.data);
     const arrayPages = [];
     for (let i = 0; i < total; i++){
       arrayPages.push(i);
@@ -98,6 +100,7 @@ class TabelaPosts extends React.Component {
                 {this.state.modalInf.user.name} {this.state.modalInf.user.surname}<br/>
                 <h6>{this.state.modalInf.dt_creation}</h6>
                 <h6>Estado da postem: {this.state.modalInf.status}</h6>
+                <h6>Categoria {this.state.modalInf.category.category_name}</h6>
               </Modal.Title>
             </Modal.Header>
               <Modal.Body>
@@ -133,22 +136,60 @@ class TabelaPosts extends React.Component {
       });
     }
 
-    finalizados(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Revisado'})
-      });
+    filterStatus(e,type){
+      if (e.target.checked === true){
+        const conjB = this.state.posts.filter((e)=>{return e.status === type})
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item)}})
+        this.setState({
+          tableData: this.state.conjuntoA
+        });
+      } else {
+        const conjB = this.state.posts.filter((e)=>{return e.status === type})
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1)}})
+        this.setState({
+          tableData: this.state.conjuntoA
+        });
+        if (this.state.conjuntoA.length === 0){
+         this.loadMoreData();
+        }
+      }
     }
 
-    emAndamento(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Em andamento'})
-      });
+    filterPerson(e, type){
+      const conjuntoB = this.state.posts;
+      if (e.target.checked === true){
+        const conjB = this.state.posts.filter((e)=>{return e.user.name === type})
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1)}})
+        this.setState({
+          tableData: conjuntoB
+        });
+        this.loadMoreData();
+      } else {
+        if (type === null) {
+          this.setState({
+            tableData: this.state.posts.filter((e)=>{return e.user.name !== type})
+          });
+        } else {
+          this.setState({
+            tableData: this.state.posts.filter((e)=>{return e.user.name === null})
+          });
+        }
+      }
     }
 
-    Aguardando(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Não revisado'})
-      });
+    filterCategory(e, type){
+      if (e.target.checked === true){
+        this.setState({
+          tableData: this.state.tableData.filter((e)=>{return e.category.category_name === type})
+        });
+      } else {
+        this.setState({
+          tableData: this.state.conjuntoA
+        });
+        if (this.state.conjuntoA.length === 0){
+         this.loadMoreData();
+        }
+      }
     }
 
     ordenar(type) {
@@ -190,58 +231,84 @@ class TabelaPosts extends React.Component {
 
 
           <nav className='menu-anuncio'>
-              <div inputMode className='button-anuncio'key="Aba1">Anunciantes</div>
-              <div key="Aba2" className="menu-txt">
-              <input type="checkbox"defaultChecked={true}  style={{ margin: "8px" }}/>
-              Registrados
+              <div inputMode className='button-anuncio'>Anunciantes</div>
+              <div className="menu-txt">
+                <input id="Registrados" name="Registrados" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterPerson(e, 'nome')}/>
+                <label for="Registrados">Registrados</label>
               </div>
-              <div key="Aba3" className="menu-txt-fim">
-              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Anônimos</div>
-              <div className='button-anuncio'key="Aba1">Categoria</div>
-              <div key="Aba2" className="menu-txt">
-              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Limpeza</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Segurança</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                  Infraestrutura</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                  Transportes</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Serviços Tercerizados</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Meio Ambiente</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Jardinagem</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Alimentação nos Campi</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Saúde e Seguridade</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Outros</div>
-              <div key="Aba3" className="menu-txt-fim">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Anônimos</div>
-              <div className='button-anuncio'key="Aba1">Status</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Aguardando</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false} style={{ margin: "8px" }} onClick={() => this.finalizados()}/>
-                Em andamento</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Resolvido</div>
+              <div className="menu-txt-fim">
+                <input id="Anônimos" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterPerson(e, null)}/>
+                <label for="Anônimos">Anônimos</label>
+              </div>
+              <div className='button-anuncio'>Status</div>
+              <div className="menu-txt">
+                <input id="Aguardando" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterStatus(e, 'Aguardando')}/>
+                <label for="Aguardando">Aguardando</label>
+                </div>
+              <div className="menu-txt">
+                <input id="Em andamento" type="checkbox" defaultChecked={false} style={{ margin: "8px" }} 
+                onClick={(e) => this.filterStatus(e, 'Em andamento')}/>
+                <label for="Em andamento">Em andamento</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Resolvido" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterStatus(e, 'Resolvido')}/>
+                <label for="Resolvido">Resolvido</label>
+                </div>
+              <div className='button-anuncio'>Categoria</div>
+              <div className="menu-txt">
+                <input id="Limpeza" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Limpeza")}/>
+                <label for="Limpeza">Limpeza</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Segurança" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Segurança")}/>
+                <label for="Segurança">Segurança</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Infraestrutura" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Infraestrutura")}/>
+                <label for="Infraestrutura">Infraestrutura</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Transportes" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Transportes")}/>
+                <label for="Transportes">Transportes</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Serviços Tercerizados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Serviços Tercerizados")}/>
+                <label for="Serviços Tercerizados">Serviços Tercerizados</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Meio Ambiente" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Meio Ambiente")}/>
+                <label for="Meio Ambiente">Meio Ambiente</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Jardinagem" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Jardinagem")}/>
+                <label for="Jardinagem">Jardinagem</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Alimentação nos Campi")}/>
+                <label for="Alimentação nos Campi">Alimentação nos Campi</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Saúde e Seguridade" type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Saúde e Seguridade")}/>
+                <label for="Saúde e Seguridade">Saúde e Seguridade</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Outros" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.filterCategory(e, "Outros")}/>
+                <label for="Outros">Outros</label>
+              </div>
           </nav>
 
             <table class="table">
