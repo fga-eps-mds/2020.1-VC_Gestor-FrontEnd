@@ -1,6 +1,6 @@
 import React from "react";
 import "./Anuncio.css"
-import api from "../../services/api";
+import apiPostagem from "../../services/apiPostagem";
 import { Card, Modal} from "react-bootstrap";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,29 +10,35 @@ class Anuncio extends React.Component {
     constructor(props){
         super(props)
         this.state = { 
-          posts: []
+          posts: [],
+          place: [],
+          category: [],
+          user: []
         };
     }
 
     // Alterar requisao por url 
     async componentDidMount() {
-        //  const response2 = await api.put(`posts/${id}`, { status: `${newStatus}` });
-        var response = await api.get(`posts/${this.props.location.state.id}`);
-          console.log(response.data);
-         this.setState({ 
-            posts: response.data
+        //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
+        var response = await apiPostagem.get(`posts/${this.props.location.state.id}`);
+
+        this.setState({ 
+          posts: response.data,
+          place: response.data.place,
+          category: response.data.category,
+          user: response.data.user
+            
           });
     }
     
   render() {
-    const {posts} = this.state
+    const { posts, place, category, user } = this.state
     return (<>
-    {console.log(posts.place)}
               <Modal.Dialog className="modal">
             <Modal.Header>
               <Modal.Title>
                 <FontAwesomeIcon icon={faUserCircle} style={{ width: "40px", marginRight: "10px" }} />
-                {posts.name} {posts.surname}<br/>
+                {user.name} {user.surname}<br/>
                 <h6>{posts.dt_creation}</h6>
                 <h6>Estado da postem: {posts.status}</h6>
               </Modal.Title>
@@ -41,7 +47,8 @@ class Anuncio extends React.Component {
                 <h4>{posts.title}
                 <FontAwesomeIcon icon={faThumbsUp} style={{ width: "15px", marginLeft: "50px", marginRight: "10px"}}/>
                 {posts.likes}</h4>
-                <h5 style={{fontSize: "14px"}}>{posts.place_name}</h5>
+                <h5 style={{fontSize: "14px"}}>{category.category_name}</h5>
+                <h5 style={{fontSize: "14px"}}>{place.place_name}</h5>
                 <p>{posts.description}</p>
                 <form onSubmit={this.handleSubmit}>
                   <label>
@@ -54,7 +61,7 @@ class Anuncio extends React.Component {
                   </select>
                   </label>
                   <div className="modal-footer">
-                    <button className="close-button" onClick={this.handleClose}>Cancelar</button>
+                    <button className="close-button" onClick={this.handleClose}>Voltar</button>
                     <input className="salve-button" variant="primary" type="submit" value="Salvar"/>
                   </div>
                 </form>

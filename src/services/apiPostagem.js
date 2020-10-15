@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create({
+const apiPostagem = axios.create({
   baseURL: 'http://172.25.0.4:3002',
 });
 
-export default api;
+export default apiPostagem;
 

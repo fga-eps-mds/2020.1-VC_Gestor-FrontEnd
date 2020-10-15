@@ -2,9 +2,9 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 
-import api from '../../services/api';
+import apiPostagem from '../../services/apiPostagem';
 
-// await api.port('posts', { post_id, title, description, status });
+// await apiPostagem.port('posts', { post_id, title, description, status });
 
 class Tabela extends React.Component {
 
@@ -13,8 +13,8 @@ class Tabela extends React.Component {
   async componentDidMount() {
     const limit = 100;
     const page = 0;
-    // const response2 = await api.put(`posts/${id}`, { status: 'modificar' });
-    const response = await api.get(`posts?limit=${limit}&page=${page}`);
+    // const response2 = await apiPostagem.put(`posts/${id}`, { status: 'modificar' });
+    const response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
     // console.log( response2.data );
     console.log( response.data );
     console.log (response.headers);
