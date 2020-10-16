@@ -138,14 +138,14 @@ class TabelaPosts extends React.Component {
 
     filterStatus(e,type){
       if (e.target.checked === true){
-        const conjB = this.state.posts.filter((e) => {return e.status === type});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item)}})
+        const conjB = this.state.posts.filter((e) => {return e.status === type;});
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item)}});
         this.setState({
           tableData: this.state.conjuntoA
         });
       } else {
         const conjB = this.state.posts.filter((e) => {return e.status === type});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1)}});
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1);}});
         this.setState({
           tableData: this.state.conjuntoA
         });
@@ -158,8 +158,8 @@ class TabelaPosts extends React.Component {
     filterPerson(e, type){
       const conjuntoB = this.state.posts;
       if (e.target.checked === true){
-        const conjB = this.state.posts.filter((e) => {return e.user.name === type});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1)}})
+        const conjB = this.state.posts.filter((e) => {return e.user.name === type;});
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1)}});
         this.setState({
           tableData: conjuntoB
         });
@@ -167,11 +167,11 @@ class TabelaPosts extends React.Component {
       } else {
         if (type === null) {
           this.setState({
-            tableData: this.state.posts.filter((e) => {return e.user.name !== type})
+            tableData: this.state.posts.filter((e) => {return e.user.name !== type;})
           });
         } else {
           this.setState({
-            tableData: this.state.posts.filter((e) => {return e.user.name === null})
+            tableData: this.state.posts.filter((e) => {return e.user.name === null;})
           });
         }
       }
@@ -180,7 +180,7 @@ class TabelaPosts extends React.Component {
     filterCategory(e, type){
       if (e.target.checked === true){
         this.setState({
-          tableData: this.state.tableData.filter((e) => {return e.category.category_name === type})
+          tableData: this.state.tableData.filter((e) => {return e.category.category_name === type;})
         });
       } else {
         this.setState({
@@ -234,7 +234,7 @@ class TabelaPosts extends React.Component {
               <div inputMode className='button-anuncio'>Anunciantes</div>
               <div className="menu-txt">
                 <input id="Registrados" name="Registrados" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterPerson(e, 'nome')}/>
+                onClick={(e) => this.filterPerson(e, "nome")}/>
                 <label for="Registrados">Registrados</label>
               </div>
               <div className="menu-txt-fim">
