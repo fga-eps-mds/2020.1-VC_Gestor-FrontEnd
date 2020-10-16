@@ -40,7 +40,7 @@ class Anuncio extends React.Component {
 
     handleSubmit = async (e) => {
       if(this.state.posts.status === this.state.status || this.state.status === null) {
-        alert("O estadado atual não foi alterado.");
+        alert("O estado atual não foi alterado.");
       } else {
        alert("O estado do post foi alterado para: " + this.state.status);
        await apiPostagem.put(`posts/${this.props.match.params.post_id}`, { status: `${this.state.status}` });
@@ -60,17 +60,20 @@ class Anuncio extends React.Component {
           <Modal.Title>
                 <FontAwesomeIcon icon={faUserCircle} style={{ width: "40px", marginRight: "10px" }} />
                 {user.name} {user.surname}<br/>
-                <h6>{posts.dt_creation}</h6>
-                <h6>Estado da postem: {posts.status}</h6>
+                <br></br>
+                <h6><strong>Data de Criação:</strong> {posts.dt_creation}</h6>
           </Modal.Title>
         </Modal.Header>
               <Modal.Body>
-                <h4>{posts.title}
+                <h3>{posts.title}
                 <FontAwesomeIcon icon={faThumbsUp} style={{ width: "40px", marginLeft: "75%", marginRight: "10px" }}/>
-                {posts.likes}</h4>
-                <h5 style={{fontSize: "14px"}}>{category.category_name}</h5>
-                <h5 style={{fontSize: "14px"}}>{place.place_name}</h5>
+                {posts.likes}</h3>
+                <h5 ><strong>Categoria: </strong>{category.category_name}</h5>
+                <h5><strong>Local: </strong>{place.place_name}</h5>
+                <h5><strong>Status da postagem: </strong>{posts.status}</h5>
+                <h5><strong>Descrição: </strong></h5>
                 <p>{posts.description}</p>
+                <h5><strong>Imagens: </strong></h5>
                 <div className="fotos">
                   <img className="foto1" src={unb1} alt="Unb1" style={ {marginRight: "10px"}} />
                   <img className="foto1" src={unb2} alt="Unb2" style={ {marginRight: "10px"}} />
