@@ -63,8 +63,8 @@ class Sidebar extends React.Component {
                 title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
-                title: "Option 2",
-                href: "/option2"
+                title: "Gerenciar Benefícios",
+                href: "/BeneficiosGerenciar"
             }]
         }, {
             index:3,

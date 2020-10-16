@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
-import api from "../../services/api";
+import apiPostagem from "../../services/apiPostagem";
 import "./tabela.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,8 +33,8 @@ class TabelaPosts extends React.Component {
   async componentDidMount() {
     const limit = 100;
     const page = 0;
-    //  const response2 = await api.put(`posts/${id}`, { status: `${newStatus}` });
-    var response = await api.get(`posts?limit=${limit}&page=${page}`);
+    //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
+    var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
     const total = Math.ceil(response.data.count/this.state.perPage)
     const numRows = response.data.count;
@@ -79,7 +79,7 @@ class TabelaPosts extends React.Component {
          alert('O estadado atual continua o mesmo');
        } else {
         alert('O estado do post foi alterado para: ' + this.state.status);
-        api.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
+        apiPostagem.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
       }
      }
     handleChange = (event) => {
