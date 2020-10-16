@@ -24,7 +24,7 @@ class TabelaPosts extends React.Component {
       handleShow: true,
       postsNew: [],
       postsClosed: [],
-      ordem: ['asc'],
+      ordem: ["asc"],
       check: false,
       conjuntoA: []
     };
@@ -139,12 +139,12 @@ class TabelaPosts extends React.Component {
     filterStatus(e,type){
       if (e.target.checked === true){
         const conjB = this.state.posts.filter((e) => {return e.status === type;});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item)}});
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item);}});
         this.setState({
           tableData: this.state.conjuntoA
         });
       } else {
-        const conjB = this.state.posts.filter((e) => {return e.status === type});
+        const conjB = this.state.posts.filter((e) => {return e.status === type;});
         this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1);}});
         this.setState({
           tableData: this.state.conjuntoA
@@ -159,7 +159,7 @@ class TabelaPosts extends React.Component {
       const conjuntoB = this.state.posts;
       if (e.target.checked === true){
         const conjB = this.state.posts.filter((e) => {return e.user.name === type;});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1)}});
+        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1);}});
         this.setState({
           tableData: conjuntoB
         });
