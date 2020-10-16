@@ -1,23 +1,24 @@
 import React from "react";
-import "./Anuncio.css"
+import "./Anuncio.css";
 import apiPostagem from "../../services/apiPostagem";
 import { Modal} from "react-bootstrap";
-import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
+import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import unb1 from '../../assets/unb1.jpeg';
-import unb2 from '../../assets/unb2.jpeg';
-import unb3 from '../../assets/unb3.jpeg';
+import unb1 from "../../assets/unb1.jpeg";
+import unb2 from "../../assets/unb2.jpeg";
+import unb3 from "../../assets/unb3.jpeg";
 
 
 class Anuncio extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = { 
           posts: [],
           place: [],
           category: [],
           user: [],
+          status: null
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,21 +39,21 @@ class Anuncio extends React.Component {
     }
 
     handleSubmit = async (e) => {
-      if(this.state.posts.status === this.state.status) {
-        alert('O estadado atual continua o mesmo');
+      if(this.state.posts.status === this.state.status || this.state.status === null) {
+        alert("O estadado atual não foi alterado.");
       } else {
-       alert('O estado do post foi alterado para: ' + this.state.status);
+       alert("O estado do post foi alterado para: " + this.state.status);
        await apiPostagem.put(`posts/${this.props.match.params.post_id}`, { status: `${this.state.status}` });
      }
     }
 
    handleChange = (event) => {
-     event.preventDefault()
+     event.preventDefault();
      this.setState({status: event.target.value});
      }
     
   render() {
-    const { posts, place, category, user } = this.state
+    const { posts, place, category, user } = this.state;
     return (<>
       <Modal.Dialog className="modal">
         <Modal.Header>
@@ -78,7 +79,7 @@ class Anuncio extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   <label style={{marginLeft: "80%", marginRight: "10px" }}>
                     Alterar estado para:<br/>
-                    <select onChange={this.handleChange} selected={this.state.status}>
+                    <select onChange={this.handleChange} select={posts.status}>
                       <option value="Aguardando">Aguardando</option>
                       <option value="Em andamento">Em andamento</option>
                       <option value="Resolvido">Resolvido</option>
@@ -86,8 +87,8 @@ class Anuncio extends React.Component {
                     </select>
                   </label>
                   <div className="modal-footer">
-                  <button className="close-button"><Link  style={{color: "white"}} to={{pathname: `/TabelaPosts`}}>Voltar</Link></button>
-                  <input className="salve-button" variant="primary" type="submit" value="Salvar"/>
+                  <button className="close-button"><Link  style={{color: "white"}} to={{pathname: "/TabelaPosts"}}>Voltar</Link></button>
+                  <input className="salve-button" type="submit" value="Salvar"/>
                   </div>
                 </form>
               </Modal.Body>
