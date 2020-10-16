@@ -1,10 +1,8 @@
 import React from "react";
-import { Card, Modal, Pagination } from "react-bootstrap";
+import { Card, Pagination } from "react-bootstrap";
 import apiPostagem from "../../services/apiPostagem";
 import "./tabela.css";
-import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class TabelaPosts extends React.Component {
   
@@ -27,8 +25,6 @@ class TabelaPosts extends React.Component {
       postsClosed: [],
       ordem: ['asc']
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
   async componentDidMount() {
@@ -73,21 +69,6 @@ class TabelaPosts extends React.Component {
     })
     return this.forceUpdate();
     }
-
-    handleClose = () => this.setState({showModal: false})
-    handleSubmit = (e) => {
-       if(this.state.modalInf.status === this.state.status) {
-         alert('O estadado atual continua o mesmo');
-       } else {
-        alert('O estado do post foi alterado para: ' + this.state.status);
-        apiPostagem.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
-      }
-     }
-    handleChange = (event) => {
-      event.preventDefault()
-      // alert(event.target.value)
-      this.setState({status: event.target.value});
-      }
 
     mostrarModal(e){
       this.setState({
@@ -252,16 +233,6 @@ class TabelaPosts extends React.Component {
                     <Pagination.Next />
                     <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
                   </Pagination>
-                  <div>
-                    <ul>
-                      <li><Link to={{
-                        pathname: `/Anuncio`,
-                        state: {
-                          titulo: 'titulos'
-                        }
-                      }}>ir para pagina</Link></li>
-                    </ul>
-                  </div>
           </Card.Text>
         </Card.Body>
       </Card>
