@@ -19,7 +19,7 @@ class Login extends React.Component{
     // body.json = { "username": "admin",	"password": "123456" }
     // retorna user e o token
 
-    // http://172.25.0.3:3000/users GET
+    // http://172.25.0.3:3000/users/id POST
     // body.json = { "username": "admin" }
     // retorna user
 
