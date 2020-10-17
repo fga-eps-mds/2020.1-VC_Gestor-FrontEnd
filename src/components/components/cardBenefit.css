@@ -1,0 +1,21 @@
+.cardBenefit {
+    background: #0F4C75;
+    width: 20%;
+    color: #E2E2E2;
+    border-radius: 3%; 
+}
+
+.titleBenefit {
+    font-size: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.iconsBenefit{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.descriptionBenefit{
+    padding-top: 1rem;
+}
