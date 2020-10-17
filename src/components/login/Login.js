@@ -27,16 +27,6 @@ class Login extends React.Component{
     // body.json = { "username": "TESTE", 	"user_id": "4",	"name": "teste", "surname": "teste", "password": "123456" }
     // retorna user 
 
-    async componentDidMount() {
-      // const response2 = await apiUser.put(`posts/${id}`, { status: 'modificar' });
-      const response = await apiUser.post("sessions", {username: "admin", password: "123456"});
-      // console.log( response2.data );
-      console.log( response.data );
-
- 
-      // this.setState({ username: response.data.username, password: response.data.password });
-    };
-
   handleChange(event){
     if(event.target.id === "username"){
       this.setState({username: event.target.value});
@@ -46,12 +36,22 @@ class Login extends React.Component{
     }
   }
 
-  handleSubmit(event){
+  async handleSubmit(event){
     event.preventDefault();
 
     const login = this.state;
 
-    console.log(login);
+    try{
+      const response = await apiUser.post("sessions", login)
+
+      const token = response.data.token;
+
+      console.log(token);
+    } catch (err) {
+      alert( "Usuario/senha incorreto!" );
+      this.setState({username: ""});
+      this.setState({password: ""});
+    }
 
   }
 
