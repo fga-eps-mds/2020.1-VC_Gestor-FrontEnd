@@ -8,30 +8,37 @@ class BeneficiosGerenciar extends React.Component {
     this.state = {
       benefits: null
     };
+    //this.getBenefits();
+    this.colors = ["#6FB1DE", "#438ABB", "#226D9F", "#0F4C75"];
   }
 
   async getBenefits(){
-    
-    //console.log(this.benefits[0]);
+    const response = await apiBeneficio.get("benefits");
+    this.setState({benefits: response.data});
   }
 
-  // componentWillMount(){
-  //   const response = apiBeneficio.get("benefits").then(
-  //       response => {
-  //         this. = null;
-  //         this.setState({externalData});
-  //       }
-  //     );
-  //   this.state.benefits = response.data;
-  //   this.setState(this.state.benefits);
-  //   console.log(this.state.benefits)
-  // }
+  componentDidMount(){
+    this.getBenefits();
+  }
+
+
 
   render() {
-    return (<div>
-      < CardBenefit title=""/>
-    </div>
-    );
+    if(this.state.benefits == null){
+      return (<div> Loading </div>);
+    }else{
+      return (
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+          {this.state.benefits.map((benefitItem, index) => {
+            return (
+              <div key={index} className="col">
+                <CardBenefit  color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
+              </div>
+            );
+          })}
+      </div>);
+    }
+    
   }
 }
 

@@ -1,8 +1,8 @@
 .cardBenefit {
-    background: #0F4C75;
-    width: 20%;
+    margin: 1rem 1rem 1rem 1rem;
     color: #E2E2E2;
-    border-radius: 3%; 
+    border-radius: 3%;
+    width: 14rem;
 }
 
 .titleBenefit {
