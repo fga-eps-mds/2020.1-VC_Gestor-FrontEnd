@@ -1,25 +1,36 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import Forms from "../components/Forms";
-import "./BeneficiosCriar.css";
-import apiBeneficio from '../../services/apiBeneficio';
+import apiBeneficio from "../../services/apiBeneficio";
+import CardBenefit from "../components/CardBenefit";
 
 class BeneficiosGerenciar extends React.Component {
   constructor(props){
     super(props);
-    this.benefits = {};
-    this.getBenefits();
+    this.state = {
+      benefits: null
+    };
   }
 
   async getBenefits(){
-    const response = await apiBeneficio.get("benefits");
-    this.benefits = response.data;
+    
+    //console.log(this.benefits[0]);
+  }
+
+  componentWillMount(){
+    const response = apiBeneficio.get("benefits").then(
+        response => {
+          this. = null;
+          this.setState({externalData});
+        }
+      );
+    this.state.benefits = response.data;
+    this.setState(this.state.benefits);
+    console.log(this.state.benefits)
   }
 
   render() {
-    return (<>
-      
-    </>
+    return (<div>
+      < CardBenefit title=""/>
+    </div>
     );
   }
 }
