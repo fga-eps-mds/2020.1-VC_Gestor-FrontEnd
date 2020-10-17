@@ -5,7 +5,8 @@ import apiBeneficio from '../../services/apiBeneficio';
 import { Row } from "react-bootstrap";
 
 
-class Forms extends React.Component {
+
+class EditBenefitForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -43,12 +44,12 @@ class Forms extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault();
+        alert("Benefício foi alterado com sucesso!")
+    }
 
-      const benefit = this.state;
-
-      const response = await apiBeneficio.post("benefits",  benefit );
-      
-      alert("Benefício criado com sucesso!");
+    async deleteBenefit(event){
+      event.preventDefault();
+      alert("Benefício foi deletado com sucesso!");
     }
   
     render() {
@@ -56,7 +57,7 @@ class Forms extends React.Component {
 
         <Form onSubmit={this.handleSubmit} >
        
-        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div className="row">
               <Form.Group controlId="title" id="title_">
                   <Form.Label>Título</Form.Label>
@@ -97,17 +98,22 @@ class Forms extends React.Component {
               </Form.Group>
             </div>
             <div className="row">
-              <Button id="button_" type="submit" size="lg" block>
+              <div className="col-3">
+                <Button id="delete" type="button" onClick={this.deleteBenefit} size="lg" block>
+                  Excluir
+                </Button>
+              </div>
+              <div className="col-6" />
+              <div className="col-3">
+                <Button id="submit" type="submit" size="lg"  block>
                   Enviar
-              </Button>
+                </Button>
+              </div>
             </div>
-            </div>
-           
+          </div>
         </Form>
-
-        
       );
     }
   }
 
-  export default Forms;
+  export default EditBenefitForm;

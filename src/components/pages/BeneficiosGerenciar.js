@@ -15,17 +15,17 @@ class BeneficiosGerenciar extends React.Component {
     //console.log(this.benefits[0]);
   }
 
-  componentWillMount(){
-    const response = apiBeneficio.get("benefits").then(
-        response => {
-          this. = null;
-          this.setState({externalData});
-        }
-      );
-    this.state.benefits = response.data;
-    this.setState(this.state.benefits);
-    console.log(this.state.benefits)
-  }
+  // componentWillMount(){
+  //   const response = apiBeneficio.get("benefits").then(
+  //       response => {
+  //         this. = null;
+  //         this.setState({externalData});
+  //       }
+  //     );
+  //   this.state.benefits = response.data;
+  //   this.setState(this.state.benefits);
+  //   console.log(this.state.benefits)
+  // }
 
   render() {
     return (<div>

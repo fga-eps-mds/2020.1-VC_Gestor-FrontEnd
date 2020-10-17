@@ -71,10 +71,19 @@
     margin: 10px 20px 10px 20px;
     width: 100%;
 }
-#button_{
+.button_{
     align-items: center;
     margin: 10px 20px 10px 20px;
     width: 100%;
+}
+
+#submit{
+    border: none;
+}
+
+#delete{
+    background-color: #F24949;
+    border: none;
 }
 
 

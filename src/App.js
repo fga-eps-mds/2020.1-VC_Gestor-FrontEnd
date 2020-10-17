@@ -11,6 +11,7 @@ import Postagem from "./components/pages/Postagem";
 import TabelaPosts from "./components/pages/TabelaPosts";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import BeneficiosGerenciar from "./components/pages/BeneficiosGerenciar";
+import BeneficiosEditar from "./components/pages/BeneficiosEditar";
 
 
 const MyRoute = ({ component: Component, ...rest }) => (
@@ -53,6 +54,7 @@ class App extends React.Component {
           <MyRoute exact path='/RelatorioDeStatus' component={RelatorioDeStatus} />
           <MyRoute exact path='/BeneficiosCriar' component={BeneficiosCriar} />
           <MyRoute exact path='/BeneficiosGerenciar' component={BeneficiosGerenciar} />
+          <MyRoute exact path='/BeneficiosEditar' component={BeneficiosEditar} />
           <MyRoute exact path='/Option2' component={Option2} />
           <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
           <MyRoute exact path='/Postagem' component={Postagem} />
