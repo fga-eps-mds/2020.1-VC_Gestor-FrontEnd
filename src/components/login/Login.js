@@ -1,6 +1,7 @@
 import React from "react";
 import apiUser from "../../services/apiUser";
 import "./Login.css";
+import { withRouter } from "react-router-dom";
 
 
 class Login extends React.Component{
@@ -48,12 +49,14 @@ class Login extends React.Component{
       const response = await apiUser.post("sessions", login)
 
       const token = response.data.token;
-
-      console.log(token);
+      localStorage.setItem("auth",JSON.stringify({
+        token,
+        logged:true
+      }))
+      this.props.history.push("/Home");
     } catch (err) {
-      alert( "Usuario/senha incorreto!" );
-      this.setState({username: ""});
-      this.setState({password: ""});
+      console.log(err)
+      alert( "Usuario/senha incorreto!");
     }
 
   }
@@ -74,4 +77,4 @@ class Login extends React.Component{
   }
 }
 
-export default Login;
+export default withRouter(Login);
