@@ -16,7 +16,9 @@ class CardBenefit extends React.Component {
             <Card.Title className="titleBenefit">{this.props.title}</Card.Title>
           </div>
           <div className="iconsBenefit col-1">
-            <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px"}}/>
+            <a className="titleLink" href={"/BeneficiosEditar/" + this.props.benefit_id} >
+            <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px"}} />
+            </a>
           </div>
           <div className="iconsBenefit col-1">
             <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>

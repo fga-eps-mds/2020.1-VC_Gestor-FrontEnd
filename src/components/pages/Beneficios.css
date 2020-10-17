@@ -86,4 +86,13 @@
     border: none;
 }
 
+.titleLink{
+    color: #f3f3f3;
+}
+
+.titleLink:hover{
+    color: #d4d4d4;
+    text-decoration: none;
+}
+
 
