@@ -4,31 +4,35 @@
     padding: 10px 25px;
     background-color: #0F4C75;
     border: none;
+    text-align: center;
     color: #FFF;
-    font-weight: 300;
+    font-weight: 300px;
     cursor: pointer;
-    display: inline-block;
-    width: 270px;
+    display: unset;
+    width: 2500px;
     height: 45px;
     border-radius: 6px;
+    margin-bottom: 20px;
+
 }
 .button-anuncio:hover {
     background-color: #70B4E6;
 }
 .menu-anuncio {
-    position: relative;
+    float: left;
+    margin-top: 20px;
     padding: 10px 15px;
+    width: 18%;
     border: none;
     background-color: #FFF;
-    color: #FFF;
+    color:gray;
     font-weight: 500;
     cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    margin-top: 20px;
 }
   
 .Abas-contain {
@@ -46,31 +50,26 @@
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 230px 1fr;
     grid-template-rows: 1fr 1fr;
     justify-content: start;
     margin: 0;
 }
 .card-body {
     margin: 0;
-}
-.conteudo {
-
+    border: none;
 }
 .titulo-conteudo {
-    margin-top: 22px;
     font-size: 17px;
     position: relative;
     padding: 10px 25px;
     background-color: #5EB2F2;
     border: none;
     color: #FFF;
-    font-weight: 300;
+    font-weight: 300px;
     cursor: pointer;
     display: inline-block;
-    width: 270px;
+    width: 120px;
     height: 45px;
     border-radius: 6px;
-    width: 125px;
-
 }

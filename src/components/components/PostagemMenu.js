@@ -40,13 +40,12 @@ class PostagemMenu extends Component {
 
   render() {
     return (<>
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: "100%" }}>
         <Card.Body>
-
           <Card.Text>
-            <div className="Abas" ref={el => this.root = el}>
+            <div className="Abas" ref={(el) => this.root = el}>
               {React.Children.map(this.props.children, (child, i) => {
-                let className = `Abas-contain`;
+                let className = "Abas-contain";
                 if (child.key === this.props.active) {
                   className = `${className} Abas-contain-active`;
                 }
