@@ -180,9 +180,9 @@ class TabelaPosts extends React.Component {
           tableData: this.state.posts,
           filters: array
         });
-        if (this.state.tableData.length === 0){
-         this.loadMoreData();
-        }
+        // if (this.state.tableData.length === 0){
+        //  this.loadMoreData();
+        // }
       }
       this.filtrar();
     }
@@ -201,7 +201,7 @@ class TabelaPosts extends React.Component {
         // conjuntoUniverso.push(conjuntoUser);
       } else {
         if (quem === "Registrados") {
-          const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;})
+          const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;});
           conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts);}});
           filtragens.splice(filtragens.indexOf("Registrados"), 1);
       } else {
