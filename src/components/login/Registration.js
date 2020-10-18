@@ -16,7 +16,7 @@ class Registration extends React.Component{
   }
 
   handleChange(event){
-    if(event.target.id === "name"){
+    /*if(event.target.id === "name"){
       this.setState({name: event.target.value});
     }
     if(event.target.id === "surname"){
@@ -27,7 +27,7 @@ class Registration extends React.Component{
     }
     if(event.target.id === "password"){
       this.setState({password: event.target.value});
-    }
+    }*/
   }
 
   handleSubmit(event){

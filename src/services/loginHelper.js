@@ -22,4 +22,4 @@ function logout(){
 module.exports = {
     isLogged,
     logout
-}
+};
