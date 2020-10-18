@@ -156,16 +156,29 @@ class TabelaPosts extends React.Component {
       this.filtrar();
     }
 
-    filterCategory(e, type){
-        if(this.state.check === null || this.state.check === e.target){
+    checkFilter(e, type){
+      if(this.state.check === null || this.state.check === e.target){
+        this.setState({check: e.target});
+      } else {
+        if (e.targe !== this.state.check){
+          var a =  this.state.check;
+          a.checked = false;
           this.setState({check: e.target});
-        } else {
-          if (e.targe !== this.state.check){
-            var a =  this.state.check;
-            a.checked = false;
-            this.setState({check: e.target});
-          }
         }
+      }
+      this.filterCategory(e, type);
+    }
+
+    filterCategory(e, type){
+        // if(this.state.check === null || this.state.check === e.target){
+        //   this.setState({check: e.target});
+        // } else {
+        //   if (e.targe !== this.state.check){
+        //     var a =  this.state.check;
+        //     a.checked = false;
+        //     this.setState({check: e.target});
+        //   }
+        // }
       if (e.target.checked === true){
         const array = this.state.filters;
         array[0] = type;
@@ -180,9 +193,6 @@ class TabelaPosts extends React.Component {
           tableData: this.state.posts,
           filters: array
         });
-        // if (this.state.tableData.length === 0){
-        //  this.loadMoreData();
-        // }
       }
       this.filtrar();
     }
@@ -334,52 +344,52 @@ class TabelaPosts extends React.Component {
               <div className='button-anuncio'>Categoria</div>
               <div className="menu-txt">
                 <input id="Limpeza" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Limpeza")}/>
+                onClick={(e) => this.checkFilter(e, "Limpeza")}/>
                 <label className="label-txt" for="Limpeza" key={1}>Limpeza</label>
               </div>
               <div className="menu-txt">
                 <input id="Segurança" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Segurança")}/>
+                onClick={(e) => this.checkFilter(e, "Segurança")}/>
                 <label className="label-txt" for="Segurança" id="2">Segurança</label>
               </div>
               <div className="menu-txt">
                 <input id="Infraestrutura" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Infraestrutura")}/>
+                onClick={(e) => this.checkFilter(e, "Infraestrutura")}/>
                 <label className="label-txt" for="Infraestrutura" id="3">Infraestrutura</label>
               </div>
               <div className="menu-txt">
                 <input id="Transportes" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Transportes")}/>
+                onClick={(e) => this.checkFilter(e, "Transportes")}/>
                 <label className="label-txt" for="Transportes" id="4">Transportes</label>
               </div>
               <div className="menu-txt">
                 <input id="Serviços Tercerizados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Serviços Tercerizados")}/>
+                onClick={(e) => this.checkFilter(e, "Serviços Tercerizados")}/>
                 <label className="label-txt" for="Serviços Tercerizados" id="5">Serviços Tercerizados</label>
               </div>
               <div className="menu-txt">
                 <input id="Meio Ambiente" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Meio Ambiente")}/>
+                onClick={(e) => this.checkFilter(e, "Meio Ambiente")}/>
                 <label className="label-txt" for="Meio Ambiente" id="6">Meio Ambiente</label>
               </div>
               <div className="menu-txt">
                 <input id="Jardinagem" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Jardinagem")}/>
+                onClick={(e) => this.checkFilter(e, "Jardinagem")}/>
                 <label className="label-txt" for="Jardinagem" id="7">Jardinagem</label>
               </div>
               <div className="menu-txt">
                 <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Alimentação nos Campi")}/>
+                onClick={(e) => this.checkFilter(e, "Alimentação nos Campi")}/>
                 <label className="label-txt" for="Alimentação nos Campi" id="8">Alimentação nos Campi</label>
               </div>
               <div className="menu-txt">
                 <input id="Saúde e Seguridade" type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Saúde e Seguridade")}/>
+                onClick={(e) => this.checkFilter(e, "Saúde e Seguridade")}/>
                 <label className="label-txt" for="Saúde e Seguridade" id="9">Saúde e Seguridade</label>
               </div>
               <div className="menu-txt">
                 <input id="Outros" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterCategory(e, "Outros")}/>
+                onClick={(e) => this.checkFilter(e, "Outros")}/>
                 <label className="label-txt" for="Outros" id="10">Outros</label>
               </div>
           </nav>
