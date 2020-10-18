@@ -22,11 +22,12 @@ class TabelaPosts extends React.Component {
       showModal: false,
       handleClose: false,
       handleShow: true,
-      postsNew: [],
+      showPagination: false,
+      postsShow: [],
       postsClosed: [],
       ordem: ["asc"],
-      check: false,
-      conjuntoA: []
+      check: null,
+      filters: ["categoria","Registrados", "Anônimos"]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,7 +53,7 @@ class TabelaPosts extends React.Component {
       tableData:response.data.rows.slice(0, this.state.perPage),
       totalPages: arrayPages,
       numRows: numRows,
-      postsNew:response.data.rows.filter((e)=>{return e.status === 'Em andamento'})
+      postsShow:response.data.rows
     });
   }
 
@@ -66,11 +67,11 @@ class TabelaPosts extends React.Component {
   }
 
   loadMoreData() {
-		const data = this.state.posts;
+		const data = this.state.postsShow;
 		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 		this.setState({
 			pageCount: Math.ceil(data.length / this.state.perPage),
-			tableData:slice
+			tableData: slice
     })
     return this.forceUpdate();
     }
@@ -137,72 +138,128 @@ class TabelaPosts extends React.Component {
     }
 
     filterStatus(e,type){
+      const array = this.state.filters;
+      const index = array.indexOf(type);
       if (e.target.checked === true){
-        const conjB = this.state.posts.filter((e) => {return e.status === type;});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.push(item);}});
+        array.push(type);
         this.setState({
-          tableData: this.state.conjuntoA
+          tableData: this.state.posts.filter((e) => {return e.status === type;}),
+          filters: array
         });
       } else {
-        const conjB = this.state.posts.filter((e) => {return e.status === type;});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1);}});
-        this.setState({
-          tableData: this.state.conjuntoA
-        });
-        if (this.state.conjuntoA.length === 0){
-         this.loadMoreData();
+        if ( index > -1){
+          this.state.filters.slice(index, 1);
         }
-      }
-    }
-
-    filterPerson(e, type){
-      const conjuntoB = this.state.posts;
-      if (e.target.checked === true){
-        const conjB = this.state.posts.filter((e) => {return e.user.name === type;});
-        this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){conjuntoB.splice(item, 1);}});
+        const removed = array.splice(array.indexOf(type),1);
+        // const conjB = this.state.posts.filter((e) => {return e.status === type;});
+        // this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1);}});
         this.setState({
-          tableData: conjuntoB
+          tableData: this.state.posts.filter((e) => {return e.status === type;})
         });
-        this.loadMoreData();
-      } else {
-        if (type === null) {
-          this.setState({
-            tableData: this.state.posts.filter((e) => {return e.user.name !== type;})
-          });
-        } else {
-          this.setState({
-            tableData: this.state.posts.filter((e) => {return e.user.name === null;})
-          });
-        }
       }
+      console.log(this.state.filters)
+      this.filtrar();
     }
 
     filterCategory(e, type){
+        if(this.state.check === null || this.state.check === e.target){
+          this.setState({check: e.target});
+        } else {
+          if (e.targe !== this.state.check){
+            var a =  this.state.check;
+            a.checked = false;
+            this.setState({check: e.target});
+          }
+        }
       if (e.target.checked === true){
+        const array = this.state.filters;
+        array[0] = type;
         this.setState({
-          tableData: this.state.tableData.filter((e) => {return e.category.category_name === type;})
+          tableData: this.state.posts.filter((e) => {return e.category.category_name === type;}),
+          filters: array
         });
       } else {
+        const array = this.state.filters;
+        array[0] = "categoria";
         this.setState({
-          tableData: this.state.conjuntoA
+          tableData: this.state.posts,
+          filters: array
         });
-        if (this.state.conjuntoA.length === 0){
+        if (this.state.tableData.length === 0){
          this.loadMoreData();
         }
+      }
+      this.filtrar();
+      console.log(this.state.filters)
+    }
+
+    filtrar(){
+      var conjuntoUniverso = [];
+      var filtragens = [...this.state.filters];
+      this.state.filters.map((quem) => {if(quem === "Anônimos"){
+        const conjuntoUser = this.state.posts.filter((e) => {return e.user.name === null;});
+        console.log(conjuntoUser);
+        conjuntoUser.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts)}});
+        filtragens.splice(filtragens.indexOf("Anônimos"), 1);
+        // conjuntoUniverso.push(conjuntoUser);
+      } else {
+        if (quem === "Registrados") {
+          const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;})
+          conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts)}});
+          filtragens.splice(filtragens.indexOf("Registrados"), 1);
+      } else {
+          this.setState({
+            tableData: []
+          });
+        }
+      }})
+      console.log(filtragens)
+      const conjuntoStatus = [];
+      if (filtragens.length !== 1) {
+          filtragens.map((status) => {if(status === "Aguardando"){
+            const process = conjuntoUniverso.filter((e) => {return e.status === "Aguardando";});
+            process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+          } else if (status === "Em andamento"){
+            console.log("eentrei em andamento")
+            const processAwait = conjuntoUniverso.filter((e) => {return e.status === "Em andamento";});
+            processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+          } else if (status === "Resolvido"){
+            const processfinished = conjuntoUniverso.filter((e) => {return e.status === "Resolvido";});
+            processfinished.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+          } else {
+            const processFiled = conjuntoUniverso.filter((e) => {return e.status === "Arquivados";});
+            processFiled.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+          }
+        })
+        conjuntoUniverso = conjuntoStatus;
+      }
+      if (this.state.filters[0] !== "categoria") {
+        const maxPage = conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];});
+        const corte = maxPage.slice(this.state.offset, this.state.offset + this.state.perPage)
+        this.setState({
+          tableData: corte,
+          postsShow: conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];})
+        }); 
+      } else {
+        const corte2 = conjuntoUniverso.slice(this.state.offset, this.state.offset + this.state.perPage)
+        this.setState({
+          tableData: corte2,
+          postsShow: conjuntoUniverso
+        });
       }
     }
 
     ordenar(type) {
       if(this.state.ordem === 'asc'){
         this.setState({
-          posts: this.state.posts.sort((a, b) => {
+          tableData: this.state.postsShow.sort((a, b) => {
             return a[type] > b[type] ? 1 : -1
           }),
           ordem: 'desc'
         });
       } else {
         this.setState({
-          posts: this.state.posts.sort((a, b) => {
+          tableData: this.state.posts.sort((a, b) => {
             return a[type] < b[type] ? 1 : -1
           }),
           ordem: 'asc'
@@ -210,7 +267,6 @@ class TabelaPosts extends React.Component {
       }
       return this.loadMoreData();
     }
-
 
 
   render() {
@@ -234,80 +290,85 @@ class TabelaPosts extends React.Component {
               <div inputMode className='button-anuncio'>Anunciantes</div>
               <div className="menu-txt">
                 <input id="Registrados" name="Registrados" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterPerson(e, "nome")}/>
-                <label for="Registrados">Registrados</label>
+                  onClick={(e) => this.filterStatus(e, "Registrados")}/>
+                <label className="label-txt" for="Registrados">Registrados</label> 
               </div>
               <div className="menu-txt-fim">
                 <input id="Anônimos" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterPerson(e, null)}/>
-                <label for="Anônimos">Anônimos</label>
+                  onClick={(e) => this.filterStatus(e, "Anônimos")}/>
+                <label className="label-txt" for="Anônimos">Anônimos</label>
               </div>
               <div className='button-anuncio'>Status</div>
               <div className="menu-txt">
                 <input id="Aguardando" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterStatus(e, "Aguardando")}/>
-                <label for="Aguardando">Aguardando</label>
+                  onClick={(e) => this.filterStatus(e, "Aguardando")}/>
+                <label className="label-txt" for="Aguardando">Aguardando</label>
                 </div>
               <div className="menu-txt">
                 <input id="Em andamento" type="checkbox" defaultChecked={false} style={{ margin: "8px" }} 
-                onClick={(e) => this.filterStatus(e, "Em andamento")}/>
-                <label for="Em andamento">Em andamento</label>
+                  onClick={(e) => this.filterStatus(e, "Em andamento")}/>
+                <label className="label-txt" for="Em andamento">Em andamento</label>
               </div>
               <div className="menu-txt">
                 <input id="Resolvido" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
-                onClick={(e) => this.filterStatus(e, "Resolvido")}/>
-                <label for="Resolvido">Resolvido</label>
-                </div>
+                  onClick={(e) => this.filterStatus(e, "Resolvido")}/>
+                <label className="label-txt" for="Resolvido">Resolvido</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Arquivados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Arquivados")}/>
+                <label className="label-txt" for="Arquivados">Arquivados</label>
+              </div>
               <div className='button-anuncio'>Categoria</div>
               <div className="menu-txt">
                 <input id="Limpeza" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Limpeza")}/>
-                <label for="Limpeza">Limpeza</label>
+                <label className="label-txt" for="Limpeza" key={1}>Limpeza</label>
               </div>
               <div className="menu-txt">
                 <input id="Segurança" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Segurança")}/>
-                <label for="Segurança">Segurança</label>
+                <label className="label-txt" for="Segurança" id="2">Segurança</label>
               </div>
               <div className="menu-txt">
                 <input id="Infraestrutura" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Infraestrutura")}/>
-                <label for="Infraestrutura">Infraestrutura</label>
+                <label className="label-txt" for="Infraestrutura" id="3">Infraestrutura</label>
               </div>
               <div className="menu-txt">
                 <input id="Transportes" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Transportes")}/>
-                <label for="Transportes">Transportes</label>
+                <label className="label-txt" for="Transportes" id="4">Transportes</label>
               </div>
               <div className="menu-txt">
                 <input id="Serviços Tercerizados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Serviços Tercerizados")}/>
-                <label for="Serviços Tercerizados">Serviços Tercerizados</label>
+                <label className="label-txt" for="Serviços Tercerizados" id="5">Serviços Tercerizados</label>
               </div>
               <div className="menu-txt">
                 <input id="Meio Ambiente" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Meio Ambiente")}/>
-                <label for="Meio Ambiente">Meio Ambiente</label>
+                <label className="label-txt" for="Meio Ambiente" id="6">Meio Ambiente</label>
               </div>
               <div className="menu-txt">
                 <input id="Jardinagem" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Jardinagem")}/>
-                <label for="Jardinagem">Jardinagem</label>
+                <label className="label-txt" for="Jardinagem" id="7">Jardinagem</label>
               </div>
               <div className="menu-txt">
                 <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Alimentação nos Campi")}/>
-                <label for="Alimentação nos Campi">Alimentação nos Campi</label>
+                <label className="label-txt" for="Alimentação nos Campi" id="8">Alimentação nos Campi</label>
               </div>
               <div className="menu-txt">
                 <input id="Saúde e Seguridade" type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Saúde e Seguridade")}/>
-                <label for="Saúde e Seguridade">Saúde e Seguridade</label>
+                <label className="label-txt" for="Saúde e Seguridade" id="9">Saúde e Seguridade</label>
               </div>
               <div className="menu-txt">
                 <input id="Outros" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
                 onClick={(e) => this.filterCategory(e, "Outros")}/>
-                <label for="Outros">Outros</label>
+                <label className="label-txt" for="Outros" id="10">Outros</label>
               </div>
           </nav>
 
@@ -339,10 +400,7 @@ class TabelaPosts extends React.Component {
                   <h2>{post.id}</h2>
                     </>))}
                 </tbody>
-            </table> 
-                  {this.state.showModal ? this.modelContent() : null}
-                  {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
-                  <Pagination className='pagination'>
+                <Pagination className='pagination'>
                     <Pagination.First onClick={() => this.currentPage(0)}/>
                     <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
                       this.currentPage(this.state.paginaAtual - 1) : null}/>
@@ -352,7 +410,10 @@ class TabelaPosts extends React.Component {
                     ))}
                     <Pagination.Next />
                     <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-                  </Pagination>
+                </Pagination>
+            </table> 
+                  {this.state.showModal ? this.modelContent() : null}
+                  {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
           </Card.Text>
         </Card.Body>
       </Card>

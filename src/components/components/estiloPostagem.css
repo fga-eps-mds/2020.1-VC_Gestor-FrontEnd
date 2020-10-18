@@ -19,19 +19,20 @@
 }
 .menu-anuncio {
     float: left;
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 10px 15px;
     width: 18%;
     border: none;
     background-color: #FFF;
     color:gray;
     font-weight: 500;
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     margin-top: 20px;
+    position: absolute;
+    left: 0;
 }
   
 .Abas-contain {
@@ -73,15 +74,15 @@
     border-radius: 6px;
 }
 .table{
-    display: inline-block;
-    position: relative;
+    position: absolute;
+    left: 300px;
     font-family: 'Roboto', sans-serif;
     align-items: center;  
     background-color: #fff;
     border: none;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    margin: 10px 10px 10px;
+    margin: 30px 10px 10px;
     padding: 20px 0 28px;
     width: 79%;
 }
@@ -90,6 +91,8 @@
     color: #fff;
     border-radius: 10px;
     width: auto;
+    align-items: center;  
+
 }
 th{
     background-color: #0F4C75;
@@ -151,16 +154,30 @@ tr:nth-child(odd):hover{
     cursor: pointer;
 }
 .pagination {
-    justify-content: center;
     position: absolute;
-    margin-left: 40%;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    justify-content: center;
+    margin-top: 10px;
+    text-align: center;
+    left: 40%;
 }
 
 .menu-txt{
     margin-top: 8px;
     margin-bottom: 10px;
 }
+
 .menu-txt-fim{
     margin-bottom: 15px;
     padding-bottom: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+
+}
+
+.label.txt{
+    cursor: pointer;
+    pointer-events: auto;
 }
