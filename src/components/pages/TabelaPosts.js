@@ -194,47 +194,49 @@ class TabelaPosts extends React.Component {
       var filtragens = [...this.state.filters];
       this.state.filters.map((quem) => {if(quem === "Anônimos"){
         const conjuntoUser = this.state.posts.filter((e) => {return e.user.name === null;});
-        conjuntoUser.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts)}});
+        conjuntoUser.map((posts) => {if(posts.length !== 0){
+          conjuntoUniverso.push(posts);
+        }});
         filtragens.splice(filtragens.indexOf("Anônimos"), 1);
         // conjuntoUniverso.push(conjuntoUser);
       } else {
         if (quem === "Registrados") {
           const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;})
-          conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts)}});
+          conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts);}});
           filtragens.splice(filtragens.indexOf("Registrados"), 1);
       } else {
           this.setState({
             tableData: []
           });
         }
-      }})
+      }});
       const conjuntoStatus = [];
       if (filtragens.length !== 1) {
           filtragens.map((status) => {if(status === "Aguardando"){
             const process = conjuntoUniverso.filter((e) => {return e.status === "Aguardando";});
-            process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+            process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           } else if (status === "Em andamento"){
             const processAwait = conjuntoUniverso.filter((e) => {return e.status === "Em andamento";});
-            processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+            processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           } else if (status === "Resolvido"){
             const processfinished = conjuntoUniverso.filter((e) => {return e.status === "Resolvido";});
-            processfinished.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+            processfinished.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           } else {
             const processFiled = conjuntoUniverso.filter((e) => {return e.status === "Arquivados";});
-            processFiled.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
+            processFiled.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           }
         })
         conjuntoUniverso = conjuntoStatus;
       }
       if (this.state.filters[0] !== "categoria") {
         const maxPage = conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];});
-        const corte = maxPage.slice(this.state.offset, this.state.offset + this.state.perPage)
+        const corte = maxPage.slice(this.state.offset, this.state.offset + this.state.perPage);
         this.setState({
           tableData: corte,
           postsShow: conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];})
         }); 
       } else {
-        const corte2 = conjuntoUniverso.slice(this.state.offset, this.state.offset + this.state.perPage)
+        const corte2 = conjuntoUniverso.slice(this.state.offset, this.state.offset + this.state.perPage);
         this.setState({
           tableData: corte2,
           postsShow: conjuntoUniverso
