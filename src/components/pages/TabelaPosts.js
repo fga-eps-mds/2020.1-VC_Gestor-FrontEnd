@@ -56,7 +56,6 @@ class TabelaPosts extends React.Component {
       postsShow:response.data.rows
     });
   }
-
   currentPage(e){
       this.setState({
         paginaAtual: e,
@@ -87,7 +86,6 @@ class TabelaPosts extends React.Component {
      }
     handleChange = (event) => {
       event.preventDefault()
-      // alert(event.target.value)
       this.setState({status: event.target.value});
       }
 
@@ -151,13 +149,10 @@ class TabelaPosts extends React.Component {
           this.state.filters.slice(index, 1);
         }
         const removed = array.splice(array.indexOf(type),1);
-        // const conjB = this.state.posts.filter((e) => {return e.status === type;});
-        // this.state.posts.map((item) => {if(conjB.indexOf(item) !== -1){this.state.conjuntoA.splice(item, 1);}});
         this.setState({
           tableData: this.state.posts.filter((e) => {return e.status === type;})
         });
       }
-      console.log(this.state.filters)
       this.filtrar();
     }
 
@@ -190,15 +185,15 @@ class TabelaPosts extends React.Component {
         }
       }
       this.filtrar();
-      console.log(this.state.filters)
     }
 
     filtrar(){
+      this.setState({paginaAtual: 0});
+      this.currentPage(0);
       var conjuntoUniverso = [];
       var filtragens = [...this.state.filters];
       this.state.filters.map((quem) => {if(quem === "Anônimos"){
         const conjuntoUser = this.state.posts.filter((e) => {return e.user.name === null;});
-        console.log(conjuntoUser);
         conjuntoUser.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts)}});
         filtragens.splice(filtragens.indexOf("Anônimos"), 1);
         // conjuntoUniverso.push(conjuntoUser);
@@ -213,14 +208,12 @@ class TabelaPosts extends React.Component {
           });
         }
       }})
-      console.log(filtragens)
       const conjuntoStatus = [];
       if (filtragens.length !== 1) {
           filtragens.map((status) => {if(status === "Aguardando"){
             const process = conjuntoUniverso.filter((e) => {return e.status === "Aguardando";});
             process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
           } else if (status === "Em andamento"){
-            console.log("eentrei em andamento")
             const processAwait = conjuntoUniverso.filter((e) => {return e.status === "Em andamento";});
             processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e)}});
           } else if (status === "Resolvido"){
@@ -259,13 +252,30 @@ class TabelaPosts extends React.Component {
         });
       } else {
         this.setState({
-          tableData: this.state.posts.sort((a, b) => {
+          tableData: this.state.postsShow.sort((a, b) => {
             return a[type] < b[type] ? 1 : -1
           }),
           ordem: 'asc'
         });
       }
       return this.loadMoreData();
+    }
+
+    showPagination(){
+      return (
+        <Pagination className='pagination'>
+          <Pagination.First onClick={() => this.currentPage(0)}/>
+          <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
+            this.currentPage(this.state.paginaAtual - 1) : null}/>
+          {this.state.totalPages.map(page => (
+            <Pagination.Item key={page} on={page}
+              onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => (this.state.paginaAtual !== this.state.totalPages) ?
+            this.currentPage(this.state.paginaAtual + 1) : null}/>
+          <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
+        </Pagination>
+      )
     }
 
 
@@ -400,7 +410,9 @@ class TabelaPosts extends React.Component {
                   <h2>{post.id}</h2>
                     </>))}
                 </tbody>
-                <Pagination className='pagination'>
+                {this.state.postsShow.length > this.state.perPage || this.state.paginaAtual === this.state.totalPages ?
+                this.showPagination() : null}
+                {/* <Pagination className='pagination'>
                     <Pagination.First onClick={() => this.currentPage(0)}/>
                     <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
                       this.currentPage(this.state.paginaAtual - 1) : null}/>
@@ -410,7 +422,7 @@ class TabelaPosts extends React.Component {
                     ))}
                     <Pagination.Next />
                     <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-                </Pagination>
+                </Pagination> */}
             </table> 
                   {this.state.showModal ? this.modelContent() : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
