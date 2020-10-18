@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./Login.css";
 
 class Registration extends React.Component{
@@ -34,9 +33,7 @@ class Registration extends React.Component{
   handleSubmit(event){
     event.preventDefault();
 
-    const registration_form = this.state;
-
-    console.log(registration_form);
+    //const registration_form = this.state;
 
   }
 
@@ -51,7 +48,7 @@ class Registration extends React.Component{
             <input type="text" id="username" value={this.state.username} onChange={this.handleChange} className="form-control login-input" placeholder="Nome de Usuário" />
             <input type="password" id="password" value={this.state.password} onChange={this.handleChange} className="form-control login-input" placeholder="Senha" />
             <button className="btn btn-block button-next" type="submit">Criar</button>
-            <p className="registration-text">Já possui conta? <a href="#">Entre</a> agora</p>
+            <p className="registration-text">Já possui conta? <a href="#1">Entre</a> agora</p>
           </form>
         </div>
       </div>

@@ -1,8 +1,7 @@
-import React from "react"
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import apiBeneficio from '../../services/apiBeneficio'
-import { Row } from "react-bootstrap";
+import React from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import apiBeneficio from "../../services/apiBeneficio";
 
 
 class Forms extends React.Component {
@@ -46,7 +45,7 @@ class Forms extends React.Component {
 
       const benefit = this.state;
 
-      const response = await apiBeneficio.post("benefits",  benefit );
+      await apiBeneficio.post("benefits",  benefit );
     }
   
     render() {

@@ -46,16 +46,15 @@ class Login extends React.Component{
     const login = this.state;
 
     try{
-      const response = await apiUser.post("sessions", login)
+      const response = await apiUser.post("sessions", login);
 
       const token = response.data.token;
       localStorage.setItem("auth",JSON.stringify({
         token,
         logged:true
-      }))
+      }));
       this.props.history.push("/Home");
     } catch (err) {
-      console.log(err)
       alert( "Usuario/senha incorreto!");
     }
 

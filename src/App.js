@@ -1,24 +1,24 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Row, Col, Navbar, NavDropdown } from "react-bootstrap";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Row, Col, Navbar } from "react-bootstrap";
 import Sidebar from "./components/components/Sidebar";
 import RelatorioDeDados from "./components/pages/RelatorioDeDados";
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
 import Option2 from "./components/pages/Option2";
 import PostagemMenu from "./components/components/PostagemMenu";
-import BeneficiosCriar from "./components/pages/BeneficiosCriar"
+import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import Postagem from "./components/pages/Postagem";
 import Tabela from "./components/pages/tabela";
 import TabelaPosts from "./components/pages/TabelaPosts";
-import Login from './components/login/Login'
-import Home from './components/Home/home'
-import p404 from './components/404/404'
-import Registration from './components/login/Registration'
-import loginHelper from './services/loginHelper'
+import Login from "./components/login/Login";
+import Home from "./components/Home/home";
+import p404 from "./components/404/404";
+import Registration from "./components/login/Registration";
+import { isLogged, logout } from "./services/loginHelper";
 
 const MyRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (<>
-    {loginHelper.isLogged() ? <><Navbar style={{ backgroundColor: "#0F4C75", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
+    { isLogged() ? <><Navbar style={{ backgroundColor: "#0F4C75", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
       <div style={{ width: "15%" }}>
       </div>
       <a href="/" style={{ width: "70%", textAlign: "center", fontWeight: "600", fontFamily: 'Big Shoulders Display', fontSize: "calc(28px + 6 * ((100vw - 320px) / 680))", color: "white", textDecoration: "none" }}>
@@ -26,13 +26,7 @@ const MyRoute = ({ component: Component, ...rest }) => (
         Vamos Cuidar
       </a>
       <div style={{ width: "15%", textAlign: "right" }}>
-        <NavDropdown alignRight data-toggle="dropdown" title={
-          <div className="pull-left"><img style={{ width: 'auto', height: '40px', marginRight: "10px" }} alt="" src={process.env.PUBLIC_URL + "/img/Vector.png"} /></div>}>
-          <NavDropdown.Item style={{ color: "black" }}>Entrar</NavDropdown.Item>
-          <NavDropdown.Item style={{ color: "black" }}>Anúncios</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item style={{ color: "#0F4C75" }}>Registrar</NavDropdown.Item>
-        </NavDropdown>
+        <div style={{color:"white"}} onClick={logout}>Logout</div>
       </div>
     </Navbar>
     <Row style={{ width: "100%" }}>

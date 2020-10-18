@@ -1,8 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-
-import apiPostagem from '../../services/apiPostagem';
+import apiPostagem from "../../services/apiPostagem";
 
 // await apiPostagem.port('posts', { post_id, title, description, status });
 
