@@ -26,7 +26,7 @@ const MyRoute = ({ component: Component, ...rest }) => (
         Vamos Cuidar
       </a>
       <div style={{ width: "15%", textAlign: "right" }}>
-        <div style={{color:"white"}} onClick={logout}>Logout</div>
+        <div onClick={logout} className="logout">Logout</div>
       </div>
     </Navbar>
     <Row style={{ width: "100%" }}>
