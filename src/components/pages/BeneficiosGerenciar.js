@@ -21,9 +21,20 @@ class BeneficiosGerenciar extends React.Component {
     this.getBenefits();
   }
 
+  deleteBenefits = async (benefit_id) =>{
+    try{
+      await apiBeneficio.delete(`/benefits/${benefit_id}`);
+      const beneficios = this.state.benefits.filter(benefit => benefit.benefit_id !== benefit_id);
+      await this.setState({benefits: beneficios});
+    }
+    catch(error){
+
+    }
+  }
 
 
   render() {
+    // console.log(this.state.benefits)
     if(this.state.benefits == null){
       return (<div> Loading </div>);
     }else{
@@ -32,7 +43,7 @@ class BeneficiosGerenciar extends React.Component {
           {this.state.benefits.map((benefitItem, index) => {
             return (
               <div key={index} className="col">
-                <CardBenefit  color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
+                <CardBenefit deleteBenefits={this.deleteBenefits} color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
               </div>
             );
           })}

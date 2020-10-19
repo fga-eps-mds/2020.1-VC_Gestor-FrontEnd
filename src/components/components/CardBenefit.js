@@ -1,11 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import apiBeneficio from "../../services/apiBeneficio";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import "./cardBenefit.css";
 
 
 class CardBenefit extends React.Component {
+  
 
   render() {
     return ( 
@@ -21,7 +23,9 @@ class CardBenefit extends React.Component {
             </a>
           </div>
           <div className="iconsBenefit col-1">
-            <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>
+            <button onClick={() => this.props.deleteBenefits(this.props.benefit_id)} type="button">
+              <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>
+            </button>
           </div>
         </div>
         <Card.Text className="descriptionBenefit">

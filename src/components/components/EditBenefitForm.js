@@ -2,11 +2,14 @@ import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import apiBeneficio from '../../services/apiBeneficio';
+import { withRouter , Redirect } from 'react-router-dom';
+import {} from 'react-router'
 import { Row } from "react-bootstrap";
 
 
 
 class EditBenefitForm extends React.Component {
+
     constructor(props) {
       super(props);
       this.state = {
@@ -16,6 +19,10 @@ class EditBenefitForm extends React.Component {
         redeem_way: "" ,
         quantity: 10
       };
+
+      this.id = this.props.match.params.benefitId;
+
+      // this.history = useHistory();
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,9 +54,16 @@ class EditBenefitForm extends React.Component {
         alert("Benefício foi alterado com sucesso!")
     }
 
-    async deleteBenefit(event){
-      event.preventDefault();
-      alert("Benefício foi deletado com sucesso!");
+
+    deleteBenefits = async (benefit_id) =>{
+      try{
+        await apiBeneficio.delete(`/benefits/${benefit_id}`);
+        this.props.history.push('/BeneficiosGerenciar');
+      }
+      catch(error){
+        
+      }
+
     }
   
     render() {
@@ -99,7 +113,7 @@ class EditBenefitForm extends React.Component {
             </div>
             <div className="row">
               <div className="col-3">
-                <Button id="delete" type="button" onClick={this.deleteBenefit} size="lg" block>
+                <Button id="delete" type="button" onClick={() => this.deleteBenefits(this.id)} size="lg" block>
                   Excluir
                 </Button>
               </div>
@@ -116,4 +130,4 @@ class EditBenefitForm extends React.Component {
     }
   }
 
-  export default EditBenefitForm;
+  export default withRouter(EditBenefitForm);
