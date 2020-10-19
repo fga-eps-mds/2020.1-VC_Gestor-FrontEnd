@@ -27,6 +27,15 @@ class EditBenefitForm extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    async getBenefits(){
+      const response = await apiBeneficio.get("benefits/"+this.id);
+      this.setState(response.data);
+    }
+
+    componentDidMount(){
+      this.getBenefits();
+    }
   
     handleChange(event) {
       switch(event.target.id){
@@ -51,7 +60,10 @@ class EditBenefitForm extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault();
-        alert("Benefício foi alterado com sucesso!")
+      const benefit = this.state;
+
+      const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
+      alert("Benefício foi alterado com sucesso!")
     }
 
 
