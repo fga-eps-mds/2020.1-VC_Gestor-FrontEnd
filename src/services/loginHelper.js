@@ -16,7 +16,7 @@ function logout(){
         token:"",
         logged:false
     }));
-    Location.reload();
+    window.location.reload();
 }
 
 module.exports = {
