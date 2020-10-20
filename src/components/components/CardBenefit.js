@@ -23,9 +23,9 @@ class CardBenefit extends React.Component {
             </a>
           </div>
           <div className="iconsBenefit col-1">
-            <button onClick={() => this.props.deleteBenefits(this.props.benefit_id)} type="button">
+            <a onClick={() => this.props.deleteBenefits(this.props.benefit_id)} type="button">
               <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>
-            </button>
+            </a>
           </div>
         </div>
         <Card.Text className="descriptionBenefit">

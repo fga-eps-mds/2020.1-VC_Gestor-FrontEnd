@@ -22,14 +22,17 @@ class BeneficiosGerenciar extends React.Component {
   }
 
   deleteBenefits = async (benefit_id) =>{
-    try{
-      await apiBeneficio.delete(`/benefits/${benefit_id}`);
-      const beneficios = this.state.benefits.filter(benefit => benefit.benefit_id !== benefit_id);
-      await this.setState({benefits: beneficios});
+    if(window.confirm("Tem certeza que quer excluir o benefício?")){
+      try{
+        await apiBeneficio.delete(`/benefits/${benefit_id}`);
+        const beneficios = this.state.benefits.filter(benefit => benefit.benefit_id !== benefit_id);
+        await this.setState({benefits: beneficios});
+      }
+      catch(error){
+        alert("Ocorreu um erro e não conseguimos excluir o benefício");
+      }  
     }
-    catch(error){
-
-    }
+    
   }
 
 
@@ -39,14 +42,16 @@ class BeneficiosGerenciar extends React.Component {
       return (<div> Loading </div>);
     }else{
       return (
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-          {this.state.benefits.map((benefitItem, index) => {
-            return (
-              <div key={index} className="col">
-                <CardBenefit deleteBenefits={this.deleteBenefits} color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
-              </div>
-            );
-          })}
+        <div className="container-fluid">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            {this.state.benefits.map((benefitItem, index) => {
+              return (
+                <div key={index} className="col" >
+                  <CardBenefit deleteBenefits={this.deleteBenefits} color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
+                </div>
+              );
+            })}
+        </div>
       </div>);
     }
     

@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import apiBeneficio from '../../services/apiBeneficio';
 import { withRouter , Redirect } from 'react-router-dom';
-import {} from 'react-router'
+//import {} from 'react-router'
 import { Row } from "react-bootstrap";
 
 
@@ -15,9 +15,9 @@ class EditBenefitForm extends React.Component {
       this.state = {
         title: "",
         description: "",
-        price: 1000000 ,
+        price:  null,
         redeem_way: "" ,
-        quantity: 10
+        quantity: null
       };
 
       this.id = this.props.match.params.benefitId;
@@ -61,19 +61,24 @@ class EditBenefitForm extends React.Component {
     async handleSubmit(event) {
       event.preventDefault();
       const benefit = this.state;
-
-      const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
-      alert("Benefício foi alterado com sucesso!")
+      try{
+        const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
+        alert("Benefício foi alterado com sucesso!");
+      }catch(e){
+        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+      }
     }
 
 
     deleteBenefits = async (benefit_id) =>{
-      try{
-        await apiBeneficio.delete(`/benefits/${benefit_id}`);
-        this.props.history.push('/BeneficiosGerenciar');
-      }
-      catch(error){
-        
+      if(window.confirm("Tem certeza que quer excluir o benefício?")){
+        try{
+          await apiBeneficio.delete(`/benefits/${benefit_id}`);
+          this.props.history.push('/BeneficiosGerenciar');
+        }
+        catch(error){
+          alert("Ocorreu um erro e não conseguimos excluir o benefício");
+        }
       }
 
     }

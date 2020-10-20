@@ -11,9 +11,9 @@ class Forms extends React.Component {
       this.state = {
         title: "",
         description: "",
-        price: 1000000 ,
+        price: "" ,
         redeem_way: "" ,
-        quantity: 10
+        quantity: 1
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -23,16 +23,32 @@ class Forms extends React.Component {
     handleChange(event) {
       switch(event.target.id){
         case  "title":
-          this.setState({title: event.target.value});
+          if(event.target.value.length<=20){
+            this.setState({title: event.target.value});
+          }
           break;
         case "description":
-          this.setState({description: event.target.value});
+          if(event.target.value.length<=20){
+            this.setState({description: event.target.value});
+          }
           break;
         case "price":
-          this.setState({price: event.target.value});
+          var regex = /^[0-9]|[.,]?$/gm;
+          console.log(this.state.price)
+          if(event.target.value.match(regex)!=null){
+            this.setState({price: event.target.value});  
+          }else{
+            this.setState({price: this.state.price});
+          }
+          regex = /^[0-9]+([,.][0-9]+)?$/gm;
+          if(event.target.value.match(regex)==null){
+
+          }
           break;
         case "redeem_way":
-          this.setState({redeem_way: event.target.value});
+          if(event.target.value.length<=25){
+            this.setState({redeem_way: event.target.value});
+          }
           break;
         case "quantity":
           this.setState({quantity: event.target.value});
@@ -45,10 +61,14 @@ class Forms extends React.Component {
       event.preventDefault();
 
       const benefit = this.state;
-
-      const response = await apiBeneficio.post("benefits",  benefit );
+      try{
+        const response = await apiBeneficio.post("benefits",  benefit );
       
-      alert("Benefício criado com sucesso!");
+        alert("Benefício criado com sucesso!");  
+      }catch(e){
+        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+      }
+      
     }
   
     render() {
@@ -88,19 +108,19 @@ class Forms extends React.Component {
               <Form.Group controlId="redeem_way" id="redeem_way_">
                 <Form.Label>Meio de Resgate</Form.Label>
                 <Form.Control type="text" placeholder="Meio de Resgate do Benefício" value={this.state.redeem_way} onChange={this.handleChange} />
-            </Form.Group>
-            </div>
-            <div className="row">
-              <Form.Group controlId="description" id="description_">
-                  <Form.Label>Descrição</Form.Label>
-                  <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" cols="6" value={this.state.description} onChange={this.handleChange} />
               </Form.Group>
-            </div>
-            <div className="row">
-              <Button id="button_" type="submit" size="lg" block>
-                  Enviar
-              </Button>
-            </div>
+              </div>
+              <div className="row">
+                <Form.Group controlId="description" id="description_">
+                    <Form.Label>Descrição</Form.Label>
+                    <Form.Control as="textarea" placeholder="Descrição dos Benefícios"rows="3" cols="6" value={this.state.description} onChange={this.handleChange} />
+                </Form.Group>
+              </div>
+              <div className="row">
+                <Button id="button_" type="submit" size="lg" block>
+                    Enviar
+                </Button>
+              </div>
             </div>
            
         </Form>
