@@ -1,16 +1,16 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import apiBeneficio from '../../services/apiBeneficio';
-import { withRouter , Redirect } from 'react-router-dom';
-//import {} from 'react-router'
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import apiBeneficio from "../../services/apiBeneficio";
+import { withRouter , Redirect } from "react-router-dom";
+//import {} from "react-router"
 import { Row } from "react-bootstrap";
 
 
 
 class EditBenefitForm extends React.Component {
 
-    constructor(props) {
+    constructor(props){
       super(props);
       this.state = {
         title: "",
@@ -37,7 +37,7 @@ class EditBenefitForm extends React.Component {
       this.getBenefits();
     }
   
-    handleChange(event) {
+    handleChange(event){
       switch(event.target.id){
         case  "title":
           this.setState({title: event.target.value});
@@ -58,23 +58,24 @@ class EditBenefitForm extends React.Component {
       }
     }
   
-    async handleSubmit(event) {
+    async handleSubmit(event){
       event.preventDefault();
       const benefit = this.state;
       try{
         const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
         alert("Benefício foi alterado com sucesso!");
+        this.props.history.push("/BeneficiosGerenciar");
       }catch(e){
         alert("Ocorreu um erro e não foi possível criar o benefício"); 
       }
     }
 
 
-    deleteBenefits = async (benefit_id) =>{
+    deleteBenefits = async (benefitId) => {
       if(window.confirm("Tem certeza que quer excluir o benefício?")){
         try{
-          await apiBeneficio.delete(`/benefits/${benefit_id}`);
-          this.props.history.push('/BeneficiosGerenciar');
+          await apiBeneficio.delete(`/benefits/${benefitId}`);
+          this.props.history.push("/BeneficiosGerenciar");
         }
         catch(error){
           alert("Ocorreu um erro e não conseguimos excluir o benefício");

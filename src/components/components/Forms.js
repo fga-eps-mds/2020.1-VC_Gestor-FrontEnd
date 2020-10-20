@@ -34,16 +34,15 @@ class Forms extends React.Component {
           break;
         case "price":
           var regex = /^[0-9]|[.,]?$/gm;
-          console.log(this.state.price)
           if(event.target.value.match(regex)!=null){
             this.setState({price: event.target.value});  
           }else{
             this.setState({price: this.state.price});
           }
           regex = /^[0-9]+([,.][0-9]+)?$/gm;
-          if(event.target.value.match(regex)==null){
+          // if(event.target.value.match(regex)==null){
 
-          }
+          // }
           break;
         case "redeem_way":
           if(event.target.value.length<=25){

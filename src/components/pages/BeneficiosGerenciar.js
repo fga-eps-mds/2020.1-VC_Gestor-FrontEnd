@@ -21,18 +21,17 @@ class BeneficiosGerenciar extends React.Component {
     this.getBenefits();
   }
 
-  deleteBenefits = async (benefit_id) =>{
+  deleteBenefits = async (benefitId) => {
     if(window.confirm("Tem certeza que quer excluir o benefício?")){
       try{
-        await apiBeneficio.delete(`/benefits/${benefit_id}`);
-        const beneficios = this.state.benefits.filter(benefit => benefit.benefit_id !== benefit_id);
+        await apiBeneficio.delete(`/benefits/${benefitId}`);
+        const beneficios = this.state.benefits.filter((benefit) => benefit.benefit_id !== benefitId);
         await this.setState({benefits: beneficios});
       }
       catch(error){
         alert("Ocorreu um erro e não conseguimos excluir o benefício");
       }  
     }
-    
   }
 
 
@@ -47,7 +46,7 @@ class BeneficiosGerenciar extends React.Component {
             {this.state.benefits.map((benefitItem, index) => {
               return (
                 <div key={index} className="col" >
-                  <CardBenefit deleteBenefits={this.deleteBenefits} color={this.colors[index%4]} benefit_id={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
+                  <CardBenefit deleteBenefits={this.deleteBenefits} color={this.colors[index%4]} benefitId={benefitItem.benefit_id} title={benefitItem.title} description={benefitItem.description}/>
                 </div>
               );
             })}

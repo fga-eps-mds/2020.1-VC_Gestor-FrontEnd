@@ -8,14 +8,12 @@ class BeneficiosEditar extends React.Component {
 
   render() {
     const { benefitId } = this.props.match.params;
-    console.log(benefitId);
     return (<>
       <Card className="card">
       <Card.Header className="card-header_"><h3>Edição de Benefícios</h3></Card.Header>
         <Card.Text className="text">
           <EditBenefitForm className="forms" />
         </Card.Text>
-
       </Card>
     </>
     );
