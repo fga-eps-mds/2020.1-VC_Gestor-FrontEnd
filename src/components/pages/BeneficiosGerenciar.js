@@ -36,7 +36,6 @@ class BeneficiosGerenciar extends React.Component {
 
 
   render() {
-    // console.log(this.state.benefits)
     if(this.state.benefits == null){
       return (<div> Loading </div>);
     }else{

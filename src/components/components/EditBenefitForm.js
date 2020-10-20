@@ -40,16 +40,27 @@ class EditBenefitForm extends React.Component {
     handleChange(event){
       switch(event.target.id){
         case  "title":
-          this.setState({title: event.target.value});
+          if(event.target.value.length<=20){
+            this.setState({title: event.target.value});
+          }
           break;
         case "description":
-          this.setState({description: event.target.value});
+          if(event.target.value.length<=20){
+            this.setState({description: event.target.value});
+          }
           break;
         case "price":
-          this.setState({price: event.target.value});
+          const regex = /^[0-9]|[.,]?$/gm;
+          if(event.target.value.match(regex)!=null){
+            this.setState({price: event.target.value});  
+          }else{
+            this.setState({price: this.state.price});
+          }
           break;
         case "redeem_way":
-          this.setState({redeem_way: event.target.value});
+          if(event.target.value.length<=25){
+            this.setState({redeem_way: event.target.value});
+          }
           break;
         case "quantity":
           this.setState({quantity: event.target.value});
@@ -61,6 +72,7 @@ class EditBenefitForm extends React.Component {
     async handleSubmit(event){
       event.preventDefault();
       const benefit = this.state;
+      
       try{
         const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
         alert("Benefício foi alterado com sucesso!");
