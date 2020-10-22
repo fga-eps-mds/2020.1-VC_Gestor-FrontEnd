@@ -1,8 +1,9 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import apiBeneficio from '../../services/apiBeneficio';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import apiBeneficio from "../../services/apiBeneficio";
 import { Row } from "react-bootstrap";
+
 
 
 class Forms extends React.Component {
@@ -60,6 +61,7 @@ class Forms extends React.Component {
       event.preventDefault();
 
       const benefit = this.state;
+
       try{
         const response = await apiBeneficio.post("benefits",  benefit );
       
@@ -67,7 +69,6 @@ class Forms extends React.Component {
       }catch(e){
         alert("Ocorreu um erro e não foi possível criar o benefício"); 
       }
-      
     }
   
     render() {
