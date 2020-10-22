@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import apiBeneficio from "../../services/apiBeneficio";
 
-
 class Forms extends React.Component {
     constructor(props) {
       super(props);
@@ -42,7 +41,7 @@ class Forms extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault();
-
+      alert("Benefício criado com sucesso.");
       const benefit = this.state;
 
       await apiBeneficio.post("benefits",  benefit );

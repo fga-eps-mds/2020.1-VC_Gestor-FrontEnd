@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
-import apiPostagem from "../../services/apiPostagem";
-import "./tabela.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import apiPostagem from "../../services/apiPostagem";
+import "./tabela.css";
+import { Redirect } from "react-router-dom";
 
 class TabelaPosts extends React.Component {
   
@@ -26,8 +28,6 @@ class TabelaPosts extends React.Component {
       postsClosed: [],
       ordem: ['asc']
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
   async componentDidMount() {
@@ -273,7 +273,10 @@ class TabelaPosts extends React.Component {
                     </>))}
                 </tbody>
             </table> 
-                  {this.state.showModal ? this.modelContent() : null}
+                  {this.state.showModal ? <Redirect to={{
+                      pathname: `/Anuncio/${this.state.modalInf.post_id}`,
+                      state: {
+                      id: this.state.modalInf.post_id}}}/> : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
                   <Pagination className='pagination'>
                     <Pagination.First onClick={() => this.currentPage(0)}/>

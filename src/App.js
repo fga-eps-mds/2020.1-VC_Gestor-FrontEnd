@@ -10,11 +10,13 @@ import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import Postagem from "./components/pages/Postagem";
 import Tabela from "./components/pages/tabela";
 import TabelaPosts from "./components/pages/TabelaPosts";
+import Anuncio from "./components/pages/Anuncio";
 import Login from "./components/login/Login";
 import Home from "./components/Home/home";
 import p404 from "./components/404/404";
 import Registration from "./components/login/Registration";
 import { isLogged, logout } from "./services/loginHelper";
+
 
 const MyRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (<>
@@ -56,9 +58,12 @@ class App extends React.Component {
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/tabela' component={Tabela} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
+          <MyRoute exact path='/Anuncio/:post_id' component={Anuncio} />
+          <MyRoute exact path='*' component={RelatorioDeStatus} />
           <MyRoute exact path='/Home' component={Home} />
           <MyRoute exact path='/' component={Home} />
           <MyRoute exact path='*' component={p404} />
+
         </Switch>
       </BrowserRouter>
     );
