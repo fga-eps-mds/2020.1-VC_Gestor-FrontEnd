@@ -5,8 +5,7 @@ import Sidebar from "./components/components/Sidebar";
 import RelatorioDeDados from "./components/pages/RelatorioDeDados";
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
 import Option2 from "./components/pages/Option2";
-import PostagemMenu from "./components/components/PostagemMenu";
-import Postagem from "./components/pages/Postagem";
+import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import BeneficiosGerenciar from "./components/pages/BeneficiosGerenciar";
@@ -55,8 +54,6 @@ class App extends React.Component {
           <MyRoute exact path='/BeneficiosGerenciar' component={BeneficiosGerenciar} />
           <MyRoute exact path='/BeneficiosEditar/:benefitId' component={BeneficiosEditar} />
           <MyRoute exact path='/Option2' component={Option2} />
-          <MyRoute exact path='/PostagemMenu' component={PostagemMenu} />
-          <MyRoute exact path='/Postagem' component={Postagem} />
           <MyRoute exact path='/Login' component={Login} />
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
