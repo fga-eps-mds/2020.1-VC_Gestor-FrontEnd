@@ -48,3 +48,20 @@ body {
     padding-top: 15px;
     padding-left: 10px;
 }
+
+.logout{
+    display: flex;
+    float: right;
+    margin-right: 30px;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.logout:hover{
+    cursor: pointer;
+    color: khaki;
+}
