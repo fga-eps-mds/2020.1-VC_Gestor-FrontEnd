@@ -1,5 +1,7 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
+import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import apiPostagem from "../../services/apiPostagem";
 import "./tabela.css";
