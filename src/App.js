@@ -4,10 +4,9 @@ import { Row, Col, Navbar } from "react-bootstrap";
 import Sidebar from "./components/components/Sidebar";
 import RelatorioDeDados from "./components/pages/RelatorioDeDados";
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
-import Option2 from "./components/pages/Option2";
+import GerenciamentoNoticias from "./components/pages/GerenciamentoNoticias";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";
-import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import BeneficiosGerenciar from "./components/pages/BeneficiosGerenciar";
 import BeneficiosEditar from "./components/pages/BeneficiosEditar";
 import Anuncio from "./components/pages/Anuncio";
@@ -53,7 +52,7 @@ class App extends React.Component {
           <MyRoute exact path='/BeneficiosCriar' component={BeneficiosCriar} />
           <MyRoute exact path='/BeneficiosGerenciar' component={BeneficiosGerenciar} />
           <MyRoute exact path='/BeneficiosEditar/:benefitId' component={BeneficiosEditar} />
-          <MyRoute exact path='/Option2' component={Option2} />
+          <MyRoute exact path='/GerenciamentoNoticias' component={GerenciamentoNoticias} />
           <MyRoute exact path='/Login' component={Login} />
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />

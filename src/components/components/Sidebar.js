@@ -53,7 +53,7 @@ class Sidebar extends React.Component {
                 href: "/option1"
             },{
                 title: "Gerenciamento de Notícias",
-                href: "/option2"
+                href: "/GerenciamentoNoticias"
             }]
         }, {
             index:2,
