@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Pagination } from "react-bootstrap";
+import { Card, Modal, Pagination } from "react-bootstrap";
+
 import apiPostagem from "../../services/apiPostagem";
 import "./tabela.css";
 import { Redirect } from "react-router-dom";
@@ -68,6 +69,59 @@ class TabelaPosts extends React.Component {
 			tableData:slice
     })
     return this.forceUpdate();
+    }
+
+    handleClose = () => this.setState({showModal: false})
+    handleSubmit = (e) => {
+       if(this.state.modalInf.status === this.state.status) {
+         alert('O estadado atual continua o mesmo');
+       } else {
+        alert('O estado do post foi alterado para: ' + this.state.status);
+        apiPostagem.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
+      }
+     }
+    handleChange = (event) => {
+      event.preventDefault()
+      // alert(event.target.value)
+      this.setState({status: event.target.value});
+      }
+
+
+    modelContent = () => {
+      return (
+          <Modal.Dialog className="modal">
+            <Modal.Header>
+              <Modal.Title>
+                <FontAwesomeIcon icon={faUserCircle} style={{ width: "40px", marginRight: "10px" }} />
+                {this.state.modalInf.user.name} {this.state.modalInf.user.surname}<br/>
+                <h6>{this.state.modalInf.dt_creation}</h6>
+                <h6>Estado da postem: {this.state.modalInf.status}</h6>
+              </Modal.Title>
+            </Modal.Header>
+              <Modal.Body>
+                <h4>{this.state.modalInf.title}
+                <FontAwesomeIcon icon={faThumbsUp} style={{ width: "15px", marginLeft: "50px", marginRight: "10px"}}/>
+                {this.state.modalInf.likes}</h4>
+                <h5 style={{fontSize: "14px"}}>{this.state.modalInf.place.place_name}</h5>
+                <p>{this.state.modalInf.description}</p>
+                <form onSubmit={this.handleSubmit}>
+                  <label>
+                    Alterar estado para:<br/>
+                    <select onChange={this.handleChange}>
+                    <option value="Aguardando">Aguardando</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Resolvido">Resolvido</option>
+                    <option value="Arquivado">Arquivado</option>
+                  </select>
+                  </label>
+                  <div className="modal-footer">
+                    <button className="close-button" onClick={this.handleClose}>Cancelar</button>
+                    <input className="salve-button" variant="primary" type="submit" value="Salvar"/>
+                  </div>
+                </form>
+              </Modal.Body>
+        </Modal.Dialog>
+      )
     }
 
     mostrarModal(e){

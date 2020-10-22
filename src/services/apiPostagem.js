@@ -5,4 +5,3 @@ const apiPostagem = axios.create({
 });
 
 export default apiPostagem;
-
