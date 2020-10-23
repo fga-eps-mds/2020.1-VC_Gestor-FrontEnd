@@ -7,7 +7,6 @@ import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
 import Option2 from "./components/pages/Option2";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";
-import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import BeneficiosGerenciar from "./components/pages/BeneficiosGerenciar";
 import BeneficiosEditar from "./components/pages/BeneficiosEditar";
 import Anuncio from "./components/pages/Anuncio";

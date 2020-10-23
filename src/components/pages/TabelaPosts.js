@@ -147,7 +147,7 @@ class TabelaPosts extends React.Component {
         if ( index > -1){
           this.state.filters.slice(index, 1);
         }
-        const removed = array.splice(array.indexOf(type),1);
+        array.splice(array.indexOf(type),1);
         this.setState({
           tableData: this.state.posts.filter((e) => {return e.status === type;})
         });
@@ -201,8 +201,10 @@ class TabelaPosts extends React.Component {
       this.currentPage(0);
       var conjuntoUniverso = [];
       var filtragens = [...this.state.filters];
+      // eslint-disable-next-line array-callback-return
       this.state.filters.map((quem) => {if(quem === "Anônimos"){
         const conjuntoUser = this.state.posts.filter((e) => {return e.user.name === null;});
+        // eslint-disable-next-line array-callback-return
         conjuntoUser.map((posts) => {if(posts.length !== 0){
           conjuntoUniverso.push(posts);
         }});
@@ -211,6 +213,7 @@ class TabelaPosts extends React.Component {
       } else {
         if (quem === "Registrados") {
           const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;});
+          // eslint-disable-next-line array-callback-return
           conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts);}});
           filtragens.splice(filtragens.indexOf("Registrados"), 1);
       } else {
@@ -220,18 +223,28 @@ class TabelaPosts extends React.Component {
         }
       }});
       const conjuntoStatus = [];
+      // eslint-disable-next-line array-callback-return
       if (filtragens.length !== 1) {
+          // eslint-disable-next-line array-callback-return
           filtragens.map((status) => {if(status === "Aguardando"){
             const process = conjuntoUniverso.filter((e) => {return e.status === "Aguardando";});
+            // eslint-disable-next-line array-callback-return
             process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           } else if (status === "Em andamento"){
+            // eslint-disable-next-line array-callback-return
             const processAwait = conjuntoUniverso.filter((e) => {return e.status === "Em andamento";});
+            // eslint-disable-next-line array-callback-return
             processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+            // eslint-disable-next-line array-callback-return
           } else if (status === "Resolvido"){
+            // eslint-disable-next-line array-callback-return
             const processfinished = conjuntoUniverso.filter((e) => {return e.status === "Resolvido";});
+            // eslint-disable-next-line array-callback-return
             processfinished.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+            // eslint-disable-next-line array-callback-return
           } else {
             const processFiled = conjuntoUniverso.filter((e) => {return e.status === "Arquivados";});
+            // eslint-disable-next-line array-callback-return
             processFiled.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
           }
         })
@@ -423,19 +436,12 @@ class TabelaPosts extends React.Component {
                 </tbody>
                 {this.state.postsShow.length > this.state.perPage || this.state.paginaAtual === this.state.totalPages ?
                 this.showPagination() : null}
-                {/* <Pagination className='pagination'>
-                    <Pagination.First onClick={() => this.currentPage(0)}/>
-                    <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
-                      this.currentPage(this.state.paginaAtual - 1) : null}/>
-                    {this.state.totalPages.map(page => (
-                      <Pagination.Item key={page} on={page}
-                        onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
-                    ))}
-                    <Pagination.Next />
-                    <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-                </Pagination> */}
+                {}
             </table> 
-                  {this.state.showModal ? this.modelContent() : null}
+            {this.state.showModal ? <Redirect to={{
+                      pathname: `/Anuncio/${this.state.modalInf.post_id}`,
+                      state: {
+                      id: this.state.modalInf.post_id}}}/> : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
           </Card.Text>
         </Card.Body>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import apiBeneficio from "../../services/apiBeneficio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "./cardBenefit.css";
@@ -23,7 +22,7 @@ class CardBenefit extends React.Component {
             </a>
           </div>
           <div className="iconsBenefit col-1">
-            <a onClick={() => this.props.deleteBenefits(this.props.benefitId)} type="button">
+            <a onClick={() => this.props.deleteBenefits(this.props.benefitId)} href="/BeneficiosGerenciar" type="button">
               <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>
             </a>
           </div>
