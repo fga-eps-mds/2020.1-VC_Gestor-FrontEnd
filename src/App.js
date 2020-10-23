@@ -54,7 +54,7 @@ class App extends React.Component {
           <MyRoute exact path='/BeneficiosGerenciar' component={BeneficiosGerenciar} />
           <MyRoute exact path='/BeneficiosEditar/:benefitId' component={BeneficiosEditar} />
           <MyRoute exact path='/GerenciamentoNoticias' component={GerenciamentoNoticias} />
-          <MyRoute exact path='/NewsEdit/:news_id' component={NewsEdit} />
+          <MyRoute exact path='/NewsEdit/:newsId' component={NewsEdit} />
           <MyRoute exact path='/Login' component={Login} />
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
