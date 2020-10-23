@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
                 title: "Criação Notícias",
                 href: "/CreateNews"
             },{
-                title: "Option 2",
+                title: "Gerenciamento de Notícias",
                 href: "/option2"
             }]
         }, {
@@ -63,20 +63,14 @@ class Sidebar extends React.Component {
                 title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
-                title: "Option 2",
-                href: "/option2"
+                title: "Gerenciar Benefícios",
+                href: "/BeneficiosGerenciar"
             }]
         }, {
             index:3,
             title: "Postagens",
             icon: faBullhorn,
-            options :[{                
-                    title: "Postagens",
-                    href: "/Postagem"
-                },{
-                    title: "Tabela",
-                    href: "/tabela"
-                },{
+            options :[{
                     title: "Postagens",
                     href: "/TabelaPosts"
                 }]
