@@ -92,18 +92,17 @@ class GerenciamentoNoticias extends React.Component {
                     <Pagination.Next/>
                     <Pagination.Last/>
                   </Pagination> */}
-
                   <nav>
                     <ul class="pagination" style={{backgroundColor: "#438ABB"}}>
-                      <li class="page-item"><a className="page-link pagination-button" href="#">
+                      <li class="page-item page-link pagination-button">
                         <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}}/>
-                        </a></li>
-                      <li class="page-item"><a className="page-link pagination-button" href="#">1</a></li>
-                      <li class="page-item"><a className="page-link pagination-button" href="#">2</a></li>
-                      <li class="page-item"><a className="page-link pagination-button" href="#">3</a></li>
-                      <li class="page-item"><a className="page-link pagination-button" href="#">
+                        </li>
+                      <li class="page-item page-link pagination-button">1</li>
+                      <li class="page-item page-link pagination-button">2</li>
+                      <li class="page-item page-link pagination-button">3</li>
+                      <li class="page-item page-link pagination-button">
                         <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}/>
-                        </a></li>
+                        </li>
                     </ul>
                   </nav>
             </table>

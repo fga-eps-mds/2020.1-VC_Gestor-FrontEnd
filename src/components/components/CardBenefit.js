@@ -23,7 +23,7 @@ class CardBenefit extends React.Component {
           </div>
           <div className="iconsBenefit col-1">
             <a onClick={() => this.props.deleteBenefits(this.props.benefitId)} href="/BeneficiosGerenciar" type="button">
-              <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px"}}/>
+              <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#E2E2E2"}}/>
             </a>
           </div>
         </div>
