@@ -2,9 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import apiBeneficio from "../../services/apiBeneficio";
-import { withRouter , Redirect } from "react-router-dom";
-//import {} from "react-router"
-import { Row } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 
 
@@ -74,7 +72,7 @@ class EditBenefitForm extends React.Component {
       const benefit = this.state;
       
       try{
-        const response = await apiBeneficio.put("benefits/"+this.id,  benefit );
+        await apiBeneficio.put("benefits/"+this.id,  benefit );
         alert("Benefício foi alterado com sucesso!");
         this.props.history.push("/BeneficiosGerenciar");
       }catch(e){
