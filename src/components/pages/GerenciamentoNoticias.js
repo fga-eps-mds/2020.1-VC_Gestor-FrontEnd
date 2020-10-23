@@ -9,47 +9,49 @@ class GerenciamentoNoticias extends React.Component {
 
   constructor(props){
     super(props)
-    this.state = [{ 
-      id: "01",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "02",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "03",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "04",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "05",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "06",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "07",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-    },{
-
-      id: "08",
-      titulo: "Novo Predio",
-      corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+    this.state = {
+      showNews: false
     }
-  ]
+  this.data = [{
+    id: "01",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "02",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "03",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "04",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "05",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "06",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "07",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+  },{
+
+    id: "08",
+    titulo: "Novo Predio",
+    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
+}]
   }
 
 
@@ -71,7 +73,7 @@ class GerenciamentoNoticias extends React.Component {
                 </thead>
                 <tbody>
                   
-                  {this.state.map(news => (
+                  {this.data.map(news => (
                     <>
                     <tr key={news.id}>
                       <td >{news.id}</td>
@@ -84,14 +86,6 @@ class GerenciamentoNoticias extends React.Component {
                     </tr>
                     </>))}
                 </tbody>
-                  {/* <Pagination className='pagination'>
-                    <Pagination.First/>
-                    <Pagination.Prev/>
-                    <Pagination.Item style={{backgroundColor: "#438ABB"}}>1</Pagination.Item>
-                    <Pagination.Item>2</Pagination.Item>
-                    <Pagination.Next/>
-                    <Pagination.Last/>
-                  </Pagination> */}
                   <nav>
                     <ul class="pagination" style={{backgroundColor: "#438ABB"}}>
                       <li class="page-item page-link pagination-button">

@@ -9,6 +9,7 @@ import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";
 import BeneficiosGerenciar from "./components/pages/BeneficiosGerenciar";
 import BeneficiosEditar from "./components/pages/BeneficiosEditar";
+import NewsEdit from "./components/pages/NewsEdit";
 import Anuncio from "./components/pages/Anuncio";
 import Login from "./components/login/Login";
 import Home from "./components/Home/home";
@@ -53,6 +54,7 @@ class App extends React.Component {
           <MyRoute exact path='/BeneficiosGerenciar' component={BeneficiosGerenciar} />
           <MyRoute exact path='/BeneficiosEditar/:benefitId' component={BeneficiosEditar} />
           <MyRoute exact path='/GerenciamentoNoticias' component={GerenciamentoNoticias} />
+          <MyRoute exact path='/NewsEdit/:news_id' component={NewsEdit} />
           <MyRoute exact path='/Login' component={Login} />
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
