@@ -41,57 +41,61 @@ class EditNewsForm extends React.Component {
     handleChange(event){
       switch(event.target.id){
         case  "title":
-          if(event.target.value.length<=20){
+            if(event.target.value.length<=25){
             this.setState({title: event.target.value});
-          }
-          break;
-        case "description":
-          if(event.target.value.length<=20){
-            this.setState({description: event.target.value});
-          }
-          break;
-        case "price":
-          const regex = /^[0-9]|[.,]?$/gm;
-          if(event.target.value.match(regex)!=null){
-            this.setState({price: event.target.value});  
-          }else{
-            this.setState({price: this.state.price});
-          }
-          break;
-        case "redeem_way":
-          if(event.target.value.length<=25){
-            this.setState({redeem_way: event.target.value});
-          }
-          break;
-        case "quantity":
-          this.setState({quantity: event.target.value});
-          break;
+            }
+            break;
+        case "subtitle":
+            if(event.target.value.length<=25){
+            this.setState({subtitle: event.target.value});
+            }
+            break;
+        case "text":
+            if(event.target.value.length<=500){
+                this.setState({text: event.target.value});
+            }
+            break;
+        case "image1":
+            if(event.target.value.length<=50){
+                this.setState({image1: event.target.value});
+            }
+            break;
+        case "image2":
+            if(event.target.value.length<=50){
+                this.setState({image2: event.target.value});
+            }
+            break;
+        case "image3":
+            if(event.target.value.length<=50){
+                this.setState({image3: event.target.value});
+            }
+            break;
         default: break;
       }
     }
   
     async handleSubmit(event){
       event.preventDefault();
-      const benefit = this.state;
+      const news = this.state;
       
       try{
-        await apiBeneficio.put("benefits/"+this.id,  benefit );
-        alert("Benefício foi alterado com sucesso!");
-        this.props.history.push("/BeneficiosGerenciar");
+        await apiNoticias.put("news/"+this.id,  news );
+        alert("Notícia alterada com sucesso!");
+        this.props.history.push("/GerenciamentoNoticias");
       }catch(e){
-        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+        alert("Ocorreu um erro e não foi possível alterar a notícia"); 
       }
     }
 
 
-    deleteBenefits = async (benefitId) => {
-      if(window.confirm("Tem certeza que quer excluir o benefício?")){
+    deleteNews = async (newsId) => {
+      if(window.confirm("Tem certeza que quer excluir esta notícia?")){
         try{
-          await apiBeneficio.delete(`/benefits/${benefitId}`);
-          this.props.history.push("/BeneficiosGerenciar");
+          await apiNoticias.delete(`/news/${newsId}`);
+          this.props.history.push("/GerenciamentoNoticias");
         }
         catch(error){
-          alert("Ocorreu um erro e não conseguimos excluir o benefício");
+          alert("Ocorreu um erro e não conseguimos excluir a notícia");
         }
       }
 
@@ -127,7 +131,7 @@ class EditNewsForm extends React.Component {
             </div>
             <div className="row">
               <div className="col-3">
-                <Button id="delete" type="button" onClick={() => this.deleteBenefits(this.id)} size="lg" block>
+                <Button id="delete" type="button" onClick={() => this.deleteNews(this.id)} size="lg" block>
                   Excluir
                 </Button>
               </div>

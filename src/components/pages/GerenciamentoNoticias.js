@@ -13,13 +13,30 @@ class GerenciamentoNoticias extends React.Component {
     this.state = {
       showNewsEdit: false,
       news: [],
+      showNews: [],
       idNews: null,
+      perPage : 10,
+      totalPages: [],
     }
   }
 
   async getNews(){
     const response = await apiNoticias.get("news");
-    this.setState({news: response.data});
+    
+    const total = Math.ceil(response.data.length/this.state.perPage)
+    const numRows = response.data.length;
+    // console.log( response.data);
+    const arrayPages = [];
+    for (let i = 0; i < total; i++){
+      arrayPages.push(i);
+    }
+    
+    this.setState({
+       news: response.data,
+       totalPages: arrayPages,
+       showNews: response.data.slice(0, this.state.perPage),
+      });
+    // console.log(this.state.showNews)
   }
 
   componentDidMount(){
@@ -34,7 +51,6 @@ class GerenciamentoNoticias extends React.Component {
   }
 
   render() {
-
     return (<>
       <Card style={{ width: '100%' }}>
         <Card.Body>
@@ -70,11 +86,11 @@ class GerenciamentoNoticias extends React.Component {
                       <li class="page-item page-link pagination-button">
                         <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}}/>
                         </li>
-                      <li class="page-item page-link pagination-button">1</li>
-                      <li class="page-item page-link pagination-button">2</li>
-                      <li class="page-item page-link pagination-button">3</li>
-                      <li class="page-item page-link pagination-button">
-                        <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}/>
+                        {this.state.totalPages.map(page => (
+                          <li class="page-item page-link pagination-button">{page+1}</li>  
+                        ))}
+                        <li class="page-item page-link pagination-button">
+                          <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}/>
                         </li>
                     </ul>
                   </nav>
