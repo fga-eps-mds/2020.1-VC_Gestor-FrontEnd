@@ -1,67 +1,45 @@
 import React from "react";
-import { Card, Pagination } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashAlt, faAngleDoubleRight , faAngleDoubleLeft} from "@fortawesome/free-solid-svg-icons";
 import "./gerenciamentoNoticias.css";
-
+import apiNoticias from "../../services/apiNoticias";
+import { Redirect } from "react-router-dom";
 
 class GerenciamentoNoticias extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-      showNews: false
+      showNewsEdit: false,
+      news: [],
+      idNews: null,
     }
-  this.data = [{
-    id: "01",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "02",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "03",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "04",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "05",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "06",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "07",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-  },{
-
-    id: "08",
-    titulo: "Novo Predio",
-    corpo: "Criação de um novo prédio. O prédio será para os professores e alguns laboratorios."
-}]
   }
 
+  async getNews(){
+    const response = await apiNoticias.get("news");
+    this.setState({news: response.data});
+  }
+
+  componentDidMount(){
+    this.getNews();
+  }
+
+  showNews(event){
+    this.setState({
+      showNewsEdit: true,
+      idNews: event.news_id
+    });
+  }
 
   render() {
+
     return (<>
       <Card style={{ width: '100%' }}>
         <Card.Body>
           <Card.Header>GerenciamentoNoticias</Card.Header>
           <Card.Text>
-            {console.log(this.state)}
             <table className="tabela-noticias">
                 <thead>
                     <tr className="tabela-noticias-cab">
@@ -73,14 +51,15 @@ class GerenciamentoNoticias extends React.Component {
                 </thead>
                 <tbody>
                   
-                  {this.data.map(news => (
+                  {this.state.news.map(news => (
                     <>
                     <tr key={news.id}>
-                      <td >{news.id}</td>
-                      <td >{news.titulo}</td>
-                      <td >{news.corpo}</td>
-                      <td>
-                        <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}} />
+                      <td>{news.news_id}</td>
+                      <td>{news.title}</td>
+                      <td>{news.text}</td>
+                      <td style={{textAlign: "end"}}>
+                        <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}} 
+                         onClick={() => this.showNews(news)}/>
                         <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}}/>
                       </td>
                     </tr>
@@ -100,7 +79,7 @@ class GerenciamentoNoticias extends React.Component {
                     </ul>
                   </nav>
             </table>
-
+            {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null}
           </Card.Text>
         </Card.Body>
       </Card>

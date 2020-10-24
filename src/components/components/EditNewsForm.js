@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import apiBeneficio from "../../services/apiBeneficio";
 import { withRouter } from "react-router-dom";
 import "./editNewsForm.css";
+import apiNoticias from "../../services/apiNoticias";
 
 
 
@@ -28,13 +29,13 @@ class EditNewsForm extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async getBenefits(){
-      const response = await apiBeneficio.get("benefits/"+this.id);
+    async getNews(){
+      const response = await apiNoticias.get("news/"+this.id);
       this.setState(response.data);
     }
 
     componentDidMount(){
-      this.getBenefits();
+      this.getNews();
     }
   
     handleChange(event){
@@ -98,7 +99,6 @@ class EditNewsForm extends React.Component {
   
     render() {
       return (
-
         <Form onSubmit={this.handleSubmit} >
           <div className="container-fluid form-news">
             <div className="row">
@@ -116,13 +116,13 @@ class EditNewsForm extends React.Component {
             <div className="row">
                 <Form.Group controlId="linkPost" className="text-area-news">
                     <Form.Label>Linkar Postagem</Form.Label>
-                    <Form.Control type="text" placeholder="Linkar Postagem" value={this.state.subtitle} onChange={this.handleChange} />
+                    <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} />
                 </Form.Group>
             </div>
             <div className="row">
               <Form.Group controlId="text" className="text-news">
                   <Form.Label>Corpo</Form.Label>
-                  <Form.Control as="textarea" placeholder="Corpo" rows="5" cols="6" value={this.state.description} onChange={this.handleChange} />
+                  <Form.Control as="textarea" placeholder="Corpo" rows="5" cols="6" value={this.state.text} onChange={this.handleChange} />
               </Form.Group>
             </div>
             <div className="row">
