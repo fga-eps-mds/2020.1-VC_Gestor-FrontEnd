@@ -17,6 +17,8 @@ class GerenciamentoNoticias extends React.Component {
       idNews: null,
       perPage : 10,
       totalPages: [],
+      paginaAtual: 0,
+      offset: 0
     }
   }
 
@@ -24,7 +26,7 @@ class GerenciamentoNoticias extends React.Component {
     const response = await apiNoticias.get("news");
     
     const total = Math.ceil(response.data.length/this.state.perPage)
-    const numRows = response.data.length;
+    // const numRows = response.data.length;
     // console.log( response.data);
     const arrayPages = [];
     for (let i = 0; i < total; i++){
@@ -50,11 +52,29 @@ class GerenciamentoNoticias extends React.Component {
     });
   }
 
+  currentPage(event){
+    this.setState({
+      paginaAtual: event,
+      offset: event * this.state.perPage
+    }, () => {
+      this.loadMoreData()
+  });
+  }
+
+  loadMoreData(){
+    const data = this.state.news;
+		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+		this.setState({
+			showNews: slice
+    })
+    return this.forceUpdate();
+  }
+
   render() {
     return (<>
       <Card style={{ width: '100%' }}>
         <Card.Body>
-          <Card.Header>GerenciamentoNoticias</Card.Header>
+          <Card.Header className="titulo-card" >Gerenciamento de Notícias</Card.Header>
           <Card.Text>
             <table className="tabela-noticias">
                 <thead>
@@ -67,7 +87,7 @@ class GerenciamentoNoticias extends React.Component {
                 </thead>
                 <tbody>
                   
-                  {this.state.news.map(news => (
+                  {this.state.showNews.map(news => (
                     <>
                     <tr key={news.id}>
                       <td>{news.news_id}</td>
@@ -84,13 +104,18 @@ class GerenciamentoNoticias extends React.Component {
                   <nav>
                     <ul class="pagination" style={{backgroundColor: "#438ABB"}}>
                       <li class="page-item page-link pagination-button">
-                        <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}}/>
+                        <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}}
+                          onClick={() => (this.state.paginaAtual !== 0) ?
+                            this.currentPage(this.state.paginaAtual - 1) : null}/>
                         </li>
                         {this.state.totalPages.map(page => (
-                          <li class="page-item page-link pagination-button">{page+1}</li>  
+                          <li class="page-item page-link pagination-button" style={page === this.state.paginaAtual ? {backgroundColor: "#E2E2E2", color: "#438ABB"} : null}
+                          onClick={() => this.currentPage(page)}>{page+1}</li>  
                         ))}
                         <li class="page-item page-link pagination-button">
-                          <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}/>
+                          <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}
+                            onClick={() => (this.state.paginaAtual !== this.state.totalPages.length - 1) ?
+                              this.currentPage(this.state.paginaAtual + 1) : null}/>
                         </li>
                     </ul>
                   </nav>

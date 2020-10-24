@@ -51,3 +51,10 @@ tr{
 td{
     padding: 20px;
 }
+
+.titulo-card{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bolder     ;
+    background-color: rgba(0, 0, 0, 0);
+}
