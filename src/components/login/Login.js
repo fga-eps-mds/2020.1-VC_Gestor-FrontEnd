@@ -95,14 +95,14 @@ class Login extends React.Component {
   }
 
   async handleCode() {
-    this.setState({ stateSwitch: -1 })
+    this.setState({ stateSwitch: -1 });
     apiUser.post("users/user/code/", { email: this.state.email, code: this.state.code })
       .then((response) => {
         this.setState({ token: response.data.token, stateSwitch: 3 });
       })
       .catch((error) => {
         try {
-          this.setState({ stateSwitch: 2 })
+          this.setState({ stateSwitch: 2 });
           alert(error.response.data.error);
         } catch (error) {
           alert("Servidor indisponível");
@@ -126,11 +126,11 @@ class Login extends React.Component {
       })
       .catch((error) => {
         try {
-          alert(error.response.data.error)
+          alert(error.response.data.error);
         } catch (error) {
-          alert("Servidor indisponível")
+          alert("Servidor indisponível");
         }
-      })
+      });
     this.setState({ stateSwitch: 0 });
   }
 
@@ -142,7 +142,7 @@ class Login extends React.Component {
         <input type="password" id="password" value={this.state.password} onChange={this.handleChange} className="form-control login-input" placeholder="Senha" />
         <button className="btn btn-block button-next" type="submit">Entrar</button>
       </form>
-      <div className="reset" onClick={() => { this.setState({ stateSwitch: 1 }) }}>Esqueceu a sua senha?</div>
+      <div className="reset" onClick={() => { this.setState({ stateSwitch: 1 }); }}>Esqueceu a sua senha?</div>
     </>);
   }
 
@@ -152,7 +152,7 @@ class Login extends React.Component {
       <div style={{ color: "red", marginTop: "10px" }}>Digite seu email para trocar de senha</div>
       <input type="email" id="email" value={this.state.email} onChange={this.handleChange} className="form-control login-input" placeholder="Email" />
       <button className="btn btn-block button-next" onClick={this.handleEmail}>Enviar</button>
-      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }) }}>Voltar</div>
+      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }); }}>Voltar</div>
     </>);
   }
 
@@ -162,7 +162,7 @@ class Login extends React.Component {
       <div style={{ color: "red", marginTop: "10px" }}>Digite o código que recebeu via email. O código expira em 15 minutos</div>
       <input type="text" id="code" value={this.state.code} onChange={this.handleChange} className="form-control login-input" placeholder="Código" />
       <button className="btn btn-block button-next" onClick={this.handleCode}>Enviar</button>
-      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }) }}>Voltar</div>
+      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }); }}>Voltar</div>
     </>);
   }
 
@@ -179,7 +179,7 @@ class Login extends React.Component {
       <input type="password" id="newPassword" value={this.state.newPassword} onChange={this.handleChange} className="form-control login-input" placeholder="Nova Senha" />
       <input type="password" id="newPasswordConfirm" value={this.state.newPasswordConfirm} onChange={this.handleChange} className="form-control login-input" placeholder="Confirmação da Nova Senha" />
       <button className="btn btn-block button-next" onClick={this.handleChangePassword}>Enviar</button>
-      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }) }}>Voltar</div>
+      <div className="reset" onClick={() => { this.setState({ stateSwitch: 0 }); }}>Voltar</div>
     </>);
   }
 
