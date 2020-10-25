@@ -119,7 +119,7 @@ class Login extends React.Component {
       alert("A senha deve possuir pelo menos 6 caracteres!");
       return;
     }
-    this.setState({ stateSwitch: -1 })
+    this.setState({ stateSwitch: -1 });
     apiUser.post("users/user/password/", { newPassword: makeHash(this.state.newPassword), token: this.state.token })
       .then((response) => {
         alert("Sucesso! Por favor, faça login com a nova senha!");
