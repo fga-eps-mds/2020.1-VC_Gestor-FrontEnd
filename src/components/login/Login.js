@@ -90,7 +90,13 @@ class Login extends React.Component {
         this.setState({ stateSwitch: 2 });
       })
       .catch((error) => {
-        alert("Código Incorreto");
+        try {
+          this.setState({ stateSwitch: 1 });
+          alert(error.response.data.error);
+        } catch (error) {
+          this.setState({ stateSwitch: 1 });
+          alert("Servidor indisponível");
+        }
       });
   }
 
@@ -105,6 +111,7 @@ class Login extends React.Component {
           this.setState({ stateSwitch: 2 });
           alert(error.response.data.error);
         } catch (error) {
+          this.setState({ stateSwitch: 2 });
           alert("Servidor indisponível");
         }
       });
