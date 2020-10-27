@@ -1,4 +1,4 @@
-import React from "react";
+import  React from "react";
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashAlt, faAngleDoubleRight , faAngleDoubleLeft} from "@fortawesome/free-solid-svg-icons";
@@ -94,7 +94,7 @@ class GerenciamentoNoticias extends React.Component {
                       <td>{news.title}</td>
                       <td>{news.text}</td>
                       <td style={{textAlign: "end"}}>
-                        <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}} 
+                        <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
                          onClick={() => this.showNews(news)}/>
                         <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}}/>
                       </td>

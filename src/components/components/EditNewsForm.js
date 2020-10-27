@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import apiBeneficio from "../../services/apiBeneficio";
+import apiPostagem from "../../services/apiPostagem";
 import { withRouter } from "react-router-dom";
 import "./editNewsForm.css";
 import apiNoticias from "../../services/apiNoticias";
@@ -16,9 +16,11 @@ class EditNewsForm extends React.Component {
         title: "",
         subtitle: "",
         text:  "",
-        image1: "" ,
+        image1: "",
         image2: "",
-        image3: ""
+        image3: "",
+        post_id: "",
+        posts: []
       };
 
       this.id = this.props.match.params.newsId;
@@ -31,7 +33,9 @@ class EditNewsForm extends React.Component {
 
     async getNews(){
       const response = await apiNoticias.get("news/"+this.id);
+      const posts = await apiPostagem.get(`posts?limit=100&page=0`);
       this.setState(response.data);
+      this.setState({posts: posts.data.rows});
     }
 
     componentDidMount(){
@@ -115,12 +119,19 @@ class EditNewsForm extends React.Component {
                 <Form.Group controlId="subtitle" className="text-area-news">
                     <Form.Label>Subtítulo</Form.Label>
                     <Form.Control type="text" placeholder="Subtítulo" value={this.state.subtitle} onChange={this.handleChange} />
+                    
                 </Form.Group>
             </div>
             <div className="row">
                 <Form.Group controlId="linkPost" className="text-area-news">
                     <Form.Label>Linkar Postagem</Form.Label>
-                    <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} />
+                    {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
+                    <select class="form-control" value={this.state.post_id}>
+                    <option>Nenhum</option>
+                    {this.state.posts.map(post => (
+                        <option>{post.post_id}</option>
+                      ))}
+                    </select>
                 </Form.Group>
             </div>
             <div className="row">
