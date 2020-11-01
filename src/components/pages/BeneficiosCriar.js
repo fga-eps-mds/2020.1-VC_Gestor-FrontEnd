@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import Forms from "../components/Forms";
-import "./BeneficiosCriar.css";
+import "./Beneficios.css";
 
 class CriarBeneficios extends React.Component {
 

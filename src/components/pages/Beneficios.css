@@ -1,13 +1,12 @@
 .cardBenefits {
     background-color: whitesmoke;
-    margin: 0;
+    margin: auto;
     border: none;
     width: 50%;
     display: "flex";
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     /* border-radius: 20px; */
     
 }
@@ -31,7 +30,7 @@
     background-color: #ffffff;
     display: flex;
     /* align-items: center; */
-   justify-content: center;
+    justify-content: center;
     /* position: absolute; */
     /* border-radius: 15px; */
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
@@ -72,10 +71,33 @@
     margin: 10px 20px 10px 20px;
     width: 100%;
 }
-#button_{
+.button_{
     align-items: center;
     margin: 10px 20px 10px 20px;
     width: 100%;
+}
+
+#submit{
+    border: none;
+}
+
+#delete{
+    background-color: #F24949;
+    border: none;
+}
+.titleLink{
+    color: #f3f3f3;
+}
+
+.titleLink:hover{
+    color: #d4d4d4;
+    text-decoration: none;
+}
+.wrongFormat{
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
 }
 
 
