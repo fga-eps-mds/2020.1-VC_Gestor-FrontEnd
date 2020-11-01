@@ -20,13 +20,14 @@ class EditNewsForm extends React.Component {
         image2: "",
         image3: "",
         post_id: "",
-        posts: []
+        posts: [],
+        img: []
       };
-
+      this.fileInput = React.createRef();
       this.id = this.props.match.params.newsId;
 
       // this.history = useHistory();
-  
+      this.ChangePostId = this.ChangePostId.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -35,7 +36,8 @@ class EditNewsForm extends React.Component {
       const response = await apiNoticias.get("news/"+this.id);
       const posts = await apiPostagem.get(`posts?limit=100&page=0`);
       this.setState(response.data);
-      this.setState({posts: posts.data.rows});
+      this.setState({posts: posts.data.rows, img: ["http://localhost:3004/img/120529.jpg",
+      "http://localhost:3004/img/120529.jpg","http://localhost:3004/img/120529.jpg"]});
     }
 
     componentDidMount(){
@@ -104,36 +106,76 @@ class EditNewsForm extends React.Component {
       }
 
     }
+
+    ChangePostId(event){
+      this.setState({post_id: event.target.value});
+    }
+
+    changePhoto(event){
+      console.log(event.target.files[0]);
+    }
   
     render() {
       return (
         <Form onSubmit={this.handleSubmit} >
           <div className="container-fluid form-news">
             <div className="row">
-              <Form.Group controlId="title" className="text-area-news">
-                  <Form.Label>Título</Form.Label>
-                  <Form.Control  type="text" placeholder="Título da Notícia" value={this.state.title} onChange={this.handleChange} />
-              </Form.Group>
-            </div>
-            <div className="row">
-                <Form.Group controlId="subtitle" className="text-area-news">
-                    <Form.Label>Subtítulo</Form.Label>
-                    <Form.Control type="text" placeholder="Subtítulo" value={this.state.subtitle} onChange={this.handleChange} />
-                    
+
+            <div className="col-7">
+              <div className="row">
+                <Form.Group controlId="title" className="text-area-news">
+                    <Form.Label>Título</Form.Label>
+                    <Form.Control  type="text" placeholder="Título da Notícia" value={this.state.title} onChange={this.handleChange} />
                 </Form.Group>
-            </div>
-            <div className="row">
+              </div>
+              <div className="row">
+                  <Form.Group controlId="subtitle" className="text-area-news">
+                    <Form.Label>Subtítulo</Form.Label>
+                    <Form.Control type="text" placeholder="Subtítulo" value={this.state.subtitle} onChange={this.handleChange} /> 
+                  </Form.Group>
+              </div>
+              <div className="row">
                 <Form.Group controlId="linkPost" className="text-area-news">
                     <Form.Label>Linkar Postagem</Form.Label>
                     {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                    <select class="form-control" value={this.state.post_id}>
-                    <option>Nenhum</option>
+                    <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
+                    {/* <option>Nenhum</option> */}
                     {this.state.posts.map(post => (
-                        <option>{post.post_id}</option>
+                      <option value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}
                     </select>
                 </Form.Group>
+              </div>
             </div>
+            <div className="col-5">    
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src={this.state.img[0]} alt="First slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src={this.state.img[1]} alt="Second slide"/>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"src={this.state.img[2]} alt="Third slide"/>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+              <div>
+                {console.log(this.state.img)}
+                  <input type="file" ref={this.fileInput} onChange={this.changePhoto}/>
+              </div>
+            </div>
+          </div>
+            
             <div className="row">
               <Form.Group controlId="text" className="text-news">
                   <Form.Label>Corpo</Form.Label>
