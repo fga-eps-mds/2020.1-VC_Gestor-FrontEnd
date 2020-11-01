@@ -21,14 +21,16 @@ class EditNewsForm extends React.Component {
         image3: "",
         post_id: "",
         posts: [],
-        img: []
+        img: [],
+        imgFile1 : ""
       };
-      this.fileInput = React.createRef();
+      // this.fileInput = React.createRef();
       this.id = this.props.match.params.newsId;
 
       // this.history = useHistory();
       this.ChangePostId = this.ChangePostId.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.changePhoto = this.changePhoto.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -83,7 +85,7 @@ class EditNewsForm extends React.Component {
     async handleSubmit(event){
       event.preventDefault();
       const news = this.state;
-      
+      //await this.fileUpload(this.state.imgFile1);
       try{
         await apiNoticias.put("news/"+this.id,  news );
         alert("Notícia alterada com sucesso!");
@@ -112,7 +114,21 @@ class EditNewsForm extends React.Component {
     }
 
     changePhoto(event){
-      console.log(event.target.files[0]);
+      this.setState({imgFile1: event.target.files[0]});
+    }
+
+    async fileUpload(file){
+      const formData = new FormData();
+      formData.append('file',file)
+
+      try{
+        await apiNoticias.post("img", formData);
+        alert("Imagem!");
+      }catch(e){
+        alert("Ocorreu um erro e não foi possível alterar a notícia"); 
+      }
+
+      // return  post(url, formData,config)
     }
   
     render() {
@@ -170,7 +186,6 @@ class EditNewsForm extends React.Component {
                 </a>
               </div>
               <div>
-                {console.log(this.state.img)}
                   <input type="file" ref={this.fileInput} onChange={this.changePhoto}/>
               </div>
             </div>
