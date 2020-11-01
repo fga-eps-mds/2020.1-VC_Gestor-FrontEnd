@@ -15,7 +15,6 @@ class CreateNews extends React.Component {
         <Card.Text className="textNews">
           <NewsForm className="newsforms" />
         </Card.Text>
-
       </Card>
     </>
     );

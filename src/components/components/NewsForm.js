@@ -67,19 +67,28 @@ class NewsForm extends React.Component {
     render() {
       return (
 
-      <Form onSubmit={this.handleSubmit} >
+      <Form onSubmit={this.handleSubmit} className="newsForm">
        
           <div className="row">
 
             <div class="col-8">
             <Form.Group controlId="title" id="titleNews">
               <Form.Control 
-                style={{ width:"100%" }}  
                 type="text" placeholder="Título da Notícia" 
                 value={this.state.title}
                 onChange={this.handleChange} 
               />
             </Form.Group>
+
+            <Form.Group controlId="subtitle" id="subtitleNews">
+              <Form.Control 
+                type="text" 
+                placeholder="Subtítulo" 
+                value={this.state.subtitle} 
+                onChange={this.handleChange} 
+              />
+            </Form.Group>
+           
             </div>
 
             <div class="col-4">
@@ -96,30 +105,17 @@ class NewsForm extends React.Component {
           </div>
 
         <div className="">
-          <Form.Group controlId="subtitle" id="subtitleNews">
-              <Form.Control 
-                type="text" 
-                placeholder="Subtítulo" 
-                value={this.state.subtitle} 
-                onChange={this.handleChange} 
-              />
-            </Form.Group>
-          </div>
-
-
-        <div className="">
             <Form.Group controlId="text" id="textNews">
-            <Form.Control as="textarea" placeholder="Corpo" rows="7" cols="10" value={this.state.text} onChange={this.handleChange} />
+            <Form.Control as="textarea" placeholder="Corpo" rows="5" cols="6" value={this.state.text} onChange={this.handleChange} />
             </Form.Group>
           </div>
 
-        <div className="">
+        <div className="row">
             <Button id="buttonNews" type="submit" size="lg" block>
               Enviar
             </Button>
           </div>
-
-           
+    
         </Form>
 
         
