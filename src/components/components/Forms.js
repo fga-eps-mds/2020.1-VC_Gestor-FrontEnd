@@ -51,7 +51,7 @@ class Forms extends React.Component {
     render() {
       return (
 
-        <Form onSubmit={this.handleSubmit} >
+        <Forms onSubmit={this.handleSubmit} >
        
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div className="row">
@@ -100,7 +100,7 @@ class Forms extends React.Component {
             </div>
             </div>
            
-        </Form>
+        </Forms>
 
         
       );
