@@ -14,7 +14,7 @@ class NewsEdit extends React.Component {
 
   render() {
     return (<>
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: "100%" }}>
         <Card.Body>
           <Card.Header style={{backgroundColor: "#226D9F", color: "white", textAlign : "center", fontSize: "2rem"}}>Editar noticias</Card.Header>
           <Card.Text>

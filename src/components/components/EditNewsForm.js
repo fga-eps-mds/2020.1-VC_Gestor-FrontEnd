@@ -85,7 +85,7 @@ class EditNewsForm extends React.Component {
     async handleSubmit(event){
       event.preventDefault();
       const news = this.state;
-      await this.fileUpload(this.state.imgFile1);
+      // await this.fileUpload(this.state.imgFile1);
       try{
         await apiNoticias.put("news/"+this.id,  news );     
         alert("Notícia alterada com sucesso!");
