@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import apiNews from "../../services/apiNews";
+import apiNoticias from "../../services/apiNoticias";
 import apiPostagem from "../../services/apiPostagem";
 import CameraImg from "../../assets/camera.png";
 
@@ -73,7 +73,7 @@ class NewsForm extends React.Component {
       console.log(news);
 
       try{
-        await apiNews.post("news",  news );
+        await apiNoticias.post("news",  news );
 
         alert("Notícia criada com sucesso!");
       }catch(err){
