@@ -36,7 +36,7 @@ class EditNewsForm extends React.Component {
 
     async getNews(){
       const response = await apiNoticias.get("news/"+this.id);
-      const posts = await apiPostagem.get(`posts?limit=100&page=0`);
+      const posts = await apiPostagem.get("posts?limit=100&page=0");
       this.setState(response.data);
       this.setState({posts: posts.data.rows, img: ["http://localhost:3004/img/120529.jpg",
       "http://localhost:3004/img/120529.jpg","http://localhost:3004/img/120529.jpg"]});
@@ -159,7 +159,7 @@ class EditNewsForm extends React.Component {
                       {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
                       <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
                       {/* <option>Nenhum</option> */}
-                      {this.state.posts.map(post => (
+                      {this.state.posts.map((post) => (
                         <option value={post.post_id}>{post.post_id} - {post.title}</option>
                         ))}
                       </select>

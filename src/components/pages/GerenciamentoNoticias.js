@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 class GerenciamentoNoticias extends React.Component {
 
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
       showNewsEdit: false,
       news: [],
@@ -19,13 +19,13 @@ class GerenciamentoNoticias extends React.Component {
       totalPages: [],
       paginaAtual: 0,
       offset: 0
-    }
+    };
   }
 
   async getNews(){
     const response = await apiNoticias.get("news");
     
-    const total = Math.ceil(response.data.length/this.state.perPage)
+    const total = Math.ceil(response.data.length/this.state.perPage);
     // const numRows = response.data.length;
     // console.log( response.data);
     const arrayPages = [];
@@ -57,22 +57,22 @@ class GerenciamentoNoticias extends React.Component {
       paginaAtual: event,
       offset: event * this.state.perPage
     }, () => {
-      this.loadMoreData()
+      this.loadMoreData();
   });
   }
 
   loadMoreData(){
     const data = this.state.news;
-		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
 		this.setState({
 			showNews: slice
-    })
+    });
     return this.forceUpdate();
   }
 
   render() {
     return (<>
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: "100%" }}>
         <Card.Body>
           <Card.Header className="titulo-card" >Gerenciamento de Notícias</Card.Header>
           <Card.Text>
@@ -87,7 +87,7 @@ class GerenciamentoNoticias extends React.Component {
                 </thead>
                 <tbody>
                   
-                  {this.state.showNews.map(news => (
+                  {this.state.showNews.map((news) => (
                     <>
                     <tr key={news.id}>
                       <td>{news.news_id}</td>
@@ -108,7 +108,7 @@ class GerenciamentoNoticias extends React.Component {
                           onClick={() => (this.state.paginaAtual !== 0) ?
                             this.currentPage(this.state.paginaAtual - 1) : null}/>
                         </li>
-                        {this.state.totalPages.map(page => (
+                        {this.state.totalPages.map((page) => (
                           <li class="page-item page-link pagination-button" style={page === this.state.paginaAtual ? {backgroundColor: "#E2E2E2", color: "#438ABB"} : null}
                           onClick={() => this.currentPage(page)}>{page+1}</li>  
                         ))}

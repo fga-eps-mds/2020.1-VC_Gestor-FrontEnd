@@ -6,9 +6,9 @@ import "../components/editNewsForm.css";
 class NewsEdit extends React.Component {
 
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
-    }
+    };
   }
 
 
