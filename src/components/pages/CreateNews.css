@@ -50,6 +50,11 @@
     width: 100%;
 }
 
+#linkPostNews{
+    margin: 0px 20px 0 50px;
+    width: 150%;
+}
+
 #textNews{
     margin: 20px 20px 0 20px;
     align-items: left;
