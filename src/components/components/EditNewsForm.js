@@ -22,7 +22,7 @@ class EditNewsForm extends React.Component {
         post_id: "",
         posts: [],
         img: [],
-        imgFile1 : ""
+        imgFile1 : null
       };
       // this.fileInput = React.createRef();
       this.id = this.props.match.params.newsId;
@@ -30,7 +30,7 @@ class EditNewsForm extends React.Component {
       // this.history = useHistory();
       this.ChangePostId = this.ChangePostId.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.changePhoto = this.changePhoto.bind(this);
+      // this.changePhoto = this.changePhoto.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -80,14 +80,14 @@ class EditNewsForm extends React.Component {
             break;
         default: break;
       }
-    }
+    } 
   
     async handleSubmit(event){
       event.preventDefault();
       const news = this.state;
-      //await this.fileUpload(this.state.imgFile1);
+      await this.fileUpload(this.state.imgFile1);
       try{
-        await apiNoticias.put("news/"+this.id,  news );
+        await apiNoticias.put("news/"+this.id,  news );     
         alert("Notícia alterada com sucesso!");
         this.props.history.push("/GerenciamentoNoticias");
       }catch(e){
@@ -106,88 +106,91 @@ class EditNewsForm extends React.Component {
           alert("Ocorreu um erro e não conseguimos excluir a notícia");
         }
       }
-
     }
 
     ChangePostId(event){
       this.setState({post_id: event.target.value});
     }
 
-    changePhoto(event){
-      this.setState({imgFile1: event.target.files[0]});
-    }
+    // changePhoto(event){
+    //   // var newPhoto = [...this.state.img];
+    //   var newPhoto = event.target.files[0];
+    //   // newPhoto.push(event.target.files[0]);
+    //   console.log(newPhoto);
+    //   this.setState({imgFile1: newPhoto});
+    //   console.log("foto nova");
+    //   console.log(this.state.imgFile1);
+    //   }
 
-    async fileUpload(file){
-      const formData = new FormData();
-      formData.append('file',file)
-
-      try{
-        await apiNoticias.post("img", formData);
-        alert("Imagem!");
-      }catch(e){
-        alert("Ocorreu um erro e não foi possível alterar a notícia"); 
-      }
-
-      // return  post(url, formData,config)
-    }
+    // async fileUpload(file){
+    //   const formData = new FormData();
+    //   formData.append('file',file);
+    //   console.log(formData);
+    //   try{
+    //     await apiNoticias.post("fileupload", formData);
+    //     alert("Imagem!");
+    //   }catch(e){
+    //     alert("Ocorreu um erro e não foi possível alterar a notícia"); 
+    //   }
+    //   // return  post(url, formData,config)
+    // }
   
     render() {
       return (
         <Form onSubmit={this.handleSubmit} >
           <div className="container-fluid form-news">
             <div className="row">
-
-            <div className="col-7">
-              <div className="row">
-                <Form.Group controlId="title" className="text-area-news">
-                    <Form.Label>Título</Form.Label>
-                    <Form.Control  type="text" placeholder="Título da Notícia" value={this.state.title} onChange={this.handleChange} />
-                </Form.Group>
-              </div>
-              <div className="row">
-                  <Form.Group controlId="subtitle" className="text-area-news">
-                    <Form.Label>Subtítulo</Form.Label>
-                    <Form.Control type="text" placeholder="Subtítulo" value={this.state.subtitle} onChange={this.handleChange} /> 
+              <div className="col-7">
+                <div className="row">
+                  <Form.Group controlId="title" className="text-area-news">
+                      <Form.Label>Título</Form.Label>
+                      <Form.Control  type="text" placeholder="Título da Notícia" value={this.state.title} onChange={this.handleChange} />
                   </Form.Group>
-              </div>
-              <div className="row">
-                <Form.Group controlId="linkPost" className="text-area-news">
-                    <Form.Label>Linkar Postagem</Form.Label>
-                    {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                    <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
-                    {/* <option>Nenhum</option> */}
-                    {this.state.posts.map(post => (
-                      <option value={post.post_id}>{post.post_id} - {post.title}</option>
-                      ))}
-                    </select>
-                </Form.Group>
-              </div>
-            </div>
-            <div className="col-5">    
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img class="d-block w-100" src={this.state.img[0]} alt="First slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src={this.state.img[1]} alt="Second slide"/>
-                  </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100"src={this.state.img[2]} alt="Third slide"/>
-                  </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
+                <div className="row">
+                    <Form.Group controlId="subtitle" className="text-area-news">
+                      <Form.Label>Subtítulo</Form.Label>
+                      <Form.Control type="text" placeholder="Subtítulo" value={this.state.subtitle} onChange={this.handleChange} /> 
+                    </Form.Group>
+                </div>
+                <div className="row">
+                  <Form.Group controlId="linkPost" className="text-area-news">
+                      <Form.Label>Linkar Postagem</Form.Label>
+                      {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
+                      <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
+                      {/* <option>Nenhum</option> */}
+                      {this.state.posts.map(post => (
+                        <option value={post.post_id}>{post.post_id} - {post.title}</option>
+                        ))}
+                      </select>
+                  </Form.Group>
+                </div>
               </div>
-              <div>
-                  <input type="file" ref={this.fileInput} onChange={this.changePhoto}/>
-              </div>
+              <div className="col-5">    
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img class="d-block w-100" src={this.state.img[0]} alt="First slide"/>
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100" src={this.state.img[1]} alt="Second slide"/>
+                    </div>
+                    <div class="carousel-item">
+                      <img class="d-block w-100"src={this.state.img[2]} alt="Third slide"/>
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+                {/* <div>
+                    <input type="file" ref={this.fileInput} name="filetoupload" onChange={this.changePhoto}/>
+                </div> */}
             </div>
           </div>
             
