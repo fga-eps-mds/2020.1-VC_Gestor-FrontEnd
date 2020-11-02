@@ -26,7 +26,7 @@ class NewsForm extends React.Component {
     }
 
     async getPosts(){
-      const posts = await apiPostagem.get(`posts?limit=100&page=0`);
+      const posts = await apiPostagem.get("posts?limit=100&page=0");
       this.setState({posts: posts.data.rows});
     }
 
@@ -69,8 +69,6 @@ class NewsForm extends React.Component {
       event.preventDefault();
 
       const news = this.state;
-
-      console.log(news);
 
       try{
         await apiNoticias.post("news",  news );
@@ -126,7 +124,7 @@ class NewsForm extends React.Component {
                     {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
                     <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
                     {/* <option>Nenhum</option> */}
-                    {this.state.posts.map(post => (
+                    {this.state.posts.map((post) => (
                       <option value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}
                     </select>
