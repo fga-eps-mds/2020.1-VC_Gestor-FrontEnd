@@ -1,0 +1,78 @@
+html{
+  background-color: #F3F3F9;
+}
+body{
+  background-color: #F3F3F9;
+  height: 100%;
+  width: 100%;
+}
+
+.login{
+  text-align: center;
+}
+.login-form{
+  background-color: white;
+  width: 30rem;
+  margin: 10% auto 0 auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 4px 4px #E5E8EF;
+  font-family: "Montserrat", sans-serif;
+}
+.login-input{
+  margin-top: 0em;
+  margin-bottom: 2.5em;
+  border-color: white;
+  border-bottom-color: #E1E1E1;
+  border-bottom-width: 2px;
+  border-radius: 0;
+}
+
+.button-next{
+  background-color: #0F4C75;
+  font-size: 1em;
+  color: white;
+  height: 4rem;
+  border-radius: 10px;
+}
+.button-next:hover{
+  background-color: #155290;
+  color: white;
+}
+
+.button-send{
+  background-color: #0F4C75;
+  font-size: 1em;
+  color: white;
+  height: 4rem;
+  border-radius: 10px;
+}
+.button-send:hover{
+  background-color: #155290;
+  color: white;
+}
+
+.registration-text{
+  margin-top: 2em;
+  text-align: left;
+}
+
+.logo{
+  width: 4rem;
+}
+
+.reset{
+  margin-top: 20px;
+  font-size: 1em;
+  color: blue;
+}
+.reset:hover{
+  color: darkblue;
+  cursor: pointer;
+}
+
+#labels-User{
+  width: 100%;
+  text-align: left;
+  margin-left: 5px;
+}
