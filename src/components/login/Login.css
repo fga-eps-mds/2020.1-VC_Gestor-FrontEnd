@@ -3,7 +3,10 @@ html{
 }
 body{
   background-color: #F3F3F9;
+  height: 100%;
+  width: 100%;
 }
+
 .login{
   text-align: center;
 }
@@ -36,10 +39,34 @@ body{
   background-color: #155290;
   color: white;
 }
+
+.button-send{
+  background-color: #0F4C75;
+  font-size: 1em;
+  color: white;
+  height: 4rem;
+  border-radius: 10px;
+}
+.button-send:hover{
+  background-color: #155290;
+  color: white;
+}
+
 .registration-text{
   margin-top: 2em;
   text-align: left;
 }
+
 .logo{
   width: 4rem;
+}
+
+.reset{
+  margin-top: 20px;
+  font-size: 1em;
+  color: blue;
+}
+.reset:hover{
+  color: darkblue;
+  cursor: pointer;
 }
