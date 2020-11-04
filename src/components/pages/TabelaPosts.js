@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, Modal, Pagination } from "react-bootstrap";
-import apiPostagem from "../../services/apiPostagem";
-import "./tabela.css";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import apiPostagem from "../../services/apiPostagem";
+import "../components/estiloPostagem.css";
+import { Redirect } from "react-router-dom";
 
 class TabelaPosts extends React.Component {
   
@@ -22,12 +23,13 @@ class TabelaPosts extends React.Component {
       showModal: false,
       handleClose: false,
       handleShow: true,
-      postsNew: [],
+      showPagination: false,
+      postsShow: [],
       postsClosed: [],
-      ordem: ['asc']
+      ordem: ["asc"],
+      check: null,
+      filters: ["categoria","Registrados", "Anônimos"]
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
   async componentDidMount() {
@@ -50,10 +52,9 @@ class TabelaPosts extends React.Component {
       tableData:response.data.rows.slice(0, this.state.perPage),
       totalPages: arrayPages,
       numRows: numRows,
-      postsNew:response.data.rows.filter((e)=>{return e.status === 'Em andamento'})
+      postsShow:response.data.rows
     });
   }
-
   currentPage(e){
       this.setState({
         paginaAtual: e,
@@ -64,11 +65,11 @@ class TabelaPosts extends React.Component {
   }
 
   loadMoreData() {
-		const data = this.state.posts;
+		const data = this.state.postsShow;
 		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
 		this.setState({
 			pageCount: Math.ceil(data.length / this.state.perPage),
-			tableData:slice
+			tableData: slice
     })
     return this.forceUpdate();
     }
@@ -84,7 +85,6 @@ class TabelaPosts extends React.Component {
      }
     handleChange = (event) => {
       event.preventDefault()
-      // alert(event.target.value)
       this.setState({status: event.target.value});
       }
 
@@ -98,6 +98,7 @@ class TabelaPosts extends React.Component {
                 {this.state.modalInf.user.name} {this.state.modalInf.user.surname}<br/>
                 <h6>{this.state.modalInf.dt_creation}</h6>
                 <h6>Estado da postem: {this.state.modalInf.status}</h6>
+                <h6>Categoria {this.state.modalInf.category.category_name}</h6>
               </Modal.Title>
             </Modal.Header>
               <Modal.Body>
@@ -133,35 +134,149 @@ class TabelaPosts extends React.Component {
       });
     }
 
-    finalizados(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Revisado'})
-      });
+    filterStatus(e,type){
+      const array = this.state.filters;
+      const index = array.indexOf(type);
+      if (e.target.checked === true){
+        array.push(type);
+        this.setState({
+          tableData: this.state.posts.filter((e) => {return e.status === type;}),
+          filters: array
+        });
+      } else {
+        if ( index > -1){
+          this.state.filters.slice(index, 1);
+        }
+        array.splice(array.indexOf(type),1);
+        this.setState({
+          tableData: this.state.posts.filter((e) => {return e.status === type;})
+        });
+      }
+      this.filtrar();
     }
 
-    emAndamento(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Em andamento'})
-      });
+    checkFilter(e, type){
+      if(this.state.check === null || this.state.check === e.target){
+        this.setState({check: e.target});
+      } else {
+        if (e.targe !== this.state.check){
+          var a =  this.state.check;
+          a.checked = false;
+          this.setState({check: e.target});
+        }
+      }
+      this.filterCategory(e, type);
     }
 
-    Aguardando(){
-      this.setState({
-        tableData: this.state.posts.filter((e)=>{return e.status === 'Não revisado'})
-      });
+    filterCategory(e, type){
+        // if(this.state.check === null || this.state.check === e.target){
+        //   this.setState({check: e.target});
+        // } else {
+        //   if (e.targe !== this.state.check){
+        //     var a =  this.state.check;
+        //     a.checked = false;
+        //     this.setState({check: e.target});
+        //   }
+        // }
+      if (e.target.checked === true){
+        const array = this.state.filters;
+        array[0] = type;
+        this.setState({
+          tableData: this.state.posts.filter((e) => {return e.category.category_name === type;}),
+          filters: array
+        });
+      } else {
+        const array = this.state.filters;
+        array[0] = "categoria";
+        this.setState({
+          tableData: this.state.posts,
+          filters: array
+        });
+      }
+      this.filtrar();
+    }
+
+    filtrar(){
+      this.setState({paginaAtual: 0});
+      this.currentPage(0);
+      var conjuntoUniverso = [];
+      var filtragens = [...this.state.filters];
+      // eslint-disable-next-line array-callback-return
+      this.state.filters.map((quem) => {if(quem === "Anônimos"){
+        const conjuntoUser = this.state.posts.filter((e) => {return e.user.name === null;});
+        // eslint-disable-next-line array-callback-return
+        conjuntoUser.map((posts) => {if(posts.length !== 0){
+          conjuntoUniverso.push(posts);
+        }});
+        filtragens.splice(filtragens.indexOf("Anônimos"), 1);
+        // conjuntoUniverso.push(conjuntoUser);
+      } else {
+        if (quem === "Registrados") {
+          const conjuntoUserB = this.state.posts.filter((e) => {return e.user.name !== null;});
+          // eslint-disable-next-line array-callback-return
+          conjuntoUserB.map((posts) => {if(posts.length !== 0){conjuntoUniverso.push(posts);}});
+          filtragens.splice(filtragens.indexOf("Registrados"), 1);
+      } else {
+          this.setState({
+            tableData: []
+          });
+        }
+      }});
+      const conjuntoStatus = [];
+      // eslint-disable-next-line array-callback-return
+      if (filtragens.length !== 1) {
+          // eslint-disable-next-line array-callback-return
+          filtragens.map((status) => {if(status === "Aguardando"){
+            const process = conjuntoUniverso.filter((e) => {return e.status === "Aguardando";});
+            // eslint-disable-next-line array-callback-return
+            process.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+          } else if (status === "Em andamento"){
+            // eslint-disable-next-line array-callback-return
+            const processAwait = conjuntoUniverso.filter((e) => {return e.status === "Em andamento";});
+            // eslint-disable-next-line array-callback-return
+            processAwait.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+            // eslint-disable-next-line array-callback-return
+          } else if (status === "Resolvido"){
+            // eslint-disable-next-line array-callback-return
+            const processfinished = conjuntoUniverso.filter((e) => {return e.status === "Resolvido";});
+            // eslint-disable-next-line array-callback-return
+            processfinished.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+            // eslint-disable-next-line array-callback-return
+          } else {
+            const processFiled = conjuntoUniverso.filter((e) => {return e.status === "Arquivados";});
+            // eslint-disable-next-line array-callback-return
+            processFiled.map((e) => {if(e.length !== 0){conjuntoStatus.push(e);}});
+          }
+        })
+        conjuntoUniverso = conjuntoStatus;
+      }
+      if (this.state.filters[0] !== "categoria") {
+        const maxPage = conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];});
+        const corte = maxPage.slice(this.state.offset, this.state.offset + this.state.perPage);
+        this.setState({
+          tableData: corte,
+          postsShow: conjuntoUniverso.filter((e) => {return e.category.category_name === this.state.filters[0];})
+        }); 
+      } else {
+        const corte2 = conjuntoUniverso.slice(this.state.offset, this.state.offset + this.state.perPage);
+        this.setState({
+          tableData: corte2,
+          postsShow: conjuntoUniverso
+        });
+      }
     }
 
     ordenar(type) {
       if(this.state.ordem === 'asc'){
         this.setState({
-          posts: this.state.posts.sort((a, b) => {
+          tableData: this.state.postsShow.sort((a, b) => {
             return a[type] > b[type] ? 1 : -1
           }),
           ordem: 'desc'
         });
       } else {
         this.setState({
-          posts: this.state.posts.sort((a, b) => {
+          tableData: this.state.postsShow.sort((a, b) => {
             return a[type] < b[type] ? 1 : -1
           }),
           ordem: 'asc'
@@ -170,6 +285,22 @@ class TabelaPosts extends React.Component {
       return this.loadMoreData();
     }
 
+    showPagination(){
+      return (
+        <Pagination className='pagination'>
+          <Pagination.First onClick={() => this.currentPage(0)}/>
+          <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
+            this.currentPage(this.state.paginaAtual - 1) : null}/>
+          {this.state.totalPages.map(page => (
+            <Pagination.Item key={page} on={page}
+              onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => (this.state.paginaAtual !== this.state.totalPages) ?
+            this.currentPage(this.state.paginaAtual + 1) : null}/>
+          <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
+        </Pagination>
+      )
+    }
 
 
   render() {
@@ -190,58 +321,89 @@ class TabelaPosts extends React.Component {
 
 
           <nav className='menu-anuncio'>
-              <div inputMode className='button-anuncio'key="Aba1">Anunciantes</div>
-              <div key="Aba2" className="menu-txt">
-              <input type="checkbox"defaultChecked={true}  style={{ margin: "8px" }}/>
-              Registrados
+              <div inputMode className='button-anuncio'>Anunciantes</div>
+              <div className="menu-txt">
+                <input id="Registrados" name="Registrados" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Registrados")}/>
+                <label className="label-txt" for="Registrados">Registrados</label> 
               </div>
-              <div key="Aba3" className="menu-txt-fim">
-              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Anônimos</div>
-              <div className='button-anuncio'key="Aba1">Categoria</div>
-              <div key="Aba2" className="menu-txt">
-              <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Limpeza</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Segurança</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                  Infraestrutura</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                  Transportes</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Serviços Tercerizados</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Meio Ambiente</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Jardinagem</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Alimentação nos Campi</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Saúde e Seguridade</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Outros</div>
-              <div key="Aba3" className="menu-txt-fim">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Anônimos</div>
-              <div className='button-anuncio'key="Aba1">Status</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Aguardando</div>
-              <div key="Aba2" className="menu-txt">
-                <input type="checkbox"defaultChecked={false} style={{ margin: "8px" }} onClick={() => this.finalizados()}/>
-                Em andamento</div>
-              <div key="Aba3" className="menu-txt">
-                <input type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}/>
-                Resolvido</div>
+              <div className="menu-txt-fim">
+                <input id="Anônimos" type="checkbox" defaultChecked={true}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Anônimos")}/>
+                <label className="label-txt" for="Anônimos">Anônimos</label>
+              </div>
+              <div className='button-anuncio'>Status</div>
+              <div className="menu-txt">
+                <input id="Aguardando" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Aguardando")}/>
+                <label className="label-txt" for="Aguardando">Aguardando</label>
+                </div>
+              <div className="menu-txt">
+                <input id="Em andamento" type="checkbox" defaultChecked={false} style={{ margin: "8px" }} 
+                  onClick={(e) => this.filterStatus(e, "Em andamento")}/>
+                <label className="label-txt" for="Em andamento">Em andamento</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Resolvido" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Resolvido")}/>
+                <label className="label-txt" for="Resolvido">Resolvido</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Arquivados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                  onClick={(e) => this.filterStatus(e, "Arquivados")}/>
+                <label className="label-txt" for="Arquivados">Arquivados</label>
+              </div>
+              <div className='button-anuncio'>Categoria</div>
+              <div className="menu-txt">
+                <input id="Limpeza" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Limpeza")}/>
+                <label className="label-txt" for="Limpeza" key={1}>Limpeza</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Segurança" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Segurança")}/>
+                <label className="label-txt" for="Segurança" id="2">Segurança</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Infraestrutura" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Infraestrutura")}/>
+                <label className="label-txt" for="Infraestrutura" id="3">Infraestrutura</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Transportes" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Transportes")}/>
+                <label className="label-txt" for="Transportes" id="4">Transportes</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Serviços Tercerizados" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Serviços Tercerizados")}/>
+                <label className="label-txt" for="Serviços Tercerizados" id="5">Serviços Tercerizados</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Meio Ambiente" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Meio Ambiente")}/>
+                <label className="label-txt" for="Meio Ambiente" id="6">Meio Ambiente</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Jardinagem" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Jardinagem")}/>
+                <label className="label-txt" for="Jardinagem" id="7">Jardinagem</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Alimentação nos Campi")}/>
+                <label className="label-txt" for="Alimentação nos Campi" id="8">Alimentação nos Campi</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Saúde e Seguridade" type="checkbox"defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Saúde e Seguridade")}/>
+                <label className="label-txt" for="Saúde e Seguridade" id="9">Saúde e Seguridade</label>
+              </div>
+              <div className="menu-txt">
+                <input id="Outros" type="checkbox" defaultChecked={false}  style={{ margin: "8px" }}
+                onClick={(e) => this.checkFilter(e, "Outros")}/>
+                <label className="label-txt" for="Outros" id="10">Outros</label>
+              </div>
           </nav>
 
             <table class="table">
@@ -272,20 +434,15 @@ class TabelaPosts extends React.Component {
                   <h2>{post.id}</h2>
                     </>))}
                 </tbody>
+                {this.state.postsShow.length > this.state.perPage || this.state.paginaAtual === this.state.totalPages ?
+                this.showPagination() : null}
+                {}
             </table> 
-                  {this.state.showModal ? this.modelContent() : null}
+            {this.state.showModal ? <Redirect to={{
+                      pathname: `/Anuncio/${this.state.modalInf.post_id}`,
+                      state: {
+                      id: this.state.modalInf.post_id}}}/> : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
-                  <Pagination className='pagination'>
-                    <Pagination.First onClick={() => this.currentPage(0)}/>
-                    <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
-                      this.currentPage(this.state.paginaAtual - 1) : null}/>
-                    {this.state.totalPages.map(page => (
-                      <Pagination.Item key={page} on={page}
-                        onClick={() => this.currentPage(page)}>{page}</Pagination.Item>
-                    ))}
-                    <Pagination.Next />
-                    <Pagination.Last onClick={() => this.currentPage(this.state.totalPages.length - 1)}/>
-                  </Pagination>
           </Card.Text>
         </Card.Body>
       </Card>

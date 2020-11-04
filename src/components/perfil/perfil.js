@@ -12,14 +12,14 @@ class Login extends React.Component {
       email: "",
       stateSwitch:0,
     };
-    this.getUser = this.getUser.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleEditUser = this.handleEditUser.bind(this)
+    this.getUser = this.getUser.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleEditUser = this.handleEditUser.bind(this);
 
   }
 
   componentDidMount() {
-    this.getUser()
+    this.getUser();
   }
 
   handleChange(event) {
@@ -51,7 +51,7 @@ class Login extends React.Component {
   }
 
   async handleEditUser(){
-    this.setState({stateSwitch:0})
+    this.setState({stateSwitch:0});
     await apiUser.post("users/user/edit/", {
       token: JSON.parse(localStorage.getItem("auth")).token,
       username: this.state.username,
@@ -72,7 +72,7 @@ class Login extends React.Component {
           alert("Servidor indisponível");
         }
       });
-    this.setState({stateSwitch:1})
+    this.setState({stateSwitch:1});
   }
 
   loading = () => {

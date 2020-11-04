@@ -8,13 +8,12 @@ body{
 }
 
 .login{
+  margin-top: -100px;
   text-align: center;
 }
 .login-form{
   background-color: white;
   width: 30rem;
-  margin: 10% auto 0 auto;
-  padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 4px 4px #E5E8EF;
   font-family: "Montserrat", sans-serif;
@@ -53,7 +52,6 @@ body{
 }
 
 .registration-text{
-  margin-top: 2em;
   text-align: left;
 }
 
@@ -62,7 +60,6 @@ body{
 }
 
 .reset{
-  margin-top: 20px;
   font-size: 1em;
   color: blue;
 }
