@@ -49,8 +49,8 @@ class Sidebar extends React.Component {
             title: "Notícias",
             icon: faBell,
             options :[{
-                title: "Criação de Benefícios",
-                href: "/option1"
+                title: "Criação Notícias",
+                href: "/CreateNews"
             },{
                 title: "Gerenciamento de Notícias",
                 href: "/GerenciamentoNoticias"

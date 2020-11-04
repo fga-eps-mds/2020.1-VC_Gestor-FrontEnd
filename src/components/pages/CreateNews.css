@@ -1,0 +1,77 @@
+.cardNews {
+    background-color: whitesmoke;
+    margin: 0;
+    border: none;
+    width: 50%;
+    display: "flex";
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+ 
+.cardHeaderNews {
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border-radius: 20%; 
+    border: none;
+    width: 100%;
+    background-color: #438ABB !important;
+    box-sizing: border-box;
+    color: #f3f3f3;
+    text-align: center !important;
+}
+
+.textNews {
+    width: 100%;
+    height: 60%;
+    background-color: #ffffff;
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: center;
+    /* position: absolute; */
+    /* border-radius: 15px; */
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+}
+
+.newsForm{
+    width: 100%;
+    /* height: 60%; */
+    
+}
+
+#titleNews{
+    margin: 20px 20px 0px 20px;
+    width: 100%;
+}
+
+#subtitleNews{
+    margin: 20px 20px 0 20px;
+    width: 100%;
+}
+
+#linkPostNews{
+    margin: 0px 20px 0 50px;
+    width: 150%;
+}
+
+#textNews{
+    margin: 20px 20px 0 20px;
+    align-items: left;
+}
+
+#buttonNews{
+    align-items: center;
+    margin: 20px 20px 10px 20px;
+    background-color: #438ABB !important;
+    border: none;
+}
+
+#imgNews{
+    
+    margin: 0px 20px 0px 40px;
+    width: 125px;
+    height: 125px;
+}
+
+

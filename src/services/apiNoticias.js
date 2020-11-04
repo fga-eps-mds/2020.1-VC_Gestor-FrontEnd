@@ -5,3 +5,4 @@ const apiNoticias = axios.create({
 });
 
 export default apiNoticias;
+
