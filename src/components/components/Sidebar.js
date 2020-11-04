@@ -92,7 +92,6 @@ class Sidebar extends React.Component {
                                 } else {
                                     this.setState({selected:item.index})
                                 }
-                                console.log(this.state.selected)
                             }} selected={this.state.selected===item.index}/>
                             { this.state.selected===item.index ? item.options.map(subitem=>{
                                 return(
