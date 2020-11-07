@@ -1,0 +1,68 @@
+.cards{
+    margin-top: 25px;
+}
+
+.card-1{
+    background-color: #0F4C75;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
+
+.card-2{
+    background-color:#226D9F;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
+
+.card-3{
+    background-color: #438ABB;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
+
+.card-4{
+    background-color: #6FB1DE;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
+
+.table-rank{
+    align-items: flex-end;
+    width: 100%;
+    color: #454242;
+    font-family: NATS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.table-rank th{
+    background-color: #FCFCFC;
+    color: #454242;
+}
+
+.rank{
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
+
+.rank h4{
+    padding-top: 10px;
+    align-items: center;
+    margin: 0 20% 0 20%;
+}
+
+.dash{
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+}
