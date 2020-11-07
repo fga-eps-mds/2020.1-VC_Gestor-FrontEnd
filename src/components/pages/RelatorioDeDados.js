@@ -10,6 +10,8 @@ class RelatorioDeDados extends React.Component {
           <Card.Header>Relatorio De Dados</Card.Header>
           <Card.Text>
             RelatorioDeDados RelatorioDeDados RelatorioDeDados RelatorioDeDados RelatorioDeDados
+
+            
           </Card.Text>
         </Card.Body>
       </Card>
