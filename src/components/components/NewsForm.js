@@ -22,7 +22,7 @@ class NewsForm extends React.Component {
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.ChangePostId = this.ChangePostId.bind(this);
+      this.changePostId = this.changePostId.bind(this);
     }
 
     async getPosts(){
@@ -34,7 +34,7 @@ class NewsForm extends React.Component {
       this.getPosts();
     }
 
-    ChangePostId(event){
+    changePostId(event){
       this.setState({post_id: event.target.value});
     }
   
@@ -49,18 +49,18 @@ class NewsForm extends React.Component {
         case "text":
           this.setState({text: event.target.value});
           break;
-        case "image1":
-          this.setState({image1: event.target.value});
-          break;
-        case "image2":
-          this.setState({image2: event.target.value});
-          break;
-        case "image3":
-          this.setState({image3: event.target.value});
-          break;
-        case "linkPost":
-          this.setState({post_id: event.target.value});
-          break;
+        // case "image1":
+        //   this.setState({image1: event.target.value});
+        //   break;
+        // case "image2":
+        //   this.setState({image2: event.target.value});
+        //   break;
+        // case "image3":
+        //   this.setState({image3: event.target.value});
+        //   break;
+        // case "linkPost":
+        //   this.setState({post_id: event.target.value});
+        //   break;
         default: break;
       }
     }
@@ -121,10 +121,10 @@ class NewsForm extends React.Component {
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
                     {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                    <select className="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
+                    <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
                     {/* <option>Nenhum</option> */}
                     {this.state.posts.map((post) => (
-                      <option value={post.post_id}>{post.post_id} - {post.title}</option>
+                      <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}
                     </select>
                 </Form.Group>

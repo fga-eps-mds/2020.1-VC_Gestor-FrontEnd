@@ -2,19 +2,18 @@ var assert = require("chai").assert;
 var sinon = require("sinon");
 require("jsdom-global")();
 
-import { act } from "react-dom/test-utils";
+import { act, Simulate } from "react-dom/test-utils";
 import React from "react";
-import {mount, render, unmountComponentAtNode } from "react-dom";
+import {render, unmountComponentAtNode } from "react-dom";
 import NewsForm from "../src/components/components/NewsForm";
 import apiPostagem from "../src/services/apiPostagem";
+import apiNoticias from "../src/services/apiNoticias";
 
-var server;
 let container = null;
 beforeEach(() => {
   // Configura um elemento do DOM como alvo do teste
   container = document.createElement("div");
   document.body.appendChild(container);
-  server = sinon.fakeServer.create();
 });
 
 afterEach(() => {
@@ -24,39 +23,115 @@ afterEach(() => {
   container = null;
 });
 
-describe("News Creation Form", function() {
-    describe("Posts request", function() {
-      it("Should call get posts, and list the posts", function() {
-        sinon.replace(apiPostagem, "get", sinon.fake.resolves([{ post_id: 1,
-            title: "Título Post 1",
-            description: "Descrição 1",
-            image: "Imagem Post 1",
-            user_id: 1,
-            category_id: 1,
-            place_id: 1,
-            status: "ok",
-            dt_creation: "2020-08-08T00:00:00.000Z" },{ post_id: 2,
-                title: "Título Post 2",
-                description: "Descrição 2",
-                image: "Imagem Post 2",
-                user_id: 2,
-                category_id: 2,
-                place_id: 2,
-                status: "ok",
-                dt_creation: "2020-08-08T00:00:00.000Z" }]));
+function setNativeValue(element, value) {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+  const prototype = Object.getPrototypeOf(element);
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+  
+  if (valueSetter && valueSetter !== prototypeValueSetter) {
+  	prototypeValueSetter.call(element, value);
+  } else {
+    valueSetter.call(element, value);
+  }
+}
 
-        var form;
-        act(() => {
-          form = mount(<NewsForm className="newsforms" />);
+describe("News Creation Form", function() {
+  const postData = {data: {rows: [{ post_id: 1,
+    title: "Título Post 1",
+    description: "Descrição 1",
+    image: "Imagem Post 1",
+    user_id: 1,
+    category_id: 1,
+    place_id: 1,
+    status: "ok",
+    dt_creation: "2020-08-08T00:00:00.000Z" },{ post_id: 2,
+        title: "Título Post 2",
+        description: "Descrição 2",
+        image: "Imagem Post 2",
+        user_id: 2,
+        category_id: 2,
+        place_id: 2,
+        status: "ok",
+        dt_creation: "2020-08-08T00:00:00.000Z" }]}};
+    
+    sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
+    describe("Posts request", function() {
+      it("Should call get posts, and list the posts", async function() {
+        
+        
+        await act(async () => {
+          render(<NewsForm className="newsforms" />, container);
         });
+        
         assert(apiPostagem.get.calledOnce);
-        form.update();
-        assert.equal(container.querySelectorAll("option")[0].textContent, "Título Post 1");
-        // assert.equal(container.querySelector(".titleBenefit").textContent, "Título");
-        // assert.equal(container.querySelector(".cardBenefit").style.backgroundColor, "rgb(111, 177, 222)");
-        // assert.equal(container.querySelector(".descriptionBenefit").textContent, "Descrição");
-        // assert.equal(container.querySelector("a.titleLink").href, "/BeneficiosEditar/1");
+        assert.equal(container.querySelectorAll("option")[0].textContent, "1 - Título Post 1");
+        assert.equal(container.querySelectorAll("option")[1].textContent, "2 - Título Post 2");
       });
-      
+    });
+    describe("Form Submission", function() {
+      it("Should update news object with form data", async function() {
+        const spyHandleChange = sinon.spy(NewsForm.prototype,"handleChange");
+        const spyChangePostId = sinon.spy(NewsForm.prototype,"changePostId");
+        
+        await act(async () => {
+          render(<NewsForm className="newsforms" />, container);
+        });
+        var title = container.querySelector("#title");
+        var subtitle = container.querySelector("#subtitle");
+        var text = container.querySelector("#text");
+        var linkPost = container.querySelector("#linkPostNews select");
+        act(() => {
+          title.value = "Title 1";
+          Simulate.change(title);
+          subtitle.value = "Subtitle 1";
+          Simulate.change(subtitle);
+          text.value = "A description";
+          Simulate.change(text);
+          linkPost.value = 1;
+          Simulate.change(linkPost);
+        })
+        
+        
+        assert.equal(spyHandleChange.callCount, 3);
+        assert(spyChangePostId.calledOnce);
+      });
+      it("Should trigger submit on button click", async function() {
+        var fakePost = sinon.stub(apiNoticias, "post").resolves();
+        // sinon.replace(apiNoticias, "post", fakePost);
+        const spyHandleSubmit = sinon.spy(NewsForm.prototype,'handleSubmit');
+        alert = sinon.fake();
+        // alert();
+        
+        await act(async () => {
+          render(<NewsForm className="newsforms" />, container);
+        });
+        var title = container.querySelector("#title");
+        var subtitle = container.querySelector("#subtitle");
+        var text = container.querySelector("#text");
+        var linkPost = container.querySelector("#linkPostNews select");
+        var form = container.querySelector("form.newsForm");
+        await act(async () => {
+          title.value = "Title 1";
+          Simulate.change(title);
+          subtitle.value = "Subtitle 1";
+          Simulate.change(subtitle);
+          text.value = "A description";
+          Simulate.change(text);
+          linkPost.value = 1;
+          Simulate.change(linkPost);
+          Simulate.submit(form);
+        });
+        
+        assert(spyHandleSubmit.calledOnce);
+        assert(apiNoticias.post.calledOnce);
+        assert(alert.calledWith("Notícia criada com sucesso!"));
+        
+        fakePost.throws(new Error("an Error"));
+        await act(async () => {
+          Simulate.submit(form);
+        });
+
+        assert(alert.calledWith("Essa noticia já existe"));
+      });
     });
   });
