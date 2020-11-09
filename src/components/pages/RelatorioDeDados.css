@@ -1,6 +1,10 @@
 .cards{
     margin-top: 25px;
 }
+.cards h5{
+    font-size: 25px;
+    font-weight: bold;
+}
 
 .card-1{
     background-color: #0F4C75;
@@ -59,10 +63,4 @@
     padding-top: 10px;
     align-items: center;
     margin: 0 20% 0 20%;
-}
-
-.dash{
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    border: none;
 }

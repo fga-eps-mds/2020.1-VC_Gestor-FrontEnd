@@ -423,13 +423,13 @@ class TabelaPosts extends React.Component {
                   {tableData.map(post => (
                     <>
                     <tr key={post.id} onClick={() => this.mostrarModal(post)}>
-                    <td >{post.post_id}</td>
-                    <td >{post.title}</td>
-                    <td >{post.description}</td>
-                    <td >{post.user.name} {post.user.surname}</td>
-                    <td >{post.place.place_name}</td>
-                    <td >{post.status}</td>
-                    <td >{post.likes}</td>
+                      <td >{post.post_id}</td>
+                      <td >{post.title}</td>
+                      <td >{post.description}</td>
+                      <td >{post.user.name} {post.user.surname}</td>
+                      <td >{post.place.place_name}</td>
+                      <td >{post.status}</td>
+                      <td >{post.likes}</td>
                     </tr>
                   <h2>{post.id}</h2>
                     </>))}
