@@ -21,19 +21,8 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
+  sinon.restore();
 });
-
-function setNativeValue(element, value) {
-  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
-  const prototype = Object.getPrototypeOf(element);
-  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
-  
-  if (valueSetter && valueSetter !== prototypeValueSetter) {
-  	prototypeValueSetter.call(element, value);
-  } else {
-    valueSetter.call(element, value);
-  }
-}
 
 describe("News Creation Form", function() {
   const postData = {data: {rows: [{ post_id: 1,
@@ -54,9 +43,9 @@ describe("News Creation Form", function() {
         status: "ok",
         dt_creation: "2020-08-08T00:00:00.000Z" }]}};
     
-    sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
     describe("Posts request", function() {
       it("Should call get posts, and list the posts", async function() {
+        sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
         
         
         await act(async () => {
@@ -70,6 +59,7 @@ describe("News Creation Form", function() {
     });
     describe("Form Submission", function() {
       it("Should update news object with form data", async function() {
+        sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
         const spyHandleChange = sinon.spy(NewsForm.prototype,"handleChange");
         const spyChangePostId = sinon.spy(NewsForm.prototype,"changePostId");
         
@@ -96,11 +86,10 @@ describe("News Creation Form", function() {
         assert(spyChangePostId.calledOnce);
       });
       it("Should trigger submit on button click", async function() {
+        sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
         var fakePost = sinon.stub(apiNoticias, "post").resolves();
-        // sinon.replace(apiNoticias, "post", fakePost);
         const spyHandleSubmit = sinon.spy(NewsForm.prototype,'handleSubmit');
         alert = sinon.fake();
-        // alert();
         
         await act(async () => {
           render(<NewsForm className="newsforms" />, container);
