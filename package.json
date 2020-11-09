@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-react": "^7.12.5",
     "@babel/register": "^7.12.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -14,6 +16,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "chai": "^4.2.0",
+    "core-js": "^3.7.0",
     "mocha": "^8.2.1",
     "nodemailer": "^6.4.14",
     "react": "^16.13.1",
@@ -23,12 +26,13 @@
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "regenerator-runtime": "^0.13.7",
     "sinon": "^9.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "./node_modules/mocha/bin/mocha --require @babel/register",
+    "test": "./node_modules/mocha/bin/mocha --require @babel/register --require ignore-styles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,5 +49,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ignore-styles": "^5.0.1",
+    "install": "^0.13.0",
+    "jsdom": "16.4.0",
+    "jsdom-global": "3.0.2",
+    "npm": "^6.14.8"
   }
 }

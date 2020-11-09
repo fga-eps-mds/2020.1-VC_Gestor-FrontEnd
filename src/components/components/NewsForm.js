@@ -87,7 +87,7 @@ class NewsForm extends React.Component {
        
           <div className="row">
 
-            <div class="col-8">
+            <div className="col-8">
             <Form.Group controlId="title" id="titleNews">
               <Form.Control 
                 type="text" placeholder="Título da Notícia" 
@@ -107,9 +107,8 @@ class NewsForm extends React.Component {
            
             </div>
 
-            <div class="col-4">
+            <div className="col-4">
             <input 
-                controlId="img"
                 id="imgNews"
                 type="image" 
                 src={CameraImg}
@@ -122,7 +121,7 @@ class NewsForm extends React.Component {
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
                     {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                    <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
+                    <select className="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
                     {/* <option>Nenhum</option> */}
                     {this.state.posts.map((post) => (
                       <option value={post.post_id}>{post.post_id} - {post.title}</option>
