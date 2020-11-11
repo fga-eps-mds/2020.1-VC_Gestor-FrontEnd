@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar, faBell, faTrophy, faBullhorn, faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";

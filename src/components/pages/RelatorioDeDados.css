@@ -2,7 +2,7 @@
     margin-top: 25px;
 }
 .cards h5{
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -63,4 +63,26 @@
     padding-top: 10px;
     align-items: center;
     margin: 0 20% 0 20%;
+}
+
+.card-header-tabs{
+    float: right;
+}
+
+.card-header-tabs a{
+    font-style: normal;
+    color: #454242;
+}
+
+.card-header-tabs a:hover {
+    background-color: #226D9F;
+    color: #FCFCFC;
+}
+
+.titulo-relatorio{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #454242;
+    background-color: rgba(0, 0, 0, 0);
 }
