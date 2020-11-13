@@ -30,11 +30,11 @@ class RelatorioDeDados extends React.Component {
     const page = 0;
     var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
     const data = response.data.rows;
-    var newPosts = data.filter((e) => {return e.dt_creation >= this.dateShow.toISOString();}) 
-    var tableRank = newPosts.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1});
-    var users = tableRank.map(e => e.user.user_id);
+    var newPosts = data.filter((e) => {return e.dt_creation >= this.dateShow.toISOString();});
+    var tableRank = newPosts.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1;});
+    var users = tableRank.map((user) => user.user.user_id);
     var soma = 0;
-    tableRank.forEach(valor => {return soma += parseInt(valor.likes, 10);});
+    tableRank.forEach((valor) => {return soma += parseInt(valor.likes, 10);});
     this.setState({
       posts: data,
       newPosts: newPosts.length,
@@ -54,10 +54,10 @@ class RelatorioDeDados extends React.Component {
       }
       this.dateShow = event;
       var newPostsCount = this.state.posts.filter((e) => {return e.dt_creation >= event.toISOString();});
-      var newTableRank = newPostsCount.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1});
+      var newTableRank = newPostsCount.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1;});
       var likesCount = 0;
       // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
-      newTableRank.forEach(valor => {return likesCount += parseInt(valor.likes, 10);});
+      newTableRank.forEach((valor) => {return likesCount += parseInt(valor.likes, 10);});
       this.setState({
         newPosts: newPostsCount.length,
         tableRank: newTableRank.slice(0,10),
@@ -189,7 +189,7 @@ class RelatorioDeDados extends React.Component {
                       </thead>
                       <tbody>
 
-                        {this.state.tableRank.map(post => (
+                        {this.state.tableRank.map((post) => (
                         <>
                         <tr key={post.id} onClick={() => this.showPost(post.post_id)}>
                           <td >{post.post_id}</td>
