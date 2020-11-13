@@ -34,7 +34,7 @@ class RelatorioDeDados extends React.Component {
     var tableRank = newPosts.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1});
     var users = tableRank.map(e => e.user.user_id);
     var soma = 0;
-    tableRank.map(valor => {return soma += parseInt(valor.likes, 10);});
+    tableRank.forEach(valor => {return soma += parseInt(valor.likes, 10);});
     this.setState({
       posts: data,
       newPosts: newPosts.length,
@@ -46,8 +46,6 @@ class RelatorioDeDados extends React.Component {
     }
 
     changeDate(event, dia){
-      console.log(dia)
-
       if(event === "semana"){
         var week = new Date();
         week.setDate(week.getDate() - 7);
@@ -55,11 +53,11 @@ class RelatorioDeDados extends React.Component {
         this.dateShow = event;
       }
       this.dateShow = event;
-      console.log(this.state.posts)
       var newPostsCount = this.state.posts.filter((e) => {return e.dt_creation >= event.toISOString();});
       var newTableRank = newPostsCount.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1});
       var likesCount = 0;
-      newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
+      // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
+      newTableRank.forEach(valor => {return likesCount += parseInt(valor.likes, 10);});
       this.setState({
         newPosts: newPostsCount.length,
         tableRank: newTableRank.slice(0,10),
