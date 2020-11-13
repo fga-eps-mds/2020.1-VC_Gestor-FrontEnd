@@ -8,6 +8,7 @@ import {render, unmountComponentAtNode } from "react-dom";
 import EditNewsForm from "../src/components/components/EditNewsForm";
 import apiPostagem from "../src/services/apiPostagem";
 import apiNoticias from "../src/services/apiNoticias";
+import { withRouter } from "react-router-dom";
 
 let container = null;
 beforeEach(() => {
@@ -56,6 +57,7 @@ describe("News Edit Form", function() {
     // describe("Posts request", function() {
     //     it("Should call get posts, and list the posts", async function() {
     //     sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
+    //     sinon.replace(withRouter, sinon.fake.);
                 
         
     //     await act(async () => {
