@@ -76,7 +76,7 @@ describe("News management page", function() {
             });
 
             const pageBtns=container.querySelectorAll("nav li");
-            assert(pageBtns.length == 5);
+            assert(pageBtns.length === 5);
             assert(pageBtns[1].textContent === "1");
             assert(pageBtns[2].textContent === "2");
             assert(pageBtns[3].textContent === "3");
