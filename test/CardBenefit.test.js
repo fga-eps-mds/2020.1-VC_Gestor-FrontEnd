@@ -1,11 +1,11 @@
-var assert = require('chai').assert;
+var assert = require("chai").assert;
 // var jsdom = require("mocha-jsdom");
 import { act } from "react-dom/test-utils";
 
 import React from "react";
 import {render, unmountComponentAtNode } from "react-dom";
 import CardBenefit from "../src/components/components/CardBenefit";
-require('jsdom-global')()
+require("jsdom-global")();
 
 
 
@@ -23,9 +23,9 @@ afterEach(() => {
   container = null;
 });
 
-describe('Benefit Card', function() {
-    describe('Props', function() {
-      it('Should be received in the card', function() {
+describe("Benefit Card", function() {
+    describe("Props", function() {
+      it("Should be received in the card", function() {
         act(() => {
           render(<CardBenefit color="#6FB1DE" benefitId={1} title="Título" description="Descrição"/>, container);
           

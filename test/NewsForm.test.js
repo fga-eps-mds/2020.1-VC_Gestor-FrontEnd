@@ -79,7 +79,7 @@ describe("News Creation Form", function() {
           Simulate.change(text);
           linkPost.value = 1;
           Simulate.change(linkPost);
-        })
+        });
         
         
         assert.equal(spyHandleChange.callCount, 3);
@@ -88,7 +88,7 @@ describe("News Creation Form", function() {
       it("Should trigger submit on button click", async function() {
         sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
         var fakePost = sinon.stub(apiNoticias, "post").resolves();
-        const spyHandleSubmit = sinon.spy(NewsForm.prototype,'handleSubmit');
+        const spyHandleSubmit = sinon.spy(NewsForm.prototype,"handleSubmit");
         alert = sinon.fake();
         
         await act(async () => {

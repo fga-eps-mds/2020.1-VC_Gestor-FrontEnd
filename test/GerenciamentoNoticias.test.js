@@ -6,9 +6,7 @@ import { act, Simulate } from "react-dom/test-utils";
 import React from "react";
 import {render, unmountComponentAtNode } from "react-dom";
 import GerenciamentoNoticias from "../src/components/pages/GerenciamentoNoticias";
-import apiPostagem from "../src/services/apiPostagem";
 import apiNoticias from "../src/services/apiNoticias";
-import { withRouter } from "react-router-dom";
 
 let container = null;
 beforeEach(() => {
@@ -79,9 +77,9 @@ describe("News management page", function() {
 
             const pageBtns=container.querySelectorAll("nav li");
             assert(pageBtns.length == 5);
-            assert(pageBtns[1].textContent == "1");
-            assert(pageBtns[2].textContent == "2");
-            assert(pageBtns[3].textContent == "3");
+            assert(pageBtns[1].textContent === "1");
+            assert(pageBtns[2].textContent === "2");
+            assert(pageBtns[3].textContent === "3");
         });
         it("Should display news in each page",async function(){
             sinon.replace(apiNoticias, "get", sinon.fake.resolves(newsData));

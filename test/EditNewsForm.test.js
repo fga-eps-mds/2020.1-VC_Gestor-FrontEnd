@@ -128,7 +128,7 @@ describe("News Edit Form", function() {
           Simulate.change(text);
           linkPost.value = 1;
           Simulate.change(linkPost);
-        })
+        });
         
         
         assert.equal(spyHandleChange.callCount, 3);
@@ -138,7 +138,7 @@ describe("News Edit Form", function() {
         sinon.replace(apiPostagem, "get", sinon.fake.resolves(postData));
         sinon.replace(apiNoticias, "get", sinon.fake.resolves(newsData));
         var fakePut = sinon.stub(apiNoticias, "put").resolves();
-        const spyHandleSubmit = sinon.spy(EditNewsForm.WrappedComponent.prototype,'handleSubmit');
+        const spyHandleSubmit = sinon.spy(EditNewsForm.WrappedComponent.prototype,"handleSubmit");
         alert = sinon.fake();
         
         await act(async () => {

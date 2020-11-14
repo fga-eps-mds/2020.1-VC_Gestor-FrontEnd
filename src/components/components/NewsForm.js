@@ -120,11 +120,9 @@ class NewsForm extends React.Component {
             <div className="row">
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
-                    {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
                     <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
-                    {/* <option>Nenhum</option> */}
-                    {this.state.posts.map((post) => (
-                      <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
+                      {this.state.posts.map((post) => (
+                        <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}
                     </select>
                 </Form.Group>
