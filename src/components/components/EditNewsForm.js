@@ -28,7 +28,7 @@ class EditNewsForm extends React.Component {
       this.id = this.props.match.params.newsId;
 
       // this.history = useHistory();
-      this.ChangePostId = this.ChangePostId.bind(this);
+      this.changePostId = this.changePostId.bind(this);
       this.handleChange = this.handleChange.bind(this);
       // this.changePhoto = this.changePhoto.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -108,7 +108,7 @@ class EditNewsForm extends React.Component {
       }
     }
 
-    ChangePostId(event){
+    changePostId(event){
       this.setState({post_id: event.target.value});
     }
 
@@ -137,7 +137,7 @@ class EditNewsForm extends React.Component {
   
     render() {
       return (
-        <Form onSubmit={this.handleSubmit} >
+        <Form onSubmit={this.handleSubmit} className="newsForm" >
           <div className="container-fluid form-news">
             <div className="row">
               <div className="col-7">
@@ -156,11 +156,9 @@ class EditNewsForm extends React.Component {
                 <div className="row">
                   <Form.Group controlId="linkPost" className="text-area-news">
                       <Form.Label>Linkar Postagem</Form.Label>
-                      {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                      <select className="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
-                      {/* <option>Nenhum</option> */}
-                      {this.state.posts.map((post) => (
-                        <option value={post.post_id}>{post.post_id} - {post.title}</option>
+                      <select id="linkPost" className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                        {this.state.posts.map((post) => (
+                          <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                         ))}
                       </select>
                   </Form.Group>
