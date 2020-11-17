@@ -2,70 +2,38 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import "./RelatorioDeStatus.css";
 import apiPostagem from "../../services/apiPostagem";
-import { Link, Redirect } from "react-router-dom";
 
 class RelatorioDeStatus extends React.Component {
 
   constructor(props){
     super(props);
-    this.today = new Date();
-    this.dateShow = new Date(this.today.getFullYear(),0,1);
     this.state = {
-      posts: [],
-      newPosts: null,
-      newPostsAnon: null,
-      likes: null,
-      totalUsers: null,
-      tableRank: [],
-      active: "anual",
-      showPostId: false,
-      idPost: null
-    };
+      waiting: 0,
+      current: 0,
+      solved: 0,
+      archived: 0
+    }
+    ;
 }
 
-  async componentDidMount() {
+  async componentDidMount(status) {
     const limit = 100;
     const page = 0;
-    var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
-    const data = response.data.rows;
-    var newPosts = data.filter((e) => {return e.dt_creation >= this.dateShow.toISOString();});
-    var tableRank = newPosts.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1;});
-    var users = tableRank.map((user) => user.user.user_id);
-    var soma = 0;
-    tableRank.forEach((valor) => {return soma += parseInt(valor.likes, 10);});
+    var {data} = await apiPostagem.get(`posts?limit=100&page=0`);
+    // const filteredData = data.rows.filter(item=>item.status === status);
+
+    const filteredData1 = data.rows.filter(item=>item.status === "Aguardando");
+    const filteredData2 = data.rows.filter(item=>item.status === "Em andamento");
+    const filteredData3 = data.rows.filter(item=>item.status === "Resolvido");
+    const filteredData4 = data.rows.filter(item=>item.status === "Arquivado");
+
     this.setState({
-      posts: data,
-      newPosts: newPosts.length,
-      tableRank: tableRank.slice(0,10),
-      likes: soma,
-      totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
-      date: new Date()
+      waiting : filteredData1.length,
+      current : filteredData2.length,
+      solved : filteredData3.length,
+      archived : filteredData4.length
     });
     }
-
-    changeDate(event, dia){
-      if(event === "semana"){
-        var week = new Date();
-        week.setDate(week.getDate() - 7);
-        event = week;
-        this.dateShow = event;
-      }
-      this.dateShow = event;
-      var newPostsCount = this.state.posts.filter((e) => {return e.dt_creation >= event.toISOString();});
-      var newTableRank = newPostsCount.sort((a, b) => {return a["likes"] < b["likes"] ? 1 : -1;});
-      var likesCount = 0;
-      // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
-      newTableRank.forEach((valor) => {return likesCount += parseInt(valor.likes, 10);});
-      this.setState({
-        newPosts: newPostsCount.length,
-        tableRank: newTableRank.slice(0,10),
-        likes: likesCount,
-        active: dia
-        // totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
-        // date: new Date()
-      });
-    }
-
 
   render() {
     return (<>
@@ -81,8 +49,7 @@ class RelatorioDeStatus extends React.Component {
                   <div class="card-body">
                     <h4 class="card-title">Publicações Aguardando</h4>
                     <p class="card-text">
-                      <h5>{this.state.newPosts}</h5>
-                      <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                      <h5>{this.state.waiting}</h5>
                     </p>
                   </div>
                 </div>
@@ -94,8 +61,7 @@ class RelatorioDeStatus extends React.Component {
                   <div class="card-body">
                     <h4 class="card-title">Publicações em Andamento</h4>
                     <p class="card-text">
-                      <h5>0</h5>
-                      <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                      <h5>{this.state.current}</h5>
                     </p>
                   </div>
                 </div>
@@ -107,8 +73,7 @@ class RelatorioDeStatus extends React.Component {
                   <div class="card-body">
                     <h4 class="card-title">Publicações Resolvidas</h4>
                     <p class="card-text">
-                      <h5>{this.state.likes}</h5>
-                      <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                      <h5>{this.state.solved}</h5>
                     </p>
                   </div>
                 </div>
@@ -120,8 +85,7 @@ class RelatorioDeStatus extends React.Component {
                   <div class="card-body">
                     <h4 class="card-title">Publicações Arquivadas</h4>
                     <p class="card-text">
-                      <h5>{this.state.totalUsers}</h5>
-                      <h6 style={{color: "rgba(0, 0, 0, .0)"}}>{this.dateShow.getDate()}</h6>
+                      <h5>{this.state.archived}</h5>
                     </p>
                   </div>
                 </div>
