@@ -5,7 +5,6 @@ import Sidebar from "./components/components/Sidebar";
 import RelatorioDeDados from "./components/pages/RelatorioDeDados";
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
 import CreateNews from "./components/pages/CreateNews";
-//import Option2 from "./components/pages/Option2";
 import GerenciamentoNoticias from "./components/pages/GerenciamentoNoticias";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";
@@ -49,7 +48,7 @@ const MyRoute = ({ component: Component, ...rest }) => (
       <Col xs={2} style={{ minWidth: "170px", maxWidth:"250px", backgroundColor: "white", borderRight: "1px solid Silver", minHeight: "calc(100vh - 85px)", height: "calc(100% - 86px)" }}>
         <Sidebar />
       </Col>
-      <Col id="page-content-wrapper" style={{ marginTop:"15px", marginBottom:"15px", width: "80vw!important", justifyContent:"center" }}>
+      <Col id="page-content-wrapper" style={{ marginTop:"15px", marginBottom:"15px", width: "80vw!important", justifyContent:"center", display: "flex" }}>
         <Component {...props} />
       </Col>
     </Row> </>: <Login/>}
