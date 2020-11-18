@@ -48,7 +48,7 @@ const MyRoute = ({ component: Component, ...rest }) => (
       <Col xs={2} style={{ minWidth: "170px", maxWidth:"250px", backgroundColor: "white", borderRight: "1px solid Silver", minHeight: "calc(100vh - 85px)", height: "calc(100% - 86px)" }}>
         <Sidebar />
       </Col>
-      <Col id="page-content-wrapper" style={{ marginTop:"15px", marginBottom:"15px", width: "80vw!important", justifyContent:"center" }}>
+      <Col id="page-content-wrapper" style={{ marginTop:"15px", marginBottom:"15px", width: "80vw!important", justifyContent:"center", display: "flex" }}>
         <Component {...props} />
       </Col>
     </Row> </>: <Login/>}
