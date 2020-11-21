@@ -13,9 +13,9 @@ class EditBenefitForm extends React.Component {
       this.state = {
         title: "",
         description: "",
-        price:  null,
+        price:  "",
         redeem_way: "" ,
-        quantity: null
+        quantity: ""
       };
 
       this.id = this.props.match.params.benefitId;
@@ -76,12 +76,12 @@ class EditBenefitForm extends React.Component {
         alert("Benefício foi alterado com sucesso!");
         this.props.history.push("/BeneficiosGerenciar");
       }catch(e){
-        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+        alert("Ocorreu um erro e não foi possível alterar o benefício"); 
       }
     }
 
 
-    deleteBenefits = async (benefitId) => {
+    async deleteBenefits(benefitId){
       if(window.confirm("Tem certeza que quer excluir o benefício?")){
         try{
           await apiBeneficio.delete(`/benefits/${benefitId}`);
