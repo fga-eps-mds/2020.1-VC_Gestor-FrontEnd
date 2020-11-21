@@ -14,6 +14,7 @@ only:
     - master
     - development
     - Issue_145-NewsTest
+    - Issue_152-BenefitsTest
 
 before_script:
     - npm install

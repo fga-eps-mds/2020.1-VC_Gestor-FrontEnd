@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register --require ignore-styles",
+    "test": "./node_modules/mocha/bin/mocha --require @babel/register --require ignore-styles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
