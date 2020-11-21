@@ -31,7 +31,7 @@
     "sinon": "^9.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm install && react-scripts start",
     "build": "react-scripts build",
     "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register --require ignore-styles",
     "eject": "react-scripts eject"
