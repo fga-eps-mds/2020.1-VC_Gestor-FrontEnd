@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faThumbsUp, faCommentAlt, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import apiPostagem from "../../services/apiPostagem";
 import { Link, Redirect } from "react-router-dom";
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 class RelatorioDeDados extends React.Component {
 
@@ -32,7 +32,7 @@ class RelatorioDeDados extends React.Component {
     const limit = 100;
     const page = 0;
     var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
-    let graph = await apiPostagem.post(`/posts/graph/`);
+    let graph = await apiPostagem.post("/posts/graph/");
     this.setState({ graph: graph.data.data });
     const data = response.data.rows;
     var newPosts = data.filter((e) => { return e.dt_creation >= this.dateShow.toISOString(); });
@@ -78,16 +78,16 @@ class RelatorioDeDados extends React.Component {
     if (this.state.graph !== undefined) {
       switch (this.state.typeGraph) {
         case 0:
-          data = this.state.graph.anual
+          data = this.state.graph.anual;
           break;
         case 1:
-          data = this.state.graph.mensal
+          data = this.state.graph.mensal;
           break;
         case 2:
-          data = this.state.graph.semanal
+          data = this.state.graph.semanal;
           break;
         case 3:
-          data = this.state.graph.diario
+          data = this.state.graph.diario;
           break;
         default:
           break;
@@ -187,16 +187,16 @@ class RelatorioDeDados extends React.Component {
                     options={{
                       chart: {
                         events: {
-                          load: function () {
+                          load: () => {
                             that.graph = this;
                           }
                         }
                       },
                       xAxis: {
-                        type: 'datetime',
+                        type: "datetime",
                       },
                       title: {
-                        text: ''
+                        text: ""
                       },
                       yAxis: {
                         title: false
@@ -206,7 +206,7 @@ class RelatorioDeDados extends React.Component {
                           enabled:false
                         },
                         showInLegend: false,
-                        data: data
+                        data
                       }]
                     }}
                   />

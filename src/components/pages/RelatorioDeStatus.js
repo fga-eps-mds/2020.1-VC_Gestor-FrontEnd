@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "./RelatorioDeStatus.css";
 import apiPostagem from "../../services/apiPostagem";
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 class RelatorioDeStatus extends React.Component {
 
@@ -23,8 +23,7 @@ class RelatorioDeStatus extends React.Component {
   }
 
   async componentDidMount(status) {
-    let { data } = await apiPostagem.get(`posts?limit=100&page=0`);
-    // const filteredData = data.rows.filter(item=>item.status === status);
+    let { data } = await apiPostagem.get("posts?limit=100&page=0");
 
     const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
     const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
@@ -37,8 +36,7 @@ class RelatorioDeStatus extends React.Component {
       solved: filteredData3.length,
       archived: filteredData4.length
     });
-    let graph = await apiPostagem.post(`/posts/graphStatus/`);
-    await console.log(graph.data.data)
+    let graph = await apiPostagem.post("/posts/graphStatus/");
     this.setState({ graph: graph.data });
   }
 
@@ -49,68 +47,68 @@ class RelatorioDeStatus extends React.Component {
     if (this.state.graph !== undefined) {
       switch (id + nounce) {
         case 0:
-          title = "Registro Anual - Aguardando"
-          data = this.state.graph.aguardando.anual
+          title = "Registro Anual - Aguardando";
+          data = this.state.graph.aguardando.anual;
           break;
         case 1:
-          title = "Registro Mensal - Aguardando"
-          data = this.state.graph.aguardando.mensal
+          title = "Registro Mensal - Aguardando";
+          data = this.state.graph.aguardando.mensal;
           break;
         case 2:
-          title = "Registro Semanal - Aguardando"
-          data = this.state.graph.aguardando.semanal
+          title = "Registro Semanal - Aguardando";
+          data = this.state.graph.aguardando.semanal;
           break;
         case 3:
-          title = "Registro Diário - Aguardando"
-          data = this.state.graph.aguardando.diario
+          title = "Registro Diário - Aguardando";
+          data = this.state.graph.aguardando.diario;
           break;
         case 4:
-          title = "Registro Anual - Em Andamento"
-          data = this.state.graph.andamento.anual
+          title = "Registro Anual - Em Andamento";
+          data = this.state.graph.andamento.anual;
           break;
         case 5:
-          title = "Registro Mensal - Em Andamento"
-          data = this.state.graph.andamento.mensal
+          title = "Registro Mensal - Em Andamento";
+          data = this.state.graph.andamento.mensal;
           break;
         case 6:
-          title = "Registro Semanal - Em Andamento"
-          data = this.state.graph.andamento.semanal
+          title = "Registro Semanal - Em Andamento";
+          data = this.state.graph.andamento.semanal;
           break;
         case 7:
-          title = "Registro Diário - Em Andamento"
-          data = this.state.graph.andamento.diario
+          title = "Registro Diário - Em Andamento";
+          data = this.state.graph.andamento.diario;
           break;
         case 8:
-          title = "Registro Anual - Resolvidas"
-          data = this.state.graph.resolvido.anual
+          title = "Registro Anual - Resolvidas";
+          data = this.state.graph.resolvido.anual;
           break;
         case 9:
-          title = "Registro Mensal - Resolvidas"
-          data = this.state.graph.resolvido.mensal
+          title = "Registro Mensal - Resolvidas";
+          data = this.state.graph.resolvido.mensal;
           break;
         case 10:
-          title = "Registro Semanal - Resolvidas"
-          data = this.state.graph.resolvido.semanal
+          title = "Registro Semanal - Resolvidas";
+          data = this.state.graph.resolvido.semanal;
           break;
         case 11:
-          title = "Registro Diário - Resolvidas"
-          data = this.state.graph.resolvido.diario
+          title = "Registro Diário - Resolvidas";
+          data = this.state.graph.resolvido.diario;
           break;
         case 12:
-          title = "Registro Anual - Arquivadas"
-          data = this.state.graph.arquivados.anual
+          title = "Registro Anual - Arquivadas";
+          data = this.state.graph.arquivados.anual;
           break;
         case 13:
-          title = "Registro Mensal - Arquivadas"
-          data = this.state.graph.arquivados.mensal
+          title = "Registro Mensal - Arquivadas";
+          data = this.state.graph.arquivados.mensal;
           break;
         case 14:
-          title = "Registro Semanal - Arquivadas"
-          data = this.state.graph.arquivados.semanal
+          title = "Registro Semanal - Arquivadas";
+          data = this.state.graph.arquivados.semanal;
           break;
         case 15:
-          title = "Registro Diário - Arquivadas"
-          data = this.state.graph.arquivados.diario
+          title = "Registro Diário - Arquivadas";
+          data = this.state.graph.arquivados.diario;
           break;
         default:
           break;
@@ -118,18 +116,18 @@ class RelatorioDeStatus extends React.Component {
     }
     let changeGraph = (newState) => {
       if (id === 0) {
-        this.setState({ aguardando: newState })
+        this.setState({ aguardando: newState });
       }
       if (id === 4) {
-        this.setState({ andamento: newState })
+        this.setState({ andamento: newState });
       }
       if (id === 8) {
-        this.setState({ resolvido: newState })
+        this.setState({ resolvido: newState });
       }
       if (id === 12) {
-        this.setState({ arquivado: newState })
+        this.setState({ arquivado: newState });
       }
-    }
+    };
     return (<>
       <div class="card text-center" id="graph">
         <div style={{ marginBottom: "10px" }} class="card-header card-dates">
