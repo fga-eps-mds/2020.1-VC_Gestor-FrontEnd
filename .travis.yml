@@ -11,10 +11,6 @@ services:
 
 notifications:
     email: false
-    
-cache:
-  directories:
-  - node_modules
 
 branches:
 only:
