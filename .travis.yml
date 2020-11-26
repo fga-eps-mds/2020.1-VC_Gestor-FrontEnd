@@ -16,7 +16,6 @@ branches:
 only:
     - master
     - development
-    - Issue_156-ContinuousDelivery
 
 before_script:
     - npm install
@@ -29,4 +28,4 @@ deploy:
   script: 
     - bash deploy.sh
   on:
-    branch: Issue_156-ContinuousDelivery 
+    branch: master 
