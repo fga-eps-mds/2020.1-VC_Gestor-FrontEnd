@@ -1,5 +1,5 @@
 .cards{
-    margin-top: 25px;
+    margin-top: 1px;
     }
     .cards h5{
     font-size: 30px;
@@ -51,4 +51,18 @@
     background-color: #226D9F;
     color: #FCFCFC;
     }
+
+    #title-header{
+        float: left;
+        height: 100%;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 20px;
+        color: black;
+    }
     
+    #graph{
+        margin-top: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    }

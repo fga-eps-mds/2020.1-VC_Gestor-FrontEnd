@@ -53,6 +53,7 @@
 }
 
 .rank{
+    margin-top: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
@@ -84,4 +85,19 @@
     font-weight: bolder;
     color: #454242;
     background-color: rgba(0, 0, 0, 0);
+}
+
+#title-header{
+    float: left;
+    height: 100%;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+#graph{
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
 }
