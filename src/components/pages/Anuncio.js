@@ -26,16 +26,13 @@ class Anuncio extends React.Component {
 
     // Alterar requisao por url 
     async componentDidMount() {
-        //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
-        var response = await apiPostagem.get(`posts/${this.props.match.params.post_id}`);
-
-        this.setState({ 
-          posts: response.data,
-          place: response.data.place,
-          category: response.data.category,
-          user: response.data.user
-            
-          });
+      //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
+      // console.log("oi");
+      var response = await apiPostagem.get(`/postage/list_one/${this.props.match.params.post_id}`);
+      // console.log(response);
+      this.setState({ 
+        posts: response.data,
+        });
     }
 
     handleSubmit = async (e) => {
@@ -43,7 +40,7 @@ class Anuncio extends React.Component {
         alert("O estado atual não foi alterado.");
       } else {
        alert("O estado do post foi alterado para: " + this.state.status);
-       await apiPostagem.put(`posts/${this.props.match.params.post_id}`, { status: `${this.state.status}` });
+       await apiPostagem.put(`/postage/update_status/${this.props.match.params.post_id}`, { post_status: `${this.state.status}` });
      }
     }
 
@@ -53,26 +50,26 @@ class Anuncio extends React.Component {
      }
     
   render() {
-    const { posts, place, category, user } = this.state;
+    const { posts} = this.state;
     return (<>
       <Modal.Dialog className="modal">
         <Modal.Header>
           <Modal.Title>
                 <FontAwesomeIcon icon={faUserCircle} style={{ width: "40px", marginRight: "10px" }} />
-                {user.name} {user.surname}<br/>
+                {posts.author}<br/>
                 <br></br>
-                <h6><strong>Data de Criação:</strong> {posts.dt_creation}</h6>
+                <h6><strong>Data de Criação:</strong> {posts.post_created_at}</h6>
           </Modal.Title>
         </Modal.Header>
               <Modal.Body>
                 <h3>{posts.title}
                 <FontAwesomeIcon icon={faThumbsUp} style={{ width: "40px", marginLeft: "75%", marginRight: "10px" }}/>
-                {posts.likes}</h3>
-                <h5 ><strong>Categoria: </strong>{category.category_name}</h5>
-                <h5><strong>Local: </strong>{place.place_name}</h5>
-                <h5><strong>Status da postagem: </strong>{posts.status}</h5>
+                {posts.__v}</h3>
+                <h5 ><strong>Categoria: </strong>{posts.post_category}</h5>
+                <h5><strong>Local: </strong>{posts.post_place}</h5>
+                <h5><strong>Status da postagem: </strong>{posts.post_status}</h5>
                 <h5><strong>Descrição: </strong></h5>
-                <p>{posts.description}</p>
+                <p>{posts.post_description}</p>
                 <h5><strong>Imagens: </strong></h5>
                 <div className="fotos">
                   <img className="foto1" src={unb1} alt="Unb1" style={ {marginRight: "10px"}} />
@@ -82,7 +79,7 @@ class Anuncio extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   <label style={{marginLeft: "80%", marginRight: "10px" }}>
                     Alterar estado para:<br/>
-                    <select onChange={this.handleChange} select={posts.status}>
+                    <select onChange={this.handleChange} select={posts.post_status}>
                       <option value="Aguardando">Aguardando</option>
                       <option value="Em andamento">Em andamento</option>
                       <option value="Resolvido">Resolvido</option>

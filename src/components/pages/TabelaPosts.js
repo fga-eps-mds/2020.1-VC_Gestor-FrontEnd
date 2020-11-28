@@ -36,10 +36,10 @@ class TabelaPosts extends React.Component {
     const limit = 100;
     const page = 0;
     //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
-    var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
+    var response = await apiPostagem.get(`postage/list_all`);
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
-    const total = Math.ceil(response.data.count/this.state.perPage)
-    const numRows = response.data.count;
+    const total = Math.ceil(response.data.length/this.state.perPage)
+    const numRows = response.data.length;
     // console.log( response.data);
     const arrayPages = [];
     for (let i = 0; i < total; i++){
@@ -47,12 +47,12 @@ class TabelaPosts extends React.Component {
     }
 
     this.setState({ 
-      posts: response.data.rows,
+      posts: response.data,
       pageCount: Math.ceil(response.length / this.state.perPage),
-      tableData:response.data.rows.slice(0, this.state.perPage),
+      tableData:response.data.slice(0, this.state.perPage),
       totalPages: arrayPages,
       numRows: numRows,
-      postsShow:response.data.rows
+      postsShow:response.data
     });
   }
   currentPage(e){
@@ -422,16 +422,16 @@ class TabelaPosts extends React.Component {
                   
                   {tableData.map(post => (
                     <>
-                    <tr key={post.id} onClick={() => this.mostrarModal(post)}>
-                      <td >{post.post_id}</td>
-                      <td >{post.title}</td>
-                      <td >{post.description}</td>
-                      <td >{post.user.name} {post.user.surname}</td>
-                      <td >{post.place.place_name}</td>
-                      <td >{post.status}</td>
-                      <td >{post.likes}</td>
+                    <tr key={post._id} onClick={() => this.mostrarModal(post)}>
+                  <td >{/*post._id*/}</td>
+                      <td >{post.post_title}</td>
+                      <td >{post.post_description}</td>
+                      <td >{post.author}</td>
+                      <td >{post.post_place}</td>
+                      <td >{post.post_status}</td>
+                      <td >{post.__v}</td>
                     </tr>
-                  <h2>{post.id}</h2>
+                  <h2>{/*post._id*/}</h2>
                     </>))}
                 </tbody>
                 {this.state.postsShow.length > this.state.perPage || this.state.paginaAtual === this.state.totalPages ?
@@ -439,9 +439,9 @@ class TabelaPosts extends React.Component {
                 {}
             </table> 
             {this.state.showModal ? <Redirect to={{
-                      pathname: `/Anuncio/${this.state.modalInf.post_id}`,
+                      pathname: `/Anuncio/${this.state.modalInf._id}`,
                       state: {
-                      id: this.state.modalInf.post_id}}}/> : null}
+                      id: this.state.modalInf._id}}}/> : null}
                   {/* {tableData.length >= this.state.perPage ? this.showPagination() : null} */}
           </Card.Text>
         </Card.Body>
