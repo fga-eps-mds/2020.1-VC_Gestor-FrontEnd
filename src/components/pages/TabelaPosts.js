@@ -427,7 +427,7 @@ class TabelaPosts extends React.Component {
                       <td >{post.author}</td>
                       <td >{post.post_place}</td>
                       <td >{post.post_status}</td>
-                      <td >{post.__v}</td>
+                      <td >{post.post_support_number}</td>
                     </tr>
                     <h2>{/*post._id*/}</h2>
                   </>))}

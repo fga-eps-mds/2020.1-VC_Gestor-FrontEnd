@@ -36,12 +36,14 @@ class Anuncio extends React.Component {
     }
 
     handleSubmit = async (e) => {
+      e.preventDefault();
       if(this.state.posts.status === this.state.status || this.state.status === null) {
         alert("O estado atual não foi alterado.");
       } else {
-       alert("O estado do post foi alterado para: " + this.state.status);
-       await apiPostagem.put(`/postage/update_status/${this.props.match.params.post_id}`, { post_status: `${this.state.status}` });
+          await apiPostagem.put(`/postage/update_status/${this.props.match.params.post_id}`, { post_status: `${this.state.status}` });
+          alert("O estado do post foi alterado para: " + this.state.status);
      }
+     window.location.reload(false);
     }
 
    handleChange = (event) => {
