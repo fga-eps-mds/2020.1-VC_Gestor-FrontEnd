@@ -77,7 +77,6 @@ class App extends React.Component {
           <MyRoute exact path='/Perfil' component={Perfil} />
           <MyRoute exact path='/' component={Home} />
           <MyRoute exact path='*' component={p404} />
-
         </Switch>
       </BrowserRouter>
     );
