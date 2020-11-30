@@ -182,7 +182,7 @@ class TabelaPosts extends React.Component {
       const array = this.state.filters;
       array[0] = type;
       this.setState({
-        tableData: this.state.posts.filter((e) => { return e.category.category_name === type; }),
+        tableData: this.state.posts.filter((e) => { return e.post_category === type; }),
         filters: array
       });
     } else {
@@ -197,6 +197,7 @@ class TabelaPosts extends React.Component {
   }
 
   filtrar() {
+    console.log(this.state.posts)
     this.setState({ paginaAtual: 0 });
     this.currentPage(0);
     var conjuntoUniverso = [];
@@ -204,7 +205,7 @@ class TabelaPosts extends React.Component {
     // eslint-disable-next-line array-callback-return
     this.state.filters.map((quem) => {
       if (quem === "Anônimos") {
-        const conjuntoUser = this.state.posts.filter((e) => { return e.user.name === null; });
+        const conjuntoUser = this.state.posts.filter((e) => { return e.fk_user_id === null; });
         // eslint-disable-next-line array-callback-return
         conjuntoUser.map((posts) => {
           if (posts.length !== 0) {
@@ -215,7 +216,7 @@ class TabelaPosts extends React.Component {
         // conjuntoUniverso.push(conjuntoUser);
       } else {
         if (quem === "Registrados") {
-          const conjuntoUserB = this.state.posts.filter((e) => { return e.user.name !== null; });
+          const conjuntoUserB = this.state.posts.filter((e) => { return e.fk_user_id !== null; });
           // eslint-disable-next-line array-callback-return
           conjuntoUserB.map((posts) => { if (posts.length !== 0) { conjuntoUniverso.push(posts); } });
           filtragens.splice(filtragens.indexOf("Registrados"), 1);
@@ -232,23 +233,23 @@ class TabelaPosts extends React.Component {
       // eslint-disable-next-line array-callback-return
       filtragens.map((status) => {
         if (status === "Aguardando") {
-          const process = conjuntoUniverso.filter((e) => { return e.status === "Aguardando"; });
+          const process = conjuntoUniverso.filter((e) => { return e.post_status === "Aguardando"; });
           // eslint-disable-next-line array-callback-return
           process.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
         } else if (status === "Em andamento") {
           // eslint-disable-next-line array-callback-return
-          const processAwait = conjuntoUniverso.filter((e) => { return e.status === "Em andamento"; });
+          const processAwait = conjuntoUniverso.filter((e) => { return e.post_status === "Em andamento"; });
           // eslint-disable-next-line array-callback-return
           processAwait.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
         } else if (status === "Resolvido") {
           // eslint-disable-next-line array-callback-return
-          const processfinished = conjuntoUniverso.filter((e) => { return e.status === "Resolvido"; });
+          const processfinished = conjuntoUniverso.filter((e) => { return e.post_status === "Resolvido"; });
           // eslint-disable-next-line array-callback-return
           processfinished.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
         } else {
-          const processFiled = conjuntoUniverso.filter((e) => { return e.status === "Arquivados"; });
+          const processFiled = conjuntoUniverso.filter((e) => { return e.post_status === "Arquivados"; });
           // eslint-disable-next-line array-callback-return
           processFiled.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
         }
@@ -256,11 +257,11 @@ class TabelaPosts extends React.Component {
       conjuntoUniverso = conjuntoStatus;
     }
     if (this.state.filters[0] !== "categoria") {
-      const maxPage = conjuntoUniverso.filter((e) => { return e.category.category_name === this.state.filters[0]; });
+      const maxPage = conjuntoUniverso.filter((e) => { return e.post_category === this.state.filters[0]; });
       const corte = maxPage.slice(this.state.offset, this.state.offset + this.state.perPage);
       this.setState({
         tableData: corte,
-        postsShow: conjuntoUniverso.filter((e) => { return e.category.category_name === this.state.filters[0]; })
+        postsShow: conjuntoUniverso.filter((e) => { return e.post_category === this.state.filters[0]; })
       });
     } else {
       const corte2 = conjuntoUniverso.slice(this.state.offset, this.state.offset + this.state.perPage);
