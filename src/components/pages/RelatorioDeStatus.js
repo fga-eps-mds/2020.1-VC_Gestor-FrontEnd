@@ -23,20 +23,21 @@ class RelatorioDeStatus extends React.Component {
   }
 
   async componentDidMount(status) {
-    let { data } = await apiPostagem.get("posts?limit=100&page=0");
+    // let { data } = await apiPostagem.get("posts?limit=100&page=0");
 
-    const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
-    const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
-    const filteredData3 = data.rows.filter(item => item.status === "Resolvido");
-    const filteredData4 = data.rows.filter(item => item.status === "Arquivado");
+    // const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
+    // const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
+    // const filteredData3 = data.rows.filter(item => item.status === "Resolvido");
+    // const filteredData4 = data.rows.filter(item => item.status === "Arquivado");
 
-    this.setState({
-      waiting: filteredData1.length,
-      current: filteredData2.length,
-      solved: filteredData3.length,
-      archived: filteredData4.length
-    });
-    let graph = await apiPostagem.post("/posts/graphStatus/");
+    // this.setState({
+    //   waiting: filteredData1.length,
+    //   current: filteredData2.length,
+    //   solved: filteredData3.length,
+    //   archived: filteredData4.length
+    // });
+    let graph = await apiPostagem.get("postage/graphs/status");
+    console.log("oiii: ", graph)
     this.setState({ graph: graph.data });
   }
 

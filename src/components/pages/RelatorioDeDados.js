@@ -29,25 +29,28 @@ class RelatorioDeDados extends React.Component {
   }
 
   async componentDidMount() {
-    const limit = 100;
-    const page = 0;
-    var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
-    let graph = await apiPostagem.post("/posts/graph/");
+  console.log("########################################################################################")
+    // const limit = 100;
+    // const page = 0;
+    // var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
+    let graph = await apiPostagem.get("postage/graphs/dados");
+    console.log("########################################################################################")
+    console.log("####################### ",graph)
     this.setState({ graph: graph.data.data });
-    const data = response.data.rows;
-    var newPosts = data.filter((e) => { return e.dt_creation >= this.dateShow.toISOString(); });
-    var tableRank = newPosts.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
-    var users = tableRank.map((user) => user.user.user_id);
-    var soma = 0;
-    tableRank.forEach((valor) => { return soma += parseInt(valor.likes, 10); });
-    this.setState({
-      posts: data,
-      newPosts: newPosts.length,
-      tableRank: tableRank.slice(0, 10),
-      likes: soma,
-      totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
-      date: new Date()
-    });
+    // const data = response.data.rows;
+    // var newPosts = data.filter((e) => { return e.dt_creation >= this.dateShow.toISOString(); });
+    // var tableRank = newPosts.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
+    // var users = tableRank.map((user) => user.user.user_id);
+    // var soma = 0;
+    // tableRank.forEach((valor) => { return soma += parseInt(valor.likes, 10); });
+    // this.setState({
+    //   posts: data,
+    //   newPosts: newPosts.length,
+    //   tableRank: tableRank.slice(0, 10),
+    //   likes: soma,
+    //   totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
+    //   date: new Date()
+    // });
   }
 
   changeDate(event, dia, type) {

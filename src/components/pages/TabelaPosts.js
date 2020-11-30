@@ -75,6 +75,7 @@ class TabelaPosts extends React.Component {
   }
 
   handleClose = () => this.setState({ showModal: false })
+
   handleSubmit = (e) => {
     if (this.state.modalInf.status === this.state.status) {
       alert('O estadado atual continua o mesmo');
@@ -83,6 +84,7 @@ class TabelaPosts extends React.Component {
       apiPostagem.put(`posts/${this.state.modalInf.post_id}`, { status: `${this.state.status}` });
     }
   }
+
   handleChange = (event) => {
     event.preventDefault()
     this.setState({ status: event.target.value });
@@ -197,7 +199,6 @@ class TabelaPosts extends React.Component {
   }
 
   filtrar() {
-    console.log(this.state.posts)
     this.setState({ paginaAtual: 0 });
     this.currentPage(0);
     var conjuntoUniverso = [];
