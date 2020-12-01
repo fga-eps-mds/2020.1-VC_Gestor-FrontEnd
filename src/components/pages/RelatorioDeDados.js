@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faThumbsUp, faCommentAlt, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import apiPostagem from "../../services/apiPostagem";
 import { Link, Redirect } from "react-router-dom";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+// import Highcharts from "highcharts";
+// import HighchartsReact from "highcharts-react-official";
 
 class RelatorioDeDados extends React.Component {
 
@@ -182,8 +182,8 @@ class RelatorioDeDados extends React.Component {
                   </li>
                 </ul>
               </div>
-                  <HighchartsReact
-                    highcharts={Highcharts}
+                  {/* <HighchartsReact
+                    // highcharts={Highcharts}
                     options={{
                       chart: {
                         events: {
@@ -209,7 +209,7 @@ class RelatorioDeDados extends React.Component {
                         data
                       }]
                     }}
-                  />
+                  /> */}
             </div>
           </div>
           {/* rank */}

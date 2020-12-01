@@ -2,8 +2,8 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "./RelatorioDeStatus.css";
 import apiPostagem from "../../services/apiPostagem";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+// import Highcharts from "highcharts";
+// import HighchartsReact from "highcharts-react-official";
 
 class RelatorioDeStatus extends React.Component {
 
@@ -156,8 +156,8 @@ class RelatorioDeStatus extends React.Component {
             </li>
           </ul>
         </div>
-        <HighchartsReact
-          highcharts={Highcharts}
+        {/* <HighchartsReact
+          // highcharts={Highcharts}
           options={{
             chart: {  
               type: 'line',
@@ -185,7 +185,7 @@ class RelatorioDeStatus extends React.Component {
               data: data
             }]
           }}
-        />
+        /> */}
       </div>
     </>)
   }
