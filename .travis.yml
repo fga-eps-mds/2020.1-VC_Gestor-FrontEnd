@@ -2,21 +2,30 @@ language: node_js
 node_js:
     - 'node'
 
+addons:
+  ssh_known_hosts:
+    - ec2-3-138-105-146.us-east-2.compute.amazonaws.com
+
+services:
+- docker
+
 notifications:
     email: false
-    
-cache:
-  directories:
-  - node_modules
 
 branches:
 only:
     - master
     - development
-    - Issue_145-NewsTest
 
 before_script:
     - npm install
 
 script:
-  - npm run test
+  - npm run test && chmod 400 deploy_rsa;
+
+deploy:
+  provider: script
+  script: 
+    - bash deploy.sh
+  on:
+    branch: master 
