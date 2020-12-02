@@ -31,12 +31,9 @@ class RelatorioDeDados extends React.Component {
   async componentDidMount() {
     const limit = 100;
     const page = 0;
-    console.log("##################################")
     var response = await apiPostagem.get(`postage/list_all`);
-    let graph = await apiPostagem.get("postage/graphs/dados");
-    console.log("##################################")
-    console.log(response);
-    this.setState({ graph: graph.data.data });
+    // let graph = await apiPostagem.get("postage/graphs/dados");
+    // this.setState({ graph: graph.data.data });
     const data = response.data;
     var newPosts = data.filter((e) => { return e.post_created_at >= this.dateShow.toISOString(); });
     var tableRank = newPosts.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
@@ -223,7 +220,7 @@ class RelatorioDeDados extends React.Component {
             <table className="table-rank">
               <thead>
                 <tr className="rank-cab">
-                  <th scope="col">ID</th>
+                  <th scope="col">Título</th>
                   <th scope="col">Apoiadores</th>
                   <th scope="col">Likes</th>
                 </tr>
@@ -232,10 +229,10 @@ class RelatorioDeDados extends React.Component {
 
                 {this.state.tableRank.slice(0,5).map((post) => (
                   <>
-                    <tr key={post.id} onClick={() => this.showPost(post.post_id)}>
-                      <td >{post.post_id}</td>
-                      <td >{post.description}</td>
-                      <td >{post.likes}</td>
+                    <tr key={post._id} onClick={() => this.showPost(post._id)}>
+                      <td >{post.post_title}</td>
+                      <td >{post.post_description}</td>
+                      <td >{post.post_support_number}</td>
                     </tr>
                   </>))}
               </tbody>

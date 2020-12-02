@@ -408,7 +408,6 @@ class TabelaPosts extends React.Component {
             <table class="table" >
               <thead>
                 <tr className="table-cab">
-                  <th scope="col" className="a" onClick={() => this.ordenar('post_id')}>#Id</th>
                   <th scope="col" className="a" onClick={() => this.ordenar('title')}>Titulo</th>
                   <th scope="col" className="a" onClick={() => this.ordenar('description')}>Descrição</th>
                   <th scope="col">Anunciante</th>
@@ -421,7 +420,6 @@ class TabelaPosts extends React.Component {
                 {tableData.map(post => (
                   <>
                     <tr key={post._id} onClick={() => this.mostrarModal(post)}>
-                      <td >{/*post._id*/}</td>
                       <td >{post.post_title}</td>
                       <td >{post.post_description}</td>
                       <td >{post.author}</td>

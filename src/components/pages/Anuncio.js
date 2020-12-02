@@ -67,6 +67,7 @@ class Anuncio extends React.Component {
                 <h3>{posts.title}
                 <FontAwesomeIcon icon={faThumbsUp} style={{ width: "40px", marginLeft: "75%", marginRight: "10px" }}/>
                 {posts.__v}</h3>
+                <h5 ><strong>ID: </strong>{posts._id}</h5>
                 <h5 ><strong>Categoria: </strong>{posts.post_category}</h5>
                 <h5><strong>Local: </strong>{posts.post_place}</h5>
                 <h5><strong>Status da postagem: </strong>{posts.post_status}</h5>

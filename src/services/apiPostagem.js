@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiPostagem = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://vc-usuario-backend.herokuapp.com/",
 });
 
 export default apiPostagem;
