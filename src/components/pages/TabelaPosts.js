@@ -204,7 +204,7 @@ class TabelaPosts extends React.Component {
     var conjuntoUniverso = [];
     var filtragens = [...this.state.filters];
     // eslint-disable-next-line array-callback-return
-    this.state.filters.map((quem) => {
+    this.state.filters.forEach((quem) => {
       if (quem === "Anônimos") {
         const conjuntoUser = this.state.posts.filter((e) => { return e.fk_user_id === null; });
         // eslint-disable-next-line array-callback-return
@@ -227,7 +227,6 @@ class TabelaPosts extends React.Component {
           });
         }
       }
-      return;
     });
     const conjuntoStatus = [];
     // eslint-disable-next-line array-callback-return
