@@ -17,7 +17,7 @@ class RelatorioDeDados extends React.Component {
     this.state = {
       posts: [],
       newPosts: null,
-      newPostsAnon: null,
+      newPostsAnon: 0,
       likes: null,
       totalUsers: null,
       tableRank: [],
@@ -31,38 +31,40 @@ class RelatorioDeDados extends React.Component {
   async componentDidMount() {
     const limit = 100;
     const page = 0;
-    var response = await apiPostagem.get(`posts?limit=${limit}&page=${page}`);
-    let graph = await apiPostagem.post("/posts/graph/");
-    this.setState({ graph: graph.data.data });
-    const data = response.data.rows;
-    var newPosts = data.filter((e) => { return e.dt_creation >= this.dateShow.toISOString(); });
-    var tableRank = newPosts.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
-    var users = tableRank.map((user) => user.user.user_id);
+    var response = await apiPostagem.get("postage/list_all");
+    // let graph = await apiPostagem.get("postage/graphs/dados");
+    // this.setState({ graph: graph.data.data });
+    const data = response.data;
+    var newPosts = data.filter((e) => { return e.post_created_at >= this.dateShow.toISOString(); });
+    var tableRank = newPosts.sort((a, b) => { return a.post_support_number < b.post_support_number ? 1 : -1; });
+    var users = tableRank.map((user) => user.fk_user_id);
     var soma = 0;
-    tableRank.forEach((valor) => { return soma += parseInt(valor.likes, 10); });
+    tableRank.forEach((valor) => { return soma += valor.post_support_number; });
     this.setState({
       posts: data,
       newPosts: newPosts.length,
       tableRank: tableRank.slice(0, 10),
       likes: soma,
       totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
-      date: new Date()
+      date: new Date(),
+      newPostsAnon: tableRank.reduce((acumulado, atual) => {return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
     });
   }
 
   changeDate(event, dia, type) {
     this.dateShow = event;
-    var newPostsCount = this.state.posts.filter((e) => { return e.dt_creation >= event.toISOString(); });
+    var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event.toISOString(); });
     var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
     var likesCount = 0;
     // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
-    newTableRank.forEach((valor) => { return likesCount += parseInt(valor.likes, 10); });
+    newTableRank.forEach((valor) => { return likesCount += valor.post_support_number; });
     this.setState({
       newPosts: newPostsCount.length,
       tableRank: newTableRank.slice(0, 10),
       likes: likesCount,
       active: dia,
-      typeGraph: type 
+      typeGraph: type,
+      newPostsAnon: newTableRank.reduce((acumulado, atual) => {return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
     });
   }
 
@@ -117,7 +119,7 @@ class RelatorioDeDados extends React.Component {
                 <FontAwesomeIcon icon={faUserSecret} style={{ width: "40px", height: "40px", float: "right", marginTop: "20px", color: "#35a2eb", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
                 <h4 class="card-title">Novas Postagens Anônimas</h4>
                 <p class="card-text">
-                  <h5>0</h5>
+                  <h5>{this.state.newPostsAnon}</h5>
                   <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
               </div>
@@ -218,7 +220,7 @@ class RelatorioDeDados extends React.Component {
             <table className="table-rank">
               <thead>
                 <tr className="rank-cab">
-                  <th scope="col">ID</th>
+                  <th scope="col">Título</th>
                   <th scope="col">Apoiadores</th>
                   <th scope="col">Likes</th>
                 </tr>
@@ -227,10 +229,10 @@ class RelatorioDeDados extends React.Component {
 
                 {this.state.tableRank.slice(0,5).map((post) => (
                   <>
-                    <tr key={post.id} onClick={() => this.showPost(post.post_id)}>
-                      <td >{post.post_id}</td>
-                      <td >{post.description}</td>
-                      <td >{post.likes}</td>
+                    <tr key={post._id} onClick={() => this.showPost(post._id)}>
+                      <td >{post.post_title}</td>
+                      <td >{post.post_description}</td>
+                      <td >{post.post_support_number}</td>
                     </tr>
                   </>))}
               </tbody>

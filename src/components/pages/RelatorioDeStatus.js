@@ -23,27 +23,32 @@ class RelatorioDeStatus extends React.Component {
   }
 
   async componentDidMount(status) {
-    let { data } = await apiPostagem.get("posts?limit=100&page=0");
+    // let { data } = await apiPostagem.get("posts?limit=100&page=0");
 
-    const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
-    const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
-    const filteredData3 = data.rows.filter(item => item.status === "Resolvido");
-    const filteredData4 = data.rows.filter(item => item.status === "Arquivado");
+    // const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
+    // const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
+    // const filteredData3 = data.rows.filter(item => item.status === "Resolvido");
+    // const filteredData4 = data.rows.filter(item => item.status === "Arquivado");
 
-    this.setState({
-      waiting: filteredData1.length,
-      current: filteredData2.length,
-      solved: filteredData3.length,
-      archived: filteredData4.length
-    });
-    let graph = await apiPostagem.post("/posts/graphStatus/");
-    this.setState({ graph: graph.data });
+    // this.setState({
+    //   waiting: filteredData1.length,
+    //   current: filteredData2.length,
+    //   solved: filteredData3.length,
+    //   archived: filteredData4.length
+    // });
+    let graph = await apiPostagem.get("postage/graphs/status");
+    this.setState({ 
+      graph: graph.data,
+      waiting: graph.data.aguardando.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      current: graph.data.andamento.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      solved: graph.data.resolvido.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      archived: graph.data.arquivados.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0)
+     });
   }
-
-  graphComponent(id, nounce) {
-    let that = this;
+  getData(id, nounce){
     let title = "Graph",
       data = [[0, 0]];
+    
     if (this.state.graph !== undefined) {
       switch (id + nounce) {
         case 0:
@@ -114,18 +119,37 @@ class RelatorioDeStatus extends React.Component {
           break;
       }
     }
+
+    return {title, data};
+  }
+  graphComponent(id, nounce) {
+    let that = this;
+    let {title, data} = this.getData(id,nounce);
     let changeGraph = (newState) => {
+      let {title, data} = this.getData(id,newState);
       if (id === 0) {
-        this.setState({ aguardando: newState });
+        this.setState({ 
+          aguardando: newState,
+          waiting: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+         });
       }
       if (id === 4) {
-        this.setState({ andamento: newState });
+        this.setState({ 
+          andamento: newState,
+          current: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0), 
+        });
       }
       if (id === 8) {
-        this.setState({ resolvido: newState });
+        this.setState({ 
+          resolvido: newState,
+          solved: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+        });
       }
       if (id === 12) {
-        this.setState({ arquivado: newState });
+        this.setState({ 
+          arquivado: newState,
+          archived: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0) 
+        });
       }
     };
     return (<>
