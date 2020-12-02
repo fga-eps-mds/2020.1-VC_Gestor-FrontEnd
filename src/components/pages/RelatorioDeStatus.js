@@ -37,13 +37,12 @@ class RelatorioDeStatus extends React.Component {
     //   archived: filteredData4.length
     // });
     let graph = await apiPostagem.get("postage/graphs/status");
-    console.log(graph.data);
     this.setState({ 
       graph: graph.data,
-      waiting: graph.data.aguardando.anual.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0),
-      current: graph.data.andamento.anual.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0),
-      solved: graph.data.resolvido.anual.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0),
-      archived: graph.data.arquivados.anual.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0)
+      waiting: graph.data.aguardando.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      current: graph.data.andamento.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      solved: graph.data.resolvido.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      archived: graph.data.arquivados.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0)
      });
   }
   getData(id, nounce){
@@ -131,25 +130,25 @@ class RelatorioDeStatus extends React.Component {
       if (id === 0) {
         this.setState({ 
           aguardando: newState,
-          waiting: data.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0),
+          waiting: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
          });
       }
       if (id === 4) {
         this.setState({ 
           andamento: newState,
-          current: data.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0), 
+          current: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0), 
         });
       }
       if (id === 8) {
         this.setState({ 
           resolvido: newState,
-          solved: data.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0),
+          solved: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
         });
       }
       if (id === 12) {
         this.setState({ 
           arquivado: newState,
-          archived: data.reduce((acumulado, atual) => {return acumulado + atual[1]}, 0) 
+          archived: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0) 
         });
       }
     };

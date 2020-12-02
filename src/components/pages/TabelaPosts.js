@@ -36,7 +36,7 @@ class TabelaPosts extends React.Component {
     // const limit = 100;
     // const page = 0;
     //  const response2 = await apiPostagem.put(`posts/${id}`, { status: `${newStatus}` });
-    var response = await apiPostagem.get(`postage/list_all`);
+    var response = await apiPostagem.get("postage/list_all");
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
     const total = Math.ceil(response.data.length / this.state.perPage)
     const numRows = response.data.length;
@@ -219,7 +219,7 @@ class TabelaPosts extends React.Component {
         if (quem === "Registrados") {
           const conjuntoUserB = this.state.posts.filter((e) => { return e.fk_user_id !== null; });
           // eslint-disable-next-line array-callback-return
-          conjuntoUserB.map((posts) => { if (posts.length !== 0) { conjuntoUniverso.push(posts); } });
+          conjuntoUserB.forEach((posts) => { if (posts.length !== 0) { conjuntoUniverso.push(posts); } });
           filtragens.splice(filtragens.indexOf("Registrados"), 1);
         } else {
           this.setState({
@@ -227,33 +227,35 @@ class TabelaPosts extends React.Component {
           });
         }
       }
+      return;
     });
     const conjuntoStatus = [];
     // eslint-disable-next-line array-callback-return
     if (filtragens.length !== 1) {
       // eslint-disable-next-line array-callback-return
-      filtragens.map((status) => {
+      filtragens.forEach((status) => {
         if (status === "Aguardando") {
           const process = conjuntoUniverso.filter((e) => { return e.post_status === "Aguardando"; });
           // eslint-disable-next-line array-callback-return
-          process.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
+          process.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
         } else if (status === "Em andamento") {
           // eslint-disable-next-line array-callback-return
           const processAwait = conjuntoUniverso.filter((e) => { return e.post_status === "Em andamento"; });
           // eslint-disable-next-line array-callback-return
-          processAwait.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
+          processAwait.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
         } else if (status === "Resolvido") {
           // eslint-disable-next-line array-callback-return
           const processfinished = conjuntoUniverso.filter((e) => { return e.post_status === "Resolvido"; });
           // eslint-disable-next-line array-callback-return
-          processfinished.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
+          processfinished.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
         } else {
-          const processFiled = conjuntoUniverso.filter((e) => { return e.post_status === "Arquivados"; });
+          const processFiled = conjuntoUniverso.filter((e) => { return e.post_status === "Arquivado"; });
           // eslint-disable-next-line array-callback-return
-          processFiled.map((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
+          processFiled.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
         }
+        return;
       })
       conjuntoUniverso = conjuntoStatus;
     }
@@ -422,12 +424,11 @@ class TabelaPosts extends React.Component {
                     <tr key={post._id} onClick={() => this.mostrarModal(post)}>
                       <td >{post.post_title}</td>
                       <td >{post.post_description}</td>
-                      <td >{post.author}</td>
+                      <td >{post.post_author}</td>
                       <td >{post.post_place}</td>
                       <td >{post.post_status}</td>
                       <td >{post.post_support_number}</td>
                     </tr>
-                    <h2>{/*post._id*/}</h2>
                   </>))}
               </tbody>
               {this.state.postsShow.length > this.state.perPage || this.state.paginaAtual === this.state.totalPages ?

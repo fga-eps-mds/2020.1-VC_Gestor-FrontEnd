@@ -31,15 +31,15 @@ class RelatorioDeDados extends React.Component {
   async componentDidMount() {
     const limit = 100;
     const page = 0;
-    var response = await apiPostagem.get(`postage/list_all`);
+    var response = await apiPostagem.get("postage/list_all");
     // let graph = await apiPostagem.get("postage/graphs/dados");
     // this.setState({ graph: graph.data.data });
     const data = response.data;
     var newPosts = data.filter((e) => { return e.post_created_at >= this.dateShow.toISOString(); });
-    var tableRank = newPosts.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
+    var tableRank = newPosts.sort((a, b) => { return a.post_support_number < b.post_support_number ? 1 : -1; });
     var users = tableRank.map((user) => user.fk_user_id);
     var soma = 0;
-    tableRank.forEach((valor) => { return soma += valor.post_support_number });
+    tableRank.forEach((valor) => { return soma += valor.post_support_number; });
     this.setState({
       posts: data,
       newPosts: newPosts.length,
@@ -47,7 +47,7 @@ class RelatorioDeDados extends React.Component {
       likes: soma,
       totalUsers: users.filter((user, i) => users.indexOf(user) === i).length,
       date: new Date(),
-      newPostsAnon: tableRank.reduce((acumulado, atual) => { console.log(atual);return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
+      newPostsAnon: tableRank.reduce((acumulado, atual) => {return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
     });
   }
 
@@ -57,14 +57,14 @@ class RelatorioDeDados extends React.Component {
     var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
     var likesCount = 0;
     // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
-    newTableRank.forEach((valor) => { return likesCount += valor.post_support_number });
+    newTableRank.forEach((valor) => { return likesCount += valor.post_support_number; });
     this.setState({
       newPosts: newPostsCount.length,
       tableRank: newTableRank.slice(0, 10),
       likes: likesCount,
       active: dia,
       typeGraph: type,
-      newPostsAnon: newTableRank.reduce((acumulado, atual) => { console.log(atual);return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
+      newPostsAnon: newTableRank.reduce((acumulado, atual) => {return atual.fk_user_id === null ? acumulado+1 : acumulado ;}, 0),
     });
   }
 
