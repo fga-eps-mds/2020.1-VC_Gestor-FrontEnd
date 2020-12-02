@@ -208,7 +208,7 @@ class TabelaPosts extends React.Component {
       if (quem === "Anônimos") {
         const conjuntoUser = this.state.posts.filter((e) => { return e.fk_user_id === null; });
         // eslint-disable-next-line array-callback-return
-        conjuntoUser.map((posts) => {
+        conjuntoUser.forEach((posts) => {
           if (posts.length !== 0) {
             conjuntoUniverso.push(posts);
           }
