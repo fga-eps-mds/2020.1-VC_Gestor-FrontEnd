@@ -95,8 +95,8 @@ class GerenciamentoNoticias extends React.Component {
                       <td>{news.text}</td>
                       <td style={{textAlign: "end"}}>
                         <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
-                         onClick={() => this.showNews(news)}/>
-                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}}/>
+                          onClick={() => this.showNews(news)}/>
+                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}}/>
                       </td>
                     </tr>
                     </>))}
