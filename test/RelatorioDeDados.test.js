@@ -29,7 +29,10 @@ describe("Dashboard page", function(){
         newPosts: 15,
         newPostsAnon: 10,
         likes: 45,
-        totalUsers: 13        
+        totalUsers: 13,
+        active: "mensal",
+        type: "1",
+        dateShow: new Date()
     }};
 
 
@@ -44,5 +47,31 @@ describe("Dashboard page", function(){
             assert(apiPostagem.get.calledOnce);
         });      
     });
+    describe("Active submition", function(){
+        it("Should trigger click", async function(){
+            // sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData));
+
+            // const spyHandleChange = sinon.spy(RelatorioDeDados.prototype,"changeDate");
+            // act( () => {
+            //     render(<RelatorioDeDados.WrappedComponent match={{params : {event: "Sun Nov 01 2020 20:14:29 GMT-0300 (Horário Padrão de Brasília)",
+            //     dia: "mensal", type: "1"}}} />, container);
+            //   });
+
+            //   assert(spyHandleChange.calledOnce);
+
+            // await act(async () => {
+            //     render(<RelatorioDeDados />, container);
+            // });
+
+            // act(() => {
+            //     Simulate.click(container.querySelectorAll("col-8 a")[3]);
+            // });
+
+            // var dashDay = container.querySelectorAll("row cards dash h5");
+            // assert.equal(dashDay[0].textContent, "15");
+            
+
+        })
+    })
 });
 
