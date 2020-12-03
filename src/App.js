@@ -5,7 +5,7 @@ import Sidebar from "./components/components/Sidebar";
 import RelatorioDeDados from "./components/pages/RelatorioDeDados";
 import RelatorioDeStatus from "./components/pages/RelatorioDeStatus";
 import CreateNews from "./components/pages/CreateNews";
-import Option2 from "./components/pages/Option2";
+// import Option2 from "./components/pages/Option2";
 import GerenciamentoNoticias from "./components/pages/GerenciamentoNoticias";
 import BeneficiosCriar from "./components/pages/BeneficiosCriar";
 import TabelaPosts from "./components/pages/TabelaPosts";

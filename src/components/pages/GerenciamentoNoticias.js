@@ -70,6 +70,21 @@ class GerenciamentoNoticias extends React.Component {
     return this.forceUpdate();
   }
 
+  deleteNews = async (newsId) => {
+    if(window.confirm("Tem certeza que quer excluir esta notícia?")){
+      try{
+        await apiNoticias.delete(`/news/${newsId}`);
+        // this.props.history.push("/GerenciamentoNoticias");
+        var noticias = this.state.news.filter((news) => news.news_id !== newsId);
+        await this.setState({news: noticias});
+        await this.loadMoreData();
+      }
+      catch(error){
+        alert("Ocorreu um erro e não conseguimos excluir a notícia");
+      }
+    }
+  }
+
   render() {
     return (<>
       <Card style={{ width: "100%" }}>
@@ -95,8 +110,9 @@ class GerenciamentoNoticias extends React.Component {
                       <td>{news.text}</td>
                       <td style={{textAlign: "end"}}>
                         <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
-                         onClick={() => this.showNews(news)}/>
-                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB"}}/>
+                          onClick={() => this.showNews(news)}/>
+                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
+                          onClick={() => this.deleteNews(news.news_id)}/>
                       </td>
                     </tr>
                     </>))}
