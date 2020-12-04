@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import apiNoticias from "../../services/apiNoticias";
 import apiPostagem from "../../services/apiPostagem";
 import CameraImg from "../../assets/camera.png";
-
+import {withRouter} from "react-router-dom";
 
 class NewsForm extends React.Component {
     constructor(props) {
@@ -69,11 +69,11 @@ class NewsForm extends React.Component {
       event.preventDefault();
 
       const news = this.state;
-
       try{
         await apiNoticias.post("news",  news );
-
+        
         alert("Notícia criada com sucesso!");
+        this.props.history.push("/GerenciamentoNoticias");
       }catch(err){
         alert("Essa noticia já existe");
       }
@@ -149,4 +149,4 @@ class NewsForm extends React.Component {
     }
   }
 
-  export default NewsForm;
+  export default withRouter(NewsForm);
