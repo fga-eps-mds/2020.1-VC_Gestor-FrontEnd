@@ -1,0 +1,73 @@
+.dropdown-toggle::after {
+    display: none;
+}
+
+@media screen and (min-width: 700px) {
+    .textSidebar {
+        font-size: 30px;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+#link-sidebar{
+    text-decoration: none;
+    font-size: calc(14px + 8 * ((100vw - 320px) / 680));
+    font-weight: 600;
+    font-family: 'Tinos', serif;
+    color: black;
+}
+
+#link-sidebar:hover{
+    color: grey;
+    cursor: pointer;
+}
+
+#Sublink-sidebar{
+    text-decoration: none;
+    font-size: calc(8px + 5 * ((100vw - 320px) / 680));
+    font-weight: 400;
+    font-family: 'Abel', sans-serif;
+    color: black;
+}
+
+#Sublink-sidebar:hover{
+    color: grey;
+}
+
+#link-row{
+    width: 100%;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.logout{
+    text-decoration: none;
+    display: flex;
+    float: right;
+    margin-right: 30px;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.logout:hover{
+    text-decoration: none;
+    cursor: pointer;
+    color: khaki;
+}
+
+#changeOnHover:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+html{
+  background-color: #F3F3F9;
+}
+body{
+  background-color: #F3F3F9;
+}
+.login{
+  text-align: center;
+  
+}
+.login-form{
+  background-color: white;
+  width: 30rem;
+  padding: 1.5rem;
+  margin: 10% auto 0 auto;
+  border-radius: 12px;
+  box-shadow: 4px 4px #E5E8EF;
+  font-family: "Montserrat", sans-serif;
+}

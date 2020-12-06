@@ -1,8 +1,8 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartBar, faBell, faTrophy, faBullhorn, faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar, faBell, faTrophy, faBullhorn, faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function Icon(props) {
     return (<>
@@ -49,11 +49,11 @@ class Sidebar extends React.Component {
             title: "Notícias",
             icon: faBell,
             options :[{
-                title: "Option 1",
-                href: "/option1"
+                title: "Criação Notícias",
+                href: "/CreateNews"
             },{
-                title: "Option 2",
-                href: "/option2"
+                title: "Gerenciamento de Notícias",
+                href: "/GerenciamentoNoticias"
             }]
         }, {
             index:2,
@@ -63,20 +63,14 @@ class Sidebar extends React.Component {
                 title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
-                title: "Option 2",
-                href: "/option2"
+                title: "Gerenciar Benefícios",
+                href: "/BeneficiosGerenciar"
             }]
         }, {
             index:3,
             title: "Postagens",
             icon: faBullhorn,
-            options :[{                
-                    title: "Postagens",
-                    href: "/Postagem"
-                },{
-                    title: "Tabela",
-                    href: "/tabela"
-                },{
+            options :[{
                     title: "Postagens",
                     href: "/TabelaPosts"
                 }]
@@ -98,7 +92,6 @@ class Sidebar extends React.Component {
                                 } else {
                                     this.setState({selected:item.index})
                                 }
-                                console.log(this.state.selected)
                             }} selected={this.state.selected===item.index}/>
                             { this.state.selected===item.index ? item.options.map(subitem=>{
                                 return(

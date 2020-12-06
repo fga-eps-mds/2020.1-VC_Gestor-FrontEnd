@@ -1,6 +1,4 @@
-
 .button-anuncio {
-    position: relative;
     padding: 10px 25px;
     background-color: #0F4C75;
     border: none;
@@ -8,8 +6,7 @@
     color: #FFF;
     font-weight: 300px;
     cursor: pointer;
-    display: unset;
-    width: 2500px;
+    width: auto;
     height: 45px;
     border-radius: 6px;
     margin-bottom: 20px;
@@ -20,19 +17,16 @@
 }
 .menu-anuncio {
     float: left;
-    margin-top: 20px;
     padding: 10px 15px;
-    width: 18%;
     border: none;
     background-color: #FFF;
     color:gray;
     font-weight: 500;
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    margin-top: 20px;
+    left: 0;
 }
   
 .Abas-contain {
@@ -47,21 +41,8 @@
 .Abas-contain-active {
     border: 1px solid #5EB2F2;
 }
-
-.container {
-    display: grid;
-    grid-template-columns: 230px 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-content: start;
-    margin: 0;
-}
-.card-body {
-    margin: 0;
-    border: none;
-}
 .titulo-conteudo {
     font-size: 17px;
-    position: relative;
     padding: 10px 25px;
     background-color: #5EB2F2;
     border: none;
@@ -72,4 +53,99 @@
     width: 120px;
     height: 45px;
     border-radius: 6px;
+}
+.table{
+    left: 300px;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;  
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}
+.table-cab{
+    background-color: #0F4C75;
+    color: #fff;
+    border-radius: 10px;
+    width: auto;
+    align-items: center;  
+
+}
+th{
+    background-color: #0F4C75;
+    color: white;
+}
+
+tr:nth-child(even):hover{
+    background-color: #5EB2F2;
+    color: white;
+}
+tr:nth-child(odd):hover{
+    background-color: #5EB2F2;
+    color: white;
+}
+
+.modal {
+    width: 800px;
+    height: 400px;
+    display: flex;
+    margin: 100px 100px 200px 500px;
+    border-radius: 10px;
+    box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+}
+.salve-button {
+    font-size: 14px;
+    padding: 15px;
+    background: #0F4C75;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+}
+.close-button {
+    font-size: 14px;
+    padding: 10px;
+    background: slategray;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+}
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0;
+    padding: 1.875rem 0 0;
+}
+.table-cab .a{
+    cursor: pointer;
+}
+.pagination {
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    justify-content: center;
+    margin-top: 10px;
+    text-align: center;
+    left: 40%;
+}
+
+.menu-txt{
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.menu-txt-fim{
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+
+}
+.label.txt{
+    cursor: pointer;
+    pointer-events: auto;
 }
