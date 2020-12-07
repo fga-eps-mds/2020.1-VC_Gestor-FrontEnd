@@ -54,18 +54,23 @@ class Forms extends React.Component {
         default: break;
       }
     }
-  
+
     async handleSubmit(event) {
       event.preventDefault();
-      alert("Benefício criado com sucesso.");
       const benefit = this.state;
 
       try{
         await apiBeneficio.post("benefits",  benefit );
-      
-        alert("Benefício criado com sucesso!");  
-      }catch(e){
-        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+
+        alert("Benefício criado com sucesso.");
+
+      }catch(err){
+
+        if(err.response.data.error === "Fill request.body correctly, cannot be an empty string or null value ") {
+          alert("Preencha os valores corretamente, não é permitidos valores em branco");
+        } else{
+          alert("Erro na criação de benefício.")
+        }
       }
     }
   
