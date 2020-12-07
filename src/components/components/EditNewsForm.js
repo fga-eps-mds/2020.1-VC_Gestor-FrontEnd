@@ -28,7 +28,7 @@ class EditNewsForm extends React.Component {
       this.id = this.props.match.params.newsId;
 
       // this.history = useHistory();
-      this.ChangePostId = this.ChangePostId.bind(this);
+      this.changePostId = this.changePostId.bind(this);
       this.handleChange = this.handleChange.bind(this);
       // this.changePhoto = this.changePhoto.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,7 +96,7 @@ class EditNewsForm extends React.Component {
     }
 
 
-    deleteNews = async (newsId) => {
+    async deleteNews(newsId){
       if(window.confirm("Tem certeza que quer excluir esta notícia?")){
         try{
           await apiNoticias.delete(`/news/${newsId}`);
@@ -108,7 +108,7 @@ class EditNewsForm extends React.Component {
       }
     }
 
-    ChangePostId(event){
+    changePostId(event){
       this.setState({post_id: event.target.value});
     }
 
@@ -137,7 +137,7 @@ class EditNewsForm extends React.Component {
   
     render() {
       return (
-        <Form onSubmit={this.handleSubmit} >
+        <Form onSubmit={this.handleSubmit} className="newsForm" >
           <div className="container-fluid form-news">
             <div className="row">
               <div className="col-7">
@@ -156,36 +156,34 @@ class EditNewsForm extends React.Component {
                 <div className="row">
                   <Form.Group controlId="linkPost" className="text-area-news">
                       <Form.Label>Linkar Postagem</Form.Label>
-                      {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                      <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
-                      {/* <option>Nenhum</option> */}
-                      {this.state.posts.map((post) => (
-                        <option value={post.post_id}>{post.post_id} - {post.title}</option>
+                      <select id="linkPost" className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                        {this.state.posts.map((post) => (
+                          <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                         ))}
                       </select>
                   </Form.Group>
                 </div>
               </div>
               <div className="col-5">    
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img class="d-block w-100" src={this.state.img[0]} alt="First slide"/>
+                <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+                  <div className="carousel-inner">
+                    <div className="carousel-item active">
+                      <img className="d-block w-100" src={this.state.img[0]} alt="First slide"/>
                     </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100" src={this.state.img[1]} alt="Second slide"/>
+                    <div className="carousel-item">
+                      <img className="d-block w-100" src={this.state.img[1]} alt="Second slide"/>
                     </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100"src={this.state.img[2]} alt="Third slide"/>
+                    <div className="carousel-item">
+                      <img className="d-block w-100"src={this.state.img[2]} alt="Third slide"/>
                     </div>
                   </div>
-                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                  <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Previous</span>
                   </a>
-                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                  <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Next</span>
                   </a>
                 </div>
                 {/* <div>

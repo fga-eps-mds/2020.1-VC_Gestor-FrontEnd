@@ -4,6 +4,9 @@ import Button from "react-bootstrap/Button";
 import apiNoticias from "../../services/apiNoticias";
 import apiPostagem from "../../services/apiPostagem";
 import CameraImg from "../../assets/camera.png";
+import { Redirect } from "react-router-dom";
+
+
 
 
 class NewsForm extends React.Component {
@@ -18,11 +21,12 @@ class NewsForm extends React.Component {
         image3: "",
         post_id: "",
         posts: [],
+        changePage: false
       };
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.ChangePostId = this.ChangePostId.bind(this);
+      this.changePostId = this.changePostId.bind(this);
     }
 
     async getPosts(){
@@ -34,7 +38,7 @@ class NewsForm extends React.Component {
       this.getPosts();
     }
 
-    ChangePostId(event){
+    changePostId(event){
       this.setState({post_id: event.target.value});
     }
   
@@ -49,18 +53,18 @@ class NewsForm extends React.Component {
         case "text":
           this.setState({text: event.target.value});
           break;
-        case "image1":
-          this.setState({image1: event.target.value});
-          break;
-        case "image2":
-          this.setState({image2: event.target.value});
-          break;
-        case "image3":
-          this.setState({image3: event.target.value});
-          break;
-        case "linkPost":
-          this.setState({post_id: event.target.value});
-          break;
+        // case "image1":
+        //   this.setState({image1: event.target.value});
+        //   break;
+        // case "image2":
+        //   this.setState({image2: event.target.value});
+        //   break;
+        // case "image3":
+        //   this.setState({image3: event.target.value});
+        //   break;
+        // case "linkPost":
+        //   this.setState({post_id: event.target.value});
+        //   break;
         default: break;
       }
     }
@@ -74,11 +78,15 @@ class NewsForm extends React.Component {
         await apiNoticias.post("news",  news );
 
         alert("Notícia criada com sucesso!");
+        // <Redirect to={{
+        //   pathname: "/GerenciamentoNoticias/"}}/>
+        this.setState({changePage: true});
       }catch(err){
         alert("Essa noticia já existe");
       }
 
     }
+
   
     render() {
       return (
@@ -87,7 +95,7 @@ class NewsForm extends React.Component {
        
           <div className="row">
 
-            <div class="col-8">
+            <div className="col-8">
             <Form.Group controlId="title" id="titleNews">
               <Form.Control 
                 type="text" placeholder="Título da Notícia" 
@@ -107,9 +115,8 @@ class NewsForm extends React.Component {
            
             </div>
 
-            <div class="col-4">
+            <div className="col-4">
             <input 
-                controlId="img"
                 id="imgNews"
                 type="image" 
                 src={CameraImg}
@@ -121,11 +128,9 @@ class NewsForm extends React.Component {
             <div className="row">
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
-                    {/* <Form.Control type="text" placeholder="Linkar Postagem" value={"Lembrar de arrumar"} onChange={this.handleChange} /> */}
-                    <select class="form-control" value={this.state.post_id} onChange={this.ChangePostId}>
-                    {/* <option>Nenhum</option> */}
-                    {this.state.posts.map((post) => (
-                      <option value={post.post_id}>{post.post_id} - {post.title}</option>
+                    <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                      {this.state.posts.map((post) => (
+                        <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}
                     </select>
                 </Form.Group>
@@ -144,10 +149,8 @@ class NewsForm extends React.Component {
               Enviar
             </Button>
           </div>
-    
-        </Form>
-
-        
+          {this.state.changePage ? <Redirect to={{pathname: "/GerenciamentoNoticias/"}}/> : null}
+        </Form>  
       );
     }
   }

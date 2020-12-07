@@ -1,0 +1,68 @@
+.cards{
+    margin-top: 1px;
+    }
+    .cards h5{
+    font-size: 30px;
+    font-weight: bold;
+    }
+    
+    .card1Status{
+    background-color: #6FB1DE;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+    }
+    
+    .card2Status{
+    background-color:#438ABB;;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+    }
+    
+    .card3Status{
+    background-color: #226D9F;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+    }
+    
+    .card4Status{
+    background-color: #0F4C75;
+    color: #E2E2E2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border: none;
+    }
+    
+    .card-header-tabs{
+    float: right;
+    }
+    
+    .card-header-tabs a{
+    font-style: normal;
+    color: #454242;
+    }
+    
+    .card-header-tabs a:hover {
+    background-color: #226D9F;
+    color: #FCFCFC;
+    }
+
+    #title-header{
+        float: left;
+        height: 100%;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 20px;
+        color: black;
+    }
+    
+    #graph{
+        margin-top: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    }
