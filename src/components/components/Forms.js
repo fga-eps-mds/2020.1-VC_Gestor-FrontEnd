@@ -69,7 +69,7 @@ class Forms extends React.Component {
         if(err.response.data.error === "Fill request.body correctly, cannot be an empty string or null value ") {
           alert("Preencha os valores corretamente, não é permitidos valores em branco");
         } else{
-          alert("Erro na criação de benefício.")
+          alert("Erro na criação de benefício.");
         }
       }
     }

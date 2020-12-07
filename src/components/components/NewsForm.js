@@ -47,15 +47,6 @@ class NewsForm extends React.Component {
       this.setState({post_id: event.target.value});
     }
 
-    createOptions = () =>
-    this.state.posts.length
-      ? this.state.posts.map(data => (
-          <option key={data.post_id} value={data.post_id} defaultValue={""}>
-            {data.post_id} - {data.title}
-          </option>
-        ))
-      : "";
-  
     handleChange(event) {
       switch(event.target.id){
         case  "title":
@@ -98,10 +89,10 @@ class NewsForm extends React.Component {
           alert("Preencha os valores corretamente, não é permitidos valores em branco");
         } else{
           if (err.response.data.error === "News already with this title") {
-            alert(" Titulo de notícia já existe, escolha outro título.")
+            alert(" Titulo de notícia já existe, escolha outro título.");
           }
           else {
-            alert("Erro na criação da notícia.")
+            alert("Erro na criação da notícia.");
           }
         }
 
@@ -150,7 +141,9 @@ class NewsForm extends React.Component {
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
                     <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
-                      {this.createOptions()};
+                      {this.state.posts.map((post) => (
+                        <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
+                      ))}
                     </select>
                 </Form.Group>
               </div>
@@ -177,4 +170,3 @@ class NewsForm extends React.Component {
   }
 
   export default NewsForm;
-  
