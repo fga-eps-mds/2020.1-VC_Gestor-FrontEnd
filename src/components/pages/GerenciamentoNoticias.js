@@ -75,7 +75,7 @@ class GerenciamentoNoticias extends React.Component {
       <Card style={{ width: "100%" }}>
         <Card.Body>
           <Card.Header className="titulo-card" >Gerenciamento de Notícias</Card.Header>
-          <Card.Text>
+          <div className="card-text">
             <table className="tabela-noticias">
                 <thead>
                     <tr className="tabela-noticias-cab">
@@ -88,40 +88,39 @@ class GerenciamentoNoticias extends React.Component {
                 <tbody>
                   
                   {this.state.showNews.map((news) => (
-                    <>
-                    <tr key={news.id}>
+                    <tr key={news.news_id}>
                       <td>{news.news_id}</td>
                       <td>{news.title}</td>
                       <td>{news.text}</td>
                       <td style={{textAlign: "end"}}>
                         <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
-                          onClick={() => this.showNews(news)}/>
+                         onClick={() => this.showNews(news)}/>
                         <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}}/>
                       </td>
-                    </tr>
-                    </>))}
+                    </tr>))}
                 </tbody>
-                  <nav>
-                    <ul class="pagination" style={{backgroundColor: "#438ABB"}}>
-                      <li class="page-item page-link pagination-button">
-                        <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}}
-                          onClick={() => (this.state.paginaAtual !== 0) ?
-                            this.currentPage(this.state.paginaAtual - 1) : null}/>
-                        </li>
-                        {this.state.totalPages.map((page) => (
-                          <li class="page-item page-link pagination-button" style={page === this.state.paginaAtual ? {backgroundColor: "#E2E2E2", color: "#438ABB"} : null}
-                          onClick={() => this.currentPage(page)}>{page+1}</li>  
-                        ))}
-                        <li class="page-item page-link pagination-button">
-                          <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}
-                            onClick={() => (this.state.paginaAtual !== this.state.totalPages.length - 1) ?
-                              this.currentPage(this.state.paginaAtual + 1) : null}/>
-                        </li>
-                    </ul>
-                  </nav>
+                  
             </table>
+            
             {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null}
-          </Card.Text>
+          </div>
+          <nav>
+            <ul className="pagination" style={{backgroundColor: "#438ABB"}}>
+              <li onClick={() => (this.state.paginaAtual !== 0) ? this.currentPage(this.state.paginaAtual - 1) : null} 
+              className="page-item page-link pagination-button">
+                <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}} />
+                </li>
+                {this.state.totalPages.map((page) => (
+                  <li key={page+1} className="page-item page-link pagination-button" style={page === this.state.paginaAtual ? {backgroundColor: "#E2E2E2", color: "#438ABB"} : null}
+                  onClick={() => this.currentPage(page)}>{page+1}</li>  
+                ))}
+                <li onClick={() => (this.state.paginaAtual !== this.state.totalPages.length - 1) ?
+                      this.currentPage(this.state.paginaAtual + 1) : null} className="page-item page-link pagination-button">
+                  <FontAwesomeIcon icon={faAngleDoubleRight} style={{ width: "20px", marginRight: "5px"}}
+                    />
+                </li>
+            </ul>
+          </nav>
         </Card.Body>
       </Card>
     </>
