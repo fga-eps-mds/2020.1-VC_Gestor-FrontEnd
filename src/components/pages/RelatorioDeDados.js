@@ -29,8 +29,6 @@ class RelatorioDeDados extends React.Component {
   }
 
   async componentDidMount() {
-    const limit = 100;
-    const page = 0;
     var response = await apiPostagem.get("postage/list_all");
     // let graph = await apiPostagem.get("postage/graphs/dados");
     // this.setState({ graph: graph.data.data });

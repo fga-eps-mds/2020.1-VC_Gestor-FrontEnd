@@ -10,7 +10,6 @@ class Forms extends React.Component {
       this.state = {
         title: "",
         description: "",
-        price: "" ,
         redeem_way: "" ,
         quantity: 1
       };
@@ -31,18 +30,6 @@ class Forms extends React.Component {
             this.setState({description: event.target.value});
           }
           break;
-        case "price":
-          var regex = /^[0-9]|[.,]?$/gm;
-          if(event.target.value.match(regex)!=null){
-            this.setState({price: event.target.value});  
-          }else{
-            this.setState({price: this.state.price});
-          }
-          regex = /^[0-9]+([,.][0-9]+)?$/gm;
-          // if(event.target.value.match(regex)==null){
-
-          // }
-          break;
         case "redeem_way":
           if(event.target.value.length<=25){
             this.setState({redeem_way: event.target.value});
@@ -57,14 +44,14 @@ class Forms extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault();
-      alert("Benefício criado com sucesso.");
       const benefit = this.state;
 
       try{
-        await apiBeneficio.post("benefits",  benefit );
+        await apiBeneficio.post("/benefits",  benefit );
       
         alert("Benefício criado com sucesso!");  
       }catch(e){
+        console.log(e)
         alert("Ocorreu um erro e não foi possível criar o benefício"); 
       }
     }
@@ -82,12 +69,7 @@ class Forms extends React.Component {
               </Form.Group>
             </div>
             <div className="row">
-              <Form.Group controlId="price" id="price_">
-              <Form.Label>Preço</Form.Label>
-              <Form.Control type="text" placeholder="Preço" value={this.state.price} onChange={this.handleChange} />
-            </Form.Group>
-
-              <Form.Group controlId="quantity" id="quantity_">
+            <Form.Group controlId="quantity" id="quantity_">
               <Form.Label>Quantidade</Form.Label>
               <Form.Control  as="select" value={this.state.quantity} onChange={this.handleChange} custom>
                 <option>1</option>
@@ -115,7 +97,7 @@ class Forms extends React.Component {
                 </Form.Group>
               </div>
               <div className="row">
-                <Button id="button_" type="submit" size="lg" block>
+                <Button id="button_" type="submit" size="lg" block style={{marginBottom:"20px"}}>
                     Enviar
                 </Button>
               </div>

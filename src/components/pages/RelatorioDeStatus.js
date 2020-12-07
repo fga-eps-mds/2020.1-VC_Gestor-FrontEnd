@@ -126,7 +126,8 @@ class RelatorioDeStatus extends React.Component {
     let that = this;
     let {title, data} = this.getData(id,nounce);
     let changeGraph = (newState) => {
-      let {title, data} = this.getData(id,newState);
+      let {title1, data} = this.getData(id,newState);
+      title1.split("-");
       if (id === 0) {
         this.setState({ 
           aguardando: newState,
