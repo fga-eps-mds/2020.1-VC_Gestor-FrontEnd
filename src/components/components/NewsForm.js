@@ -28,10 +28,11 @@ class NewsForm extends React.Component {
     async getPosts(){
       var tamanho;
       const posts = await apiPostagem.get("posts?limit=100&page=0");
+      const dataPrimaria = posts.data.rows[0];
 
       if (posts.data.count !== 0) {
         tamanho = (posts.data.count);
-        posts.data.rows[tamanho] = posts.data.rows[0];
+        posts.data.rows[tamanho] = dataPrimaria;
   
         posts.data.rows[0] = 999; 
   
