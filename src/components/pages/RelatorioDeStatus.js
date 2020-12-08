@@ -26,7 +26,7 @@ function generateGraphs(dataset) {
   dataset.filter((data) => { return data.day < 7; })
     .forEach((data) => { countWeek[Math.abs(data.day - 6)][1]++; });
 
-  dataset.filter((data) => { return data.date > dayAgo })
+  dataset.filter((data) => { return data.date > dayAgo; })
     .forEach((data) => { countDay[Math.abs(data.date.getHours()-23)][1]++; });
 
   return { anual: countYear, mensal: countMonth, semanal: countWeek, diario: countDay };
@@ -52,16 +52,16 @@ class RelatorioDeStatus extends React.Component {
   async componentDidMount(status) {
     let today = new Date();
     let graph = await apiPostagem.get("/postage/list_all");
-    let postagens = graph.data.map((post)=>{
+    let postagens = graph.data.map((post) => {
       let split = post.post_created_at.split("/");
       post.post_created_at = new Date(split[1]+"/"+split[0]+"/"+split[2]);
       return post;
     });
-    postagens = postagens.map((post)=>{return{
+    postagens = postagens.map((post) => {return{
       date: post.post_created_at,
       day: ~~((Math.abs(post.post_created_at.getTime() - (today.getTime()))) / (1000 * 60 * 60 * 24)),
       status: post.post_status,
-    }});
+    };});
     postagens = {
       andamento: generateGraphs(postagens.filter((post) => { return post.status === "Em andamento"; })),
       aguardando: generateGraphs(postagens.filter((post) => { return post.status === "Aguardando"; })),
