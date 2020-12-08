@@ -32,16 +32,13 @@ const MyRoute = ({ component: Component, ...rest }) => (
         Vamos Cuidar
       </a>
       <div style={{ width: "15%", textAlign: "right" }}>
-        <div class="dropdown">
-          <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style={{ width: "auto", height: "40px", marginRight: "20px" }} id="changeOnHover"  alt="" src={process.env.PUBLIC_URL + "/img/Vector.png"} /></div>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <NavDropdown title={<img style={{ width: "auto", height: "40px", marginRight: "20px" }} id="changeOnHover"  alt="" src={process.env.PUBLIC_URL + "/img/Vector.png"} />}>
             <LinkContainer to="/Perfil">
               <NavDropdown.Item style={{ color: "black" }}>Perfil</NavDropdown.Item>
             </LinkContainer>
             <NavDropdown.Divider />
             <NavDropdown.Item style={{ color: "black" }} onClick={logout}>Logout</NavDropdown.Item>
-          </div>
-        </div>        
+          </NavDropdown>       
       </div>
     </Navbar>
     <Row style={{ width: "100%" }}>
