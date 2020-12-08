@@ -26,18 +26,8 @@ class NewsForm extends React.Component {
     }
 
     async getPosts(){
-      var tamanho;
       const posts = await apiPostagem.get("posts?limit=100&page=0");
-      const dataPrimaria = posts.data.rows[0];
-
-      if (posts.data.count !== 0) {
-        tamanho = (posts.data.count);
-        posts.data.rows[tamanho] = dataPrimaria;
-  
-        posts.data.rows[0] = 999; 
-  
-        this.setState({posts: posts.data.rows});
-      } 
+      this.setState({posts: posts.data.rows});
     }
 
     componentDidMount(){
@@ -142,6 +132,7 @@ class NewsForm extends React.Component {
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
                     <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                      <option key="" value=""> ------------------ </option>
                       {this.state.posts.map((post) => (
                         <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                       ))}

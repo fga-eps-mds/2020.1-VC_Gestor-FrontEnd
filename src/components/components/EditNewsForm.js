@@ -157,6 +157,7 @@ class EditNewsForm extends React.Component {
                   <Form.Group controlId="linkPost" className="text-area-news">
                       <Form.Label>Linkar Postagem</Form.Label>
                       <select id="linkPost" className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                        <option key="" value=""> ------------------ </option>
                         {this.state.posts.map((post) => (
                           <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
                         ))}

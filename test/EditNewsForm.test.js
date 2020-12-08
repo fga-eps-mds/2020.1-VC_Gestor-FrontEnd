@@ -74,8 +74,8 @@ describe("News Edit Form", function() {
             render(<EditNewsForm.WrappedComponent match={{params : {newsId: 1}}} />, container);
           });
 
-          assert.equal(container.querySelectorAll("option")[0].textContent, "1 - Título Post 1");
-          assert.equal(container.querySelectorAll("option")[1].textContent, "2 - Título Post 2");
+          assert.equal(container.querySelectorAll("option")[0].textContent, " ------------------ ");
+          assert.equal(container.querySelectorAll("option")[1].textContent, "1 - Título Post 1");
         });
     });
     describe("News get request", function() {

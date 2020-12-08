@@ -53,8 +53,8 @@ describe("News Creation Form", function() {
         });
         
         assert(apiPostagem.get.calledOnce);
-        assert.equal(container.querySelectorAll("option")[0].textContent, " - ");
-        assert.equal(container.querySelectorAll("option")[1].textContent, "2 - Título Post 2");
+        assert.equal(container.querySelectorAll("option")[0].textContent, " ------------------ ");
+        assert.equal(container.querySelectorAll("option")[1].textContent, "1 - Título Post 1");
       });
     });
     describe("Form Submission", function() {
@@ -115,12 +115,12 @@ describe("News Creation Form", function() {
         assert(apiNoticias.post.calledOnce);
         assert(alert.calledWith("Notícia criada com sucesso!"));
         
-        // fakePost.throws(new Error("an Error"));
-        // await act(async () => {
-        //   Simulate.submit(form);
-        // });
+        //  fakePost.throws(new Error("an Error"));
+        //  await act(async () => {
+        //    Simulate.submit(form);
+        //  });
 
-        // assert(alert.calledWith("Erro na criação da notícia."));
+        //  assert(alert.calledWith("Erro na criação da notícia."));
       });
     });
   });
