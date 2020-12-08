@@ -1,5 +1,4 @@
 .button-anuncio {
-    position: relative;
     padding: 10px 25px;
     background-color: #0F4C75;
     border: none;
@@ -7,7 +6,6 @@
     color: #FFF;
     font-weight: 300px;
     cursor: pointer;
-    display: block;
     width: auto;
     height: 45px;
     border-radius: 6px;
@@ -19,9 +17,7 @@
 }
 .menu-anuncio {
     float: left;
-    margin-bottom: 20px;
     padding: 10px 15px;
-    width: 18%;
     border: none;
     background-color: #FFF;
     color:gray;
@@ -30,8 +26,6 @@
     align-items: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    margin-top: 20px;
-    position: absolute;
     left: 0;
 }
   
@@ -47,21 +41,8 @@
 .Abas-contain-active {
     border: 1px solid #5EB2F2;
 }
-
-.container {
-    display: grid;
-    grid-template-columns: 230px 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-content: start;
-    margin: 0;
-}
-.card-body {
-    margin: 0;
-    border: none;
-}
 .titulo-conteudo {
     font-size: 17px;
-    position: relative;
     padding: 10px 25px;
     background-color: #5EB2F2;
     border: none;
@@ -74,7 +55,6 @@
     border-radius: 6px;
 }
 .table{
-    position: absolute;
     left: 300px;
     font-family: 'Roboto', sans-serif;
     align-items: center;  
@@ -82,9 +62,6 @@
     border: none;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    margin: 30px 10px 10px;
-    padding: 20px 0 28px;
-    width: 79%;
 }
 .table-cab{
     background-color: #0F4C75;
@@ -112,16 +89,12 @@ tr:nth-child(odd):hover{
     width: 800px;
     height: 400px;
     display: flex;
-    position: absolute;
     margin: 100px 100px 200px 500px;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
 }
-
 .salve-button {
-    position: relative;
-    display: block;
     font-size: 14px;
     padding: 15px;
     background: #0F4C75;
@@ -131,8 +104,6 @@ tr:nth-child(odd):hover{
     border-radius: 0.25rem;
 }
 .close-button {
-    position: relative;
-    display: block;
     font-size: 14px;
     padding: 10px;
     background: slategray;
@@ -142,7 +113,6 @@ tr:nth-child(odd):hover{
     border-radius: 0.25rem;
 }
 .modal-footer {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -154,7 +124,6 @@ tr:nth-child(odd):hover{
     cursor: pointer;
 }
 .pagination {
-    position: absolute;
     padding-left: 0;
     list-style: none;
     border-radius: .25rem;
@@ -176,7 +145,6 @@ tr:nth-child(odd):hover{
     pointer-events: auto;
 
 }
-
 .label.txt{
     cursor: pointer;
     pointer-events: auto;

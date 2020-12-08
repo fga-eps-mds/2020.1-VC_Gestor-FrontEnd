@@ -5,6 +5,33 @@ import apiPostagem from "../../services/apiPostagem";
 // import Highcharts from "highcharts";
 // import HighchartsReact from "highcharts-react-official";
 
+function generateGraphs(dataset) {
+  let today = new Date();
+  today.setHours(0);
+  today.setMilliseconds(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  today = today.getTime() -60*1000*60*3;
+  let dayAgo = new Date((new Date().getTime()) - 24 * 60 * 60 * 1000);
+  let countYear = [...Array(366).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-365), 0]; });
+  let countMonth = [...Array(31).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-30), 0]; });
+  let countWeek = [...Array(7).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-6), 0]; });
+  let countDay = [...Array(24).keys()].map((i) => { return [today-1000*60*60*Math.abs(i-23), 0]; });
+
+  dataset.forEach((data) => { countYear[Math.abs(data.day - 365)][1]++;});
+
+  dataset.filter((data) => { return data.day < 31; })
+    .forEach((data) => { countMonth[Math.abs(data.day - 30)][1]++;});
+
+  dataset.filter((data) => { return data.day < 7; })
+    .forEach((data) => { countWeek[Math.abs(data.day - 6)][1]++; });
+
+  dataset.filter((data) => { return data.date > dayAgo; })
+    .forEach((data) => { countDay[Math.abs(data.date.getHours()-23)][1]++; });
+
+  return { anual: countYear, mensal: countMonth, semanal: countWeek, diario: countDay };
+}
+
 class RelatorioDeStatus extends React.Component {
 
   constructor(props) {
@@ -23,27 +50,36 @@ class RelatorioDeStatus extends React.Component {
   }
 
   async componentDidMount(status) {
-    let { data } = await apiPostagem.get("posts?limit=100&page=0");
-
-    const filteredData1 = data.rows.filter(item => item.status === "Aguardando");
-    const filteredData2 = data.rows.filter(item => item.status === "Em andamento");
-    const filteredData3 = data.rows.filter(item => item.status === "Resolvido");
-    const filteredData4 = data.rows.filter(item => item.status === "Arquivado");
-
-    this.setState({
-      waiting: filteredData1.length,
-      current: filteredData2.length,
-      solved: filteredData3.length,
-      archived: filteredData4.length
+    let today = new Date();
+    let graph = await apiPostagem.get("/postage/list_all");
+    let postagens = graph.data.map((post) => {
+      let split = post.post_created_at.split("/");
+      post.post_created_at = new Date(split[1]+"/"+split[0]+"/"+split[2]);
+      return post;
     });
-    let graph = await apiPostagem.post("/posts/graphStatus/");
-    this.setState({ graph: graph.data });
+    postagens = postagens.map((post) => {return{
+      date: post.post_created_at,
+      day: ~~((Math.abs(post.post_created_at.getTime() - (today.getTime()))) / (1000 * 60 * 60 * 24)),
+      status: post.post_status,
+    };});
+    postagens = {
+      andamento: generateGraphs(postagens.filter((post) => { return post.status === "Em andamento"; })),
+      aguardando: generateGraphs(postagens.filter((post) => { return post.status === "Aguardando"; })),
+      arquivados: generateGraphs(postagens.filter((post) => { return post.status === "Arquivado"; })),
+      resolvido: generateGraphs(postagens.filter((post) => { return post.status === "Resolvido"; }))
+    };
+    this.setState({ 
+      graph: postagens,
+      waiting: postagens.aguardando.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      current: postagens.andamento.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      solved: postagens.resolvido.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+      archived: postagens.arquivados.anual.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0)
+     });
   }
-
-  graphComponent(id, nounce) {
-    let that = this;
+  getData(id, nounce){
     let title = "Graph",
       data = [[0, 0]];
+    
     if (this.state.graph !== undefined) {
       switch (id + nounce) {
         case 0:
@@ -114,18 +150,38 @@ class RelatorioDeStatus extends React.Component {
           break;
       }
     }
+
+    return {title, data};
+  }
+  graphComponent(id, nounce) {
+    let that = this;
+    let {title, data} = this.getData(id,nounce);
     let changeGraph = (newState) => {
+      // eslint-disable-next-line
+      let {title, data} = this.getData(id,newState);
       if (id === 0) {
-        this.setState({ aguardando: newState });
+        this.setState({ 
+          aguardando: newState,
+          waiting: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+         });
       }
       if (id === 4) {
-        this.setState({ andamento: newState });
+        this.setState({ 
+          andamento: newState,
+          current: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0), 
+        });
       }
       if (id === 8) {
-        this.setState({ resolvido: newState });
+        this.setState({ 
+          resolvido: newState,
+          solved: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0),
+        });
       }
       if (id === 12) {
-        this.setState({ arquivado: newState });
+        this.setState({ 
+          arquivado: newState,
+          archived: data.reduce((acumulado, atual) => {return acumulado + atual[1];}, 0) 
+        });
       }
     };
     return (<>
