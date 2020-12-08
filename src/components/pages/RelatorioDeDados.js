@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faThumbsUp, faCommentAlt, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import apiPostagem from "../../services/apiPostagem";
 import { Link, Redirect } from "react-router-dom";
-// import Highcharts from "highcharts";
-// import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 function generateGraphs(dataset) {
   let today = new Date();
@@ -152,15 +152,9 @@ class RelatorioDeDados extends React.Component {
             <div className="card card-2">
               <div className="card-body">
                 <FontAwesomeIcon icon={faUserSecret} style={{ width: "40px", height: "40px", float: "right", marginTop: "20px", color: "#35a2eb", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-<<<<<<< HEAD
-                <h4 className="card-title">Novas Postagens Anônimas</h4>
-                <div className="card-text">
-                  <h5>0</h5>
-=======
                 <h4 class="card-title">Novas Postagens Anônimas</h4>
-                <p class="card-text">
+                <div class="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
->>>>>>> ce09f4aaac1f2fc62d1e4608f94da182aaaf4ac5
                   <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </div>
               </div>
@@ -225,8 +219,8 @@ class RelatorioDeDados extends React.Component {
                   </li>
                 </ul>
               </div>
-                  {/* <HighchartsReact
-                    // highcharts={Highcharts}
+                  <HighchartsReact
+                    highcharts={Highcharts}
                     options={{
                       chart: {
                         events: {
@@ -252,7 +246,7 @@ class RelatorioDeDados extends React.Component {
                         data
                       }]
                     }}
-                  /> */}
+                  />
             </div>
           </div>
           {/* rank */}
