@@ -41,7 +41,7 @@ describe("News Edit Form", function() {
       post_category: "Segurança",
       post_place: "FGA",
       post_status: "Arquivado",
-    }]}
+    }]};
     const newsData = {data : {
         news_id: 1,
         title: "Title News",
