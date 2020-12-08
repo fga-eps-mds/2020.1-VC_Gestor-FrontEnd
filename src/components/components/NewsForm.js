@@ -29,8 +29,8 @@ class NewsForm extends React.Component {
     }
 
     async getPosts(){
-      const posts = await apiPostagem.get("posts?limit=100&page=0");
-      this.setState({posts: posts.data.rows});
+      const posts = await apiPostagem.get("postage/list_all");
+      this.setState({posts: posts.data});
     }
 
     componentDidMount(){
@@ -128,7 +128,7 @@ class NewsForm extends React.Component {
                     <Form.Label>Atrelar Postagem</Form.Label>
                     <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
                       {this.state.posts.map((post) => (
-                        <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
+                        <option key={post._id} value={post._id}>{post.post_title}</option>
                       ))}
                     </select>
                 </Form.Group>
