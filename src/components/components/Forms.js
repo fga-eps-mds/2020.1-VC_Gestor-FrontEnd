@@ -51,7 +51,6 @@ class Forms extends React.Component {
       
         alert("Benefício criado com sucesso!");  
       }catch(e){
-        console.log(e)
         alert("Ocorreu um erro e não foi possível criar o benefício"); 
       }
     }
