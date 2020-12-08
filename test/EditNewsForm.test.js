@@ -26,23 +26,22 @@ afterEach(() => {
 
 
 describe("News Edit Form", function() {
-  const postData = {data: {rows: [{ post_id: 1,
-    title: "Título Post 1",
-    description: "Descrição 1",
-    image: "Imagem Post 1",
-    user_id: 1,
-    category_id: 1,
-    place_id: 1,
-    status: "ok",
-    dt_creation: "2020-08-08T00:00:00.000Z" },{ post_id: 2,
-        title: "Título Post 2",
-        description: "Descrição 2",
-        image: "Imagem Post 2",
-        user_id: 2,
-        category_id: 2,
-        place_id: 2,
-        status: "ok",
-        dt_creation: "2020-08-08T00:00:00.000Z" }]}};
+  const postData = {data: [{ 
+    _id: "id_1",
+    post_title: "Título Post 1",
+    post_description: "Descrição 1",
+    fk_user_id: "user_id_1",
+    post_category: "Limpeza",
+    post_place: "FCE",
+    post_status: "Aguardando",},
+    { post_id: "id_2",
+      post_title: "Título Post 2",
+      post_description: "Descrição 2",
+      fk_user_id: "user_id_2",
+      post_category: "Segurança",
+      post_place: "FGA",
+      post_status: "Arquivado",
+    }]};
     const newsData = {data : {
         news_id: 1,
         title: "Title News",
@@ -51,7 +50,7 @@ describe("News Edit Form", function() {
         image1: "image1",
         image2: "image2",
         image3: "image3",
-        post_id: 1,
+        post_id: "id_1",
       }};
     
     describe("Posts request", function() {
@@ -75,7 +74,7 @@ describe("News Edit Form", function() {
           });
 
           assert.equal(container.querySelectorAll("option")[0].textContent, " ------------------ ");
-          assert.equal(container.querySelectorAll("option")[1].textContent, "1 - Título Post 1");
+          assert.equal(container.querySelectorAll("option")[1].textContent, "Título Post 1");
         });
     });
     describe("News get request", function() {

@@ -70,6 +70,20 @@ class GerenciamentoNoticias extends React.Component {
     return this.forceUpdate();
   }
 
+  async deleteNews(newsId){
+    if(window.confirm("Tem certeza que quer excluir esta notícia?")){
+      try{
+        await apiNoticias.delete(`/news/${newsId}`);
+        var noticias = this.state.news.filter((news) => news.news_id !== newsId);
+        await this.setState({news: noticias});
+        this.loadMoreData();
+      }
+      catch(error){
+        alert("Ocorreu um erro e não conseguimos excluir a notícia");
+      }
+    }
+  }
+
   render() {
     return (<>
       <Card style={{ width: "100%" }}>
@@ -94,8 +108,9 @@ class GerenciamentoNoticias extends React.Component {
                       <td>{news.text}</td>
                       <td style={{textAlign: "end"}}>
                         <FontAwesomeIcon icon={faPen} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
-                         onClick={() => this.showNews(news)}/>
-                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}}/>
+                          onClick={() => this.showNews(news)}/>
+                        <FontAwesomeIcon icon={faTrashAlt} style={{ width: "20px", marginRight: "10px", color: "#438ABB", cursor: "pointer"}} 
+                          onClick={() => this.deleteNews(news.news_id)}/>
                       </td>
                     </tr>))}
                 </tbody>
@@ -105,7 +120,7 @@ class GerenciamentoNoticias extends React.Component {
             {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null}
           </div>
           <nav>
-            <ul className="pagination" style={{backgroundColor: "#438ABB"}}>
+            <ul className="pagination">
               <li onClick={() => (this.state.paginaAtual !== 0) ? this.currentPage(this.state.paginaAtual - 1) : null} 
               className="page-item page-link pagination-button">
                 <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}} />

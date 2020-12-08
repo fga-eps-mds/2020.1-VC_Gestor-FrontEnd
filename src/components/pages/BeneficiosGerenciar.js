@@ -21,7 +21,7 @@ class BeneficiosGerenciar extends React.Component {
     this.getBenefits();
   }
 
-  deleteBenefits = async (benefitId) => {
+  async deleteBenefits(benefitId){
     if(window.confirm("Tem certeza que quer excluir o benefício?")){
       try{
         await apiBeneficio.delete(`/benefits/${benefitId}`);
