@@ -2,7 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import apiBeneficio from "../../services/apiBeneficio";
-
+import { withRouter } from "react-router-dom";
 
 class Forms extends React.Component {
     constructor(props) {
@@ -57,15 +57,15 @@ class Forms extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault();
-      alert("Benefício criado com sucesso.");
       const benefit = this.state;
 
       try{
         await apiBeneficio.post("benefits",  benefit );
-      
+        this.props.history.push("/BeneficiosGerenciar");
         alert("Benefício criado com sucesso!");  
+        // return <Redirect to="/BenficiosGerenciar" />;
       }catch(e){
-        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+        alert(e); 
       }
     }
   
@@ -128,4 +128,4 @@ class Forms extends React.Component {
     }
   }
 
-  export default Forms;
+  export default withRouter(Forms);
