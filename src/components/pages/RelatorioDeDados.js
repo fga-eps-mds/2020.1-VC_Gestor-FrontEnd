@@ -88,7 +88,7 @@ class RelatorioDeDados extends React.Component {
 
   changeDate(event, dia, type) {
     this.dateShow = event;
-    var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event.toISOString(); });
+    var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event });
     var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
     var likesCount = 0;
     // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
