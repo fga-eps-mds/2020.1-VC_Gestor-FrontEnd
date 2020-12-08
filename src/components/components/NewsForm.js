@@ -8,7 +8,6 @@ import { Redirect } from "react-router-dom";
 
 
 
-
 class NewsForm extends React.Component {
     constructor(props) {
       super(props);
@@ -73,10 +72,9 @@ class NewsForm extends React.Component {
       event.preventDefault();
 
       const news = this.state;
-
       try{
         await apiNoticias.post("news",  news );
-
+        
         alert("Notícia criada com sucesso!");
         // <Redirect to={{
         //   pathname: "/GerenciamentoNoticias/"}}/>
