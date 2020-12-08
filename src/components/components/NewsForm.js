@@ -4,6 +4,9 @@ import Button from "react-bootstrap/Button";
 import apiNoticias from "../../services/apiNoticias";
 import apiPostagem from "../../services/apiPostagem";
 import CameraImg from "../../assets/camera.png";
+import { Redirect } from "react-router-dom";
+
+
 
 
 class NewsForm extends React.Component {
@@ -18,6 +21,7 @@ class NewsForm extends React.Component {
         image3: "",
         post_id: "",
         posts: [],
+        changePage: false
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -74,11 +78,15 @@ class NewsForm extends React.Component {
         await apiNoticias.post("news",  news );
 
         alert("Notícia criada com sucesso!");
+        // <Redirect to={{
+        //   pathname: "/GerenciamentoNoticias/"}}/>
+        this.setState({changePage: true});
       }catch(err){
         alert("Essa noticia já existe");
       }
 
     }
+
   
     render() {
       return (
@@ -141,10 +149,8 @@ class NewsForm extends React.Component {
               Enviar
             </Button>
           </div>
-    
-        </Form>
-
-        
+          {this.state.changePage ? <Redirect to={{pathname: "/GerenciamentoNoticias/"}}/> : null}
+        </Form>  
       );
     }
   }
