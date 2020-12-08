@@ -157,6 +157,7 @@ class RelatorioDeStatus extends React.Component {
     let that = this;
     let {title, data} = this.getData(id,nounce);
     let changeGraph = (newState) => {
+      // eslint-disable-next-line
       let {title, data} = this.getData(id,newState);
       if (id === 0) {
         this.setState({ 
