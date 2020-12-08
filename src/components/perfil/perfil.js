@@ -10,7 +10,7 @@ class Login extends React.Component {
       surname: "",
       name: "",
       email: "",
-      stateSwitch:0,
+      stateSwitch: 0,
     };
     this.getUser = this.getUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -38,7 +38,7 @@ class Login extends React.Component {
     apiUser.post("users/user/getUser/", { token: JSON.parse(localStorage.getItem("auth")).token })
       .then((response) => {
         this.setState(response.data);
-        this.setState({stateSwitch:1});
+        this.setState({ stateSwitch: 1 });
       })
       .catch((error) => {
         try {
@@ -46,12 +46,12 @@ class Login extends React.Component {
         } catch (error) {
           alert("Servidor indisponível");
         }
-        this.setState({stateSwitch:1});
+        this.setState({ stateSwitch: 1 });
       });
   }
 
-  async handleEditUser(){
-    this.setState({stateSwitch:0});
+  async handleEditUser() {
+    this.setState({ stateSwitch: 0 });
     await apiUser.post("users/user/edit/", {
       token: JSON.parse(localStorage.getItem("auth")).token,
       username: this.state.username,
@@ -72,7 +72,7 @@ class Login extends React.Component {
           alert("Servidor indisponível");
         }
       });
-    this.setState({stateSwitch:1});
+    this.setState({ stateSwitch: 1 });
   }
 
   loading = () => {
@@ -83,7 +83,7 @@ class Login extends React.Component {
 
   editUser = () => {
     return (<>
-      <div style={{marginTop:"1em"}} id="labels-User"><label for="username">Nome de Usuário:</label></div>
+      <div style={{ marginTop: "1em" }} id="labels-User"><label for="username">Nome de Usuário:</label></div>
       <input type="text" id="username" value={this.state.username} onChange={this.handleChange} className="form-control login-input" placeholder="Nome de Usuário" />
       <div id="labels-User"><label for="name">Primeiro Nome:</label></div>
       <input type="text" id="name" value={this.state.name} onChange={this.handleChange} className="form-control login-input" placeholder="Primeiro nome" />
@@ -106,9 +106,11 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
-        <div className="login-form">
-          {this.switchRender()}
+      <div style={{display:"flex", width:"100%", height:"100%", justifyContent:"center"}}>
+        <div className="login" style={{ marginTop: "20px" }}>
+          <div className="login-form">
+            {this.switchRender()}
+          </div>
         </div>
       </div>
     );
