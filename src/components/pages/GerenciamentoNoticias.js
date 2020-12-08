@@ -70,14 +70,13 @@ class GerenciamentoNoticias extends React.Component {
     return this.forceUpdate();
   }
 
-  deleteNews = async (newsId) => {
+  async deleteNews(newsId){
     if(window.confirm("Tem certeza que quer excluir esta notícia?")){
       try{
         await apiNoticias.delete(`/news/${newsId}`);
-        // this.props.history.push("/GerenciamentoNoticias");
         var noticias = this.state.news.filter((news) => news.news_id !== newsId);
         await this.setState({news: noticias});
-        await this.loadMoreData();
+        this.loadMoreData();
       }
       catch(error){
         alert("Ocorreu um erro e não conseguimos excluir a notícia");
@@ -121,7 +120,7 @@ class GerenciamentoNoticias extends React.Component {
             {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null}
           </div>
           <nav>
-            <ul className="pagination" style={{backgroundColor: "#438ABB"}}>
+            <ul className="pagination">
               <li onClick={() => (this.state.paginaAtual !== 0) ? this.currentPage(this.state.paginaAtual - 1) : null} 
               className="page-item page-link pagination-button">
                 <FontAwesomeIcon icon={faAngleDoubleLeft} style={{ width: "20px", marginRight: "5px"}} />
