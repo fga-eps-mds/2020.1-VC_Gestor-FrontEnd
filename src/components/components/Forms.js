@@ -41,7 +41,7 @@ class Forms extends React.Component {
         default: break;
       }
     }
-  
+
     async handleSubmit(event) {
       event.preventDefault();
       const benefit = this.state;
@@ -49,10 +49,14 @@ class Forms extends React.Component {
       try{
         await apiBeneficio.post("benefits",  benefit );
         this.props.history.push("/BeneficiosGerenciar");
-        alert("Benefício criado com sucesso!");  
-        // return <Redirect to="/BenficiosGerenciar" />;
-      }catch(e){
-        alert(e); 
+        alert("Benefício criado com sucesso!"); 
+      }catch(err){
+
+        if(err.response.data.error === "Fill request.body correctly, cannot be an empty string or null value ") {
+          alert("Preencha os valores corretamente, não é permitidos valores em branco");
+        } else{
+          alert("Erro na criação de benefício.");
+        }
       }
     }
   
