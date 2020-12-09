@@ -22,8 +22,8 @@ only:
     - Issue_177-SonarMochaIntegration
 
 before_script:
-    - npm install
-    - sonar-scanner -Dsonar.projectKey=fga-eps-mds_2020.1-VC_Gestor-FrontEnd
+    - npm install && npm run report
+    - sonar-scanner -Dsonar.projectKey=fga-eps-mds_2020.1-VC_Gestor-FrontEnd -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
 script:
   - npm run test && chmod 400 deploy_rsa;
