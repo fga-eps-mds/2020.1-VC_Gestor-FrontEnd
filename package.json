@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "nyc ./node_modules/mocha/bin/mocha --require @babel/register --require ignore-styles",
+    "test": "nyc mocha --require @babel/register --require ignore-styles",
     "report": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "eject": "react-scripts eject"
   },
