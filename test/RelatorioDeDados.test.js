@@ -25,7 +25,7 @@ afterEach(() => {
 });
 
 describe("Dashboard page", function(){
-    const dashboardData = {data: 
+    const dashboardData = () => ({data: 
         [
             {
             post_status: "Aguardando",
@@ -140,12 +140,12 @@ describe("Dashboard page", function(){
             __v: 0
             }
         ]
-    };
+    });
 
 
     describe("Dashboard request", function() {
         it("Should call get dashboard",async function() {
-            sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData));
+            sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData()));
                 
             await act(async () => {
                 render(<RelatorioDeDados />, container);
@@ -156,7 +156,7 @@ describe("Dashboard page", function(){
     });
     describe("Active submition", function(){
         it("Should trigger click", async function(){
-            sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData));
+            sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData()));
             var clock = sinon.useFakeTimers({
                 now: 1607461879000,
                 shouldAdvanceTime: false
@@ -174,14 +174,7 @@ describe("Dashboard page", function(){
 
 
             const dashDay = container.querySelector(".card-1 h5");
-            const dashDay2 = container.querySelector(".card-2 h5");
-            const dashDay3 = container.querySelector(".card-3 h5");
-            const dashDay4 = container.querySelector(".card-4 h5");
-            console.log(dashDay.textContent);
-            console.log(dashDay2.textContent);
-            console.log(dashDay3.textContent);
-            console.log(dashDay4.textContent);
-            // assert.equal(dashDay.textContent, toString(dashboardData.data.newPosts));
+
             assert.equal(dashDay.textContent, "7");
             
         })

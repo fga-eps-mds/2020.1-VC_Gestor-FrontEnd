@@ -152,8 +152,8 @@ class RelatorioDeDados extends React.Component {
             <div className="card card-2">
               <div className="card-body">
                 <FontAwesomeIcon icon={faUserSecret} style={{ width: "40px", height: "40px", float: "right", marginTop: "20px", color: "#35a2eb", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-                <h4 class="card-title">Novas Postagens Anônimas</h4>
-                <div class="card-text">
+                <h4 className="card-title">Novas Postagens Anônimas</h4>
+                <div className="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
                   <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </div>
@@ -263,13 +263,12 @@ class RelatorioDeDados extends React.Component {
               <tbody>
 
                 {this.state.tableRank.slice(0,5).map((post) => (
-                  <>
                     <tr key={post._id} onClick={() => this.showPost(post._id)}>
                       <td >{post.post_title}</td>
                       <td >{post.post_description}</td>
                       <td >{post.post_support_number}</td>
                     </tr>
-                  </>))}
+                  ))}
               </tbody>
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
