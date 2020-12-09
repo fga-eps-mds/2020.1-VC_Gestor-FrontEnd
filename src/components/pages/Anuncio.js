@@ -15,6 +15,7 @@ class Anuncio extends React.Component {
         super(props);
         this.state = { 
           posts: [],
+          title: [],
           place: [],
           category: [],
           user: [],
@@ -60,18 +61,21 @@ class Anuncio extends React.Component {
                 <FontAwesomeIcon icon={faUserCircle} style={{ width: "40px", marginRight: "10px" }} />
                 {posts.author}<br/>
                 <br></br>
-                <h6><strong>Data de Criação:</strong> {posts.post_created_at}</h6>
+                <h6><strong>{posts.post_created_at}</strong></h6>
           </Modal.Title>
         </Modal.Header>
               <Modal.Body>
                 <h3>{posts.title}
-                <FontAwesomeIcon icon={faThumbsUp} style={{ width: "40px", marginLeft: "75%", marginRight: "10px" }}/>
+                <FontAwesomeIcon icon={faThumbsUp} style={{ width: "40px", marginLeft: "50%", marginRight: "10px" }}/>
                 {posts.__v}</h3>
-                <h5 ><strong>ID: </strong>{posts._id}</h5>
-                <h5 ><strong>Categoria: </strong>{posts.post_category}</h5>
-                <h5><strong>Local: </strong>{posts.post_place}</h5>
-                <h5><strong>Status da postagem: </strong>{posts.post_status}</h5>
-                <h5><strong>Descrição: </strong></h5>
+                {/* <h5 ><strong>ID: </strong>{posts._id}</h5> */}
+                <h5><strong>{posts.post_title}</strong></h5>
+                <h5>{posts.post_category}</h5>
+                <h6>{posts.post_place}</h6>
+                {/* <h5><strong>Status da postagem: </strong>{posts.post_status}</h5> */}
+
+                <hr></hr>
+
                 <p>{posts.post_description}</p>
                 <h5><strong>Imagens: </strong></h5>
                 <div className="fotos">
@@ -79,6 +83,7 @@ class Anuncio extends React.Component {
                   <img className="foto1" src={unb2} alt="Unb2" style={ {marginRight: "10px"}} />
                   <img className="foto1" src={unb3} alt="Unb3" style={ {marginRight: "10px"}} />
                 </div><br/>
+
                 <form onSubmit={this.handleSubmit}>
                   <label style={{marginLeft: "80%", marginRight: "10px" }}>
                     Alterar estado para:<br/>
@@ -89,10 +94,12 @@ class Anuncio extends React.Component {
                       <option value="Arquivado">Arquivado</option>
                     </select>
                   </label>
+
                   <div className="modal-footer">
                   <button className="close-button"><Link  style={{color: "white"}} to={{pathname: "/TabelaPosts"}}>Voltar</Link></button>
                   <input className="salve-button" type="submit" value="Salvar"/>
                   </div>
+
                 </form>
               </Modal.Body>
       </Modal.Dialog>
