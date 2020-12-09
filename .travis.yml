@@ -4,7 +4,7 @@ node_js:
 
 addons:
   ssh_known_hosts:
-    - ec2-3-138-105-146.us-east-2.compute.amazonaws.com
+    - ec2-18-191-150-245.us-east-2.compute.amazonaws.com
   sonarcloud:
     organization: "fga-eps-mds-1"
     token: ${SONAR_TOKEN} 
@@ -19,6 +19,7 @@ branches:
 only:
     - master
     - development    
+    - Issue_177-SonarMochaIntegration
 
 before_script:
     - npm install
@@ -32,4 +33,4 @@ deploy:
   script: 
     - bash deploy.sh ${TRAVIS_BRANCH}
   on:
-    branch: master 
+    branch: Issue_177-SonarMochaIntegration 
