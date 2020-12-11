@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiNoticias = axios.create({
-  baseURL: "http://172.25.0.7:3004",
+  baseURL: "http://ec2-18-208-181-242.compute-1.amazonaws.com:3004",
 });
 
 export default apiNoticias;
