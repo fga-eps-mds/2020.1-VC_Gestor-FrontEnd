@@ -14,6 +14,7 @@ class BeneficiosGerenciar extends React.Component {
 
   async getBenefits(){
     const response = await apiBeneficio.get("benefits");
+    console.log(response.data)
     this.setState({benefits: response.data});
   }
 
@@ -25,8 +26,12 @@ class BeneficiosGerenciar extends React.Component {
     if(window.confirm("Tem certeza que quer excluir o benefício?")){
       try{
         await apiBeneficio.delete(`/benefits/${benefitId}`);
-        const beneficios = this.state.benefits.filter((benefit) => benefit.benefit_id !== benefitId);
-        await this.setState({benefits: beneficios});
+        await alert("Beneficio apagado com sucesso");
+        var beneficios = this.state.benefits.filter((benefit) => benefit.benefit_id !== benefitId);
+        await this.setState({benefits: beneficios}, () => {
+          this.getBenefits();
+          });
+        // await this.getBenefits();
       }
       catch(error){
         alert("Ocorreu um erro e não conseguimos excluir o benefício");
