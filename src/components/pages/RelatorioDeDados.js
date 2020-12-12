@@ -8,6 +8,33 @@ import { Link, Redirect } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+function generateGraphs(dataset) {
+  let today = new Date();
+  today.setHours(0);
+  today.setMilliseconds(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  today = today.getTime() -60*1000*60*3;
+  let dayAgo = new Date((new Date().getTime()) - 24 * 60 * 60 * 1000);
+  let countYear = [...Array(366).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-365), 0]; });
+  let countMonth = [...Array(31).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-30), 0]; });
+  let countWeek = [...Array(7).keys()].map((i) => { return [today-1000*60*60*24*Math.abs(i-6), 0]; });
+  let countDay = [...Array(24).keys()].map((i) => { return [today-1000*60*60*Math.abs(i-23), 0]; });
+
+  dataset.forEach((data) => { countYear[Math.abs(data.day - 365)][1]++;});
+
+  dataset.filter((data) => { return data.day < 31; })
+    .forEach((data) => { countMonth[Math.abs(data.day - 30)][1]++;});
+
+  dataset.filter((data) => { return data.day < 7; })
+    .forEach((data) => { countWeek[Math.abs(data.day - 6)][1]++; });
+
+  dataset.filter((data) => { return data.date > dayAgo; })
+    .forEach((data) => { countDay[Math.abs(data.date.getHours()-23)][1]++; });
+
+  return { anual: countYear, mensal: countMonth, semanal: countWeek, diario: countDay };
+}
+
 class RelatorioDeDados extends React.Component {
 
   constructor(props) {
@@ -29,13 +56,21 @@ class RelatorioDeDados extends React.Component {
   }
 
   async componentDidMount() {
-    const limit = 100;
-    const page = 0;
+    let today = new Date();
     var response = await apiPostagem.get("postage/list_all");
-    // let graph = await apiPostagem.get("postage/graphs/dados");
-    // this.setState({ graph: graph.data.data });
+    response.data = response.data.map((post) => {
+      let split = post.post_created_at.split("/");
+      post.post_created_at = new Date(split[1]+"/"+split[0]+"/"+split[2]);
+      return post;
+    });
+    let postagens = response.data.map((post) => {return{
+      date: post.post_created_at,
+      day: ~~((Math.abs(post.post_created_at.getTime() - (today.getTime()))) / (1000 * 60 * 60 * 24)),
+      status: post.post_status,
+    };});
+    this.setState({ graph: generateGraphs(postagens) });
     const data = response.data;
-    var newPosts = data.filter((e) => { return e.post_created_at >= this.dateShow.toISOString(); });
+    var newPosts = data.filter((e) => { return e.post_created_at >= this.dateShow; });
     var tableRank = newPosts.sort((a, b) => { return a.post_support_number < b.post_support_number ? 1 : -1; });
     var users = tableRank.map((user) => user.fk_user_id);
     var soma = 0;
@@ -53,7 +88,7 @@ class RelatorioDeDados extends React.Component {
 
   changeDate(event, dia, type) {
     this.dateShow = event;
-    var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event.toISOString(); });
+    var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event });
     var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
     var likesCount = 0;
     // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});

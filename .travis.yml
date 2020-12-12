@@ -4,7 +4,7 @@ node_js:
 
 addons:
   ssh_known_hosts:
-    - ec2-3-138-105-146.us-east-2.compute.amazonaws.com
+    - ec2-18-191-150-245.us-east-2.compute.amazonaws.com
   sonarcloud:
     organization: "fga-eps-mds-1"
     token: ${SONAR_TOKEN} 
@@ -19,10 +19,11 @@ branches:
 only:
     - master
     - development    
+    - Issue_177-SonarMochaIntegration
 
 before_script:
-    - npm install
-    - sonar-scanner -Dsonar.projectKey=fga-eps-mds_2020.1-VC_Gestor-FrontEnd
+    - npm install && npm run report
+    - sonar-scanner -Dsonar.projectKey=fga-eps-mds_2020.1-VC_Gestor-FrontEnd -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
 script:
   - npm run test && chmod 400 deploy_rsa;

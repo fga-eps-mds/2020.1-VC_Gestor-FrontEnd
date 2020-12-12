@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import apiNoticias from "../../services/apiNoticias";
 import apiPostagem from "../../services/apiPostagem";
 import CameraImg from "../../assets/camera.png";
+import { Redirect } from "react-router-dom";
+
 
 
 class NewsForm extends React.Component {
@@ -18,6 +20,7 @@ class NewsForm extends React.Component {
         image3: "",
         post_id: "",
         posts: [],
+        changePage: false
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -26,8 +29,8 @@ class NewsForm extends React.Component {
     }
 
     async getPosts(){
-      const posts = await apiPostagem.get("posts?limit=100&page=0");
-      this.setState({posts: posts.data.rows});
+      const posts = await apiPostagem.get("postage/list_all");
+      this.setState({posts: posts.data});
     }
 
     componentDidMount(){
@@ -37,7 +40,7 @@ class NewsForm extends React.Component {
     changePostId(event){
       this.setState({post_id: event.target.value});
     }
-  
+
     handleChange(event) {
       switch(event.target.id){
         case  "title":
@@ -69,16 +72,30 @@ class NewsForm extends React.Component {
       event.preventDefault();
 
       const news = this.state;
-
       try{
         await apiNoticias.post("news",  news );
-
+        
         alert("Notícia criada com sucesso!");
+        // <Redirect to={{
+        //   pathname: "/GerenciamentoNoticias/"}}/>
+        this.setState({changePage: true});
       }catch(err){
-        alert("Essa noticia já existe");
+
+        if(err.response.data.error === "Fill request.body correctly, cannot be an empty string or null value ") {
+          alert("Preencha os valores corretamente, não é permitidos valores em branco");
+        } else{
+          if (err.response.data.error === "News already with this title") {
+            alert(" Titulo de notícia já existe, escolha outro título.");
+          }
+          else {
+            alert("Erro na criação da notícia.");
+          }
+        }
+
       }
 
     }
+
   
     render() {
       return (
@@ -121,8 +138,9 @@ class NewsForm extends React.Component {
                 <Form.Group controlId="linkPost" id="linkPostNews">
                     <Form.Label>Atrelar Postagem</Form.Label>
                     <select className="form-control" value={this.state.post_id} onChange={this.changePostId}>
+                      <option key="" value=""> ------------------ </option>
                       {this.state.posts.map((post) => (
-                        <option key={post.post_id} value={post.post_id}>{post.post_id} - {post.title}</option>
+                        <option key={post._id} value={post._id}>{post.post_title}</option>
                       ))}
                     </select>
                 </Form.Group>
@@ -141,10 +159,8 @@ class NewsForm extends React.Component {
               Enviar
             </Button>
           </div>
-    
-        </Form>
-
-        
+          {this.state.changePage ? <Redirect to={{pathname: "/GerenciamentoNoticias/"}}/> : null}
+        </Form>  
       );
     }
   }
