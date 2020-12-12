@@ -75,8 +75,12 @@ class EditBenefitForm extends React.Component {
         await apiBeneficio.put("benefits/"+this.id,  benefit );
         alert("Benefício foi alterado com sucesso!");
         this.props.history.push("/BeneficiosGerenciar");
-      }catch(e){
-        alert("Ocorreu um erro e não foi possível criar o benefício"); 
+      }catch(err){
+        if(err.response.data.error === "Fill request.body correctly, cannot be an empty string or null value ") {
+          alert("Preencha os valores corretamente, não é permitidos valores em branco");
+        } else{
+          alert("Erro na criação de benefício.");
+        } 
       }
     }
 
@@ -107,10 +111,10 @@ class EditBenefitForm extends React.Component {
               </Form.Group>
             </div>
             <div className="row">
-              <Form.Group controlId="price" id="price_">
+              {/* <Form.Group controlId="price" id="price_">
               <Form.Label>Preço</Form.Label>
               <Form.Control type="text" placeholder="Preço" value={this.state.price} onChange={this.handleChange} />
-            </Form.Group>
+            </Form.Group> */}
 
               <Form.Group controlId="quantity" id="quantity_">
               <Form.Label>Quantidade</Form.Label>
