@@ -168,14 +168,68 @@ describe("Dashboard page", function(){
                 render(<RelatorioDeDados />, container);
             });
 
+            // TESTE CARDS DADOS ANUAIS
             await act(async () => {
                 Simulate.click(container.querySelectorAll("ul a")[3]);
             });
 
+            var dashCard1 = container.querySelector(".card-1 h5");
+            var dashCard2 = container.querySelector(".card-2 h5");
+            var dashCard3 = container.querySelector(".card-3 h5");
+            var dashCard4 = container.querySelector(".card-4 h5");
+            assert.equal(dashCard1.textContent, "7");
+            assert.equal(dashCard2.textContent, "2");
+            assert.equal(dashCard3.textContent, "5");
+            assert.equal(dashCard4.textContent, "5");
 
-            const dashDay = container.querySelector(".card-1 h5");
+            // rank de likes anual
+            // var rank = container.querySelectorAll("tbody tr");
+            // assert.equal(rank[1].querySelectorAll("td")[1].textContent, "7");
+            // assert.equal(rank[1].querySelectorAll("td")[2].textContent, "7");
+            // assert.equal(rank[1].querySelectorAll("td")[3].textContent, "7");
 
-            assert.equal(dashDay.textContent, "7");
+
+            // TESTE CARDS DADOS MENSAIS
+            await act(async () => {
+                Simulate.click(container.querySelectorAll("ul a")[2]);
+            });
+
+            var dashCard1 = container.querySelector(".card-1 h5");
+            var dashCard2 = container.querySelector(".card-2 h5");
+            var dashCard3 = container.querySelector(".card-3 h5");
+            var dashCard4 = container.querySelector(".card-4 h5");
+            assert.equal(dashCard1.textContent, "7");
+            assert.equal(dashCard2.textContent, "2");
+            assert.equal(dashCard3.textContent, "5");
+            assert.equal(dashCard4.textContent, "5");
+
+            // TESTE CARDS DADOS SEMANAIS
+            await act(async () => {
+                Simulate.click(container.querySelectorAll("ul a")[1]);
+            });
+
+            var dashCard1 = container.querySelector(".card-1 h5");
+            var dashCard2 = container.querySelector(".card-2 h5");
+            var dashCard3 = container.querySelector(".card-3 h5");
+            var dashCard4 = container.querySelector(".card-4 h5");
+            assert.equal(dashCard1.textContent, "7");
+            assert.equal(dashCard2.textContent, "2");
+            assert.equal(dashCard3.textContent, "5");
+            assert.equal(dashCard4.textContent, "5");
+
+            // TESTE CARDS DADOS DIARIOS
+            await act(async () => {
+                Simulate.click(container.querySelectorAll("ul a")[0]);
+            });
+
+            var dashCard1 = container.querySelector(".card-1 h5");
+            var dashCard2 = container.querySelector(".card-2 h5");
+            var dashCard3 = container.querySelector(".card-3 h5");
+            var dashCard4 = container.querySelector(".card-4 h5");
+            assert.equal(dashCard1.textContent, "6");
+            assert.equal(dashCard2.textContent, "2");
+            assert.equal(dashCard3.textContent, "4");
+            assert.equal(dashCard4.textContent, "5");
             
         })
     })
