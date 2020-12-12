@@ -5,10 +5,11 @@ import { Modal} from "react-bootstrap";
 import { faUserCircle, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { Slide } from "react-slideshow-image";
+// import { Slide } from "react-slideshow-image";
 import unb1 from "../../assets/unb1.jpeg";
 import unb2 from "../../assets/unb2.jpeg";
 import unb3 from "../../assets/unb3.jpeg";
+import { withRouter } from "react-router-dom";
 
 
 class Anuncio extends React.Component {
@@ -44,6 +45,7 @@ class Anuncio extends React.Component {
       } else {
           await apiPostagem.put(`/postage/update_status/${this.props.match.params.post_id}`, { post_status: `${this.state.status}` });
           alert("O estado do post foi alterado para: " + this.state.status);
+          this.props.history.push("/TabelaPosts");
      }
      window.location.reload(false);
     }
@@ -132,4 +134,4 @@ class Anuncio extends React.Component {
   } 
 }
 
-export default Anuncio;
+export default withRouter(Anuncio);
