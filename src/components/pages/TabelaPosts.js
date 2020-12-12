@@ -42,6 +42,7 @@ class TabelaPosts extends React.Component {
     const numRows = response.data.length;
     // console.log( response.data);
     const arrayPages = [];
+    console.log(response.data);
     for (let i = 0; i < total; i++) {
       arrayPages.push(i);
     }
@@ -137,12 +138,12 @@ class TabelaPosts extends React.Component {
   }
 
   filterStatus(e, type) {
-    const array = this.state.filters;
-    const index = array.indexOf(type);
+    var array = this.state.filters;
+    var index = array.indexOf(type);
     if (e.target.checked === true) {
       array.push(type);
       this.setState({
-        tableData: this.state.posts.filter((e) => { return e.status === type; }),
+        tableData: this.state.posts.filter((e) => { return e.post_status === type; }),
         filters: array
       });
     } else {
@@ -151,7 +152,7 @@ class TabelaPosts extends React.Component {
       }
       array.splice(array.indexOf(type), 1);
       this.setState({
-        tableData: this.state.posts.filter((e) => { return e.status === type; })
+        tableData: this.state.posts.filter((e) => { return e.post_status === type; })
       });
     }
     this.filtrar();
@@ -349,8 +350,8 @@ class TabelaPosts extends React.Component {
               </div>
               <div className="menu-txt">
                 <input id="Arquivados" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
-                  onClick={(e) => this.filterStatus(e, "Arquivados")} />
-                <label className="label-txt" for="Arquivados">Arquivados</label>
+                  onClick={(e) => this.filterStatus(e, "Arquivado")} />
+                <label className="label-txt" for="Arquivado">Arquivados</label>
               </div>
               <div className='button-anuncio'>Categoria</div>
               <div className="menu-txt">
@@ -390,8 +391,8 @@ class TabelaPosts extends React.Component {
               </div>
               <div className="menu-txt">
                 <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
-                  onClick={(e) => this.checkFilter(e, "Alimentação nos Campi")} />
-                <label className="label-txt" for="Alimentação nos Campi" id="8">Alimentação nos Campi</label>
+                  onClick={(e) => this.checkFilter(e, "Alimentação nos campi")} />
+                <label className="label-txt" for="Alimentação nos campi" id="8">Alimentação nos Campi</label>
               </div>
               <div className="menu-txt">
                 <input id="Saúde e Seguridade" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
