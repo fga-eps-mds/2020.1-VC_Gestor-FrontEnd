@@ -70,7 +70,7 @@ class App extends React.Component {
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
           <MyRoute exact path='/Anuncio/:post_id' component={Anuncio} />
-          <MyRoute exact path='/Home' component={Home} />
+          <MyRoute exact path='/Home' component={RelatorioDeDados} />
           <MyRoute exact path='/Perfil' component={Perfil} />
           <MyRoute exact path='/' component={RelatorioDeDados} />
           <MyRoute exact path='*' component={p404} />

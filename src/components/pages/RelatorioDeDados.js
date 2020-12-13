@@ -155,7 +155,7 @@ class RelatorioDeDados extends React.Component {
                 <h4 class="card-title">Novas Postagens Anônimas</h4>
                 <p class="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
-                  <h6>A partir de{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                  <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
               </div>
             </div>
@@ -168,7 +168,7 @@ class RelatorioDeDados extends React.Component {
                 <h4 class="card-title">Novos Votos de Apoio</h4>
                 <p class="card-text">
                   <h5>{this.state.likes}</h5>
-                  <h6>A partir de{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                  <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
               </div>
             </div>
