@@ -123,3 +123,7 @@
     border-radius: 5px; 
     box-sizing: border-box;
 }
+
+.cardBenefit{
+    font-family: 'UnBPro', sans-serif;
+}
