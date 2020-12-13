@@ -14,7 +14,7 @@ class BeneficiosGerenciar extends React.Component {
 
   async getBenefits(){
     const response = await apiBeneficio.get("benefits");
-    console.log(response.data)
+    // console.log(response.data);
     this.setState({benefits: response.data});
   }
 
