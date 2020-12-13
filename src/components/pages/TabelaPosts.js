@@ -142,10 +142,8 @@ class TabelaPosts extends React.Component {
     var newTable = this.state.posts;
     if (e.target.checked === true) {
       array.push(type);
-      // console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
       this.setState({
         tableData: newTable.filter((e) => { return e.post_status === type; }),
-        // this.state.posts.filter((e) => { return e.post_status === type; }),
         filters: array
       });
     } else {
@@ -153,10 +151,8 @@ class TabelaPosts extends React.Component {
         this.state.filters.slice(index, 1);
       }
       array.splice(array.indexOf(type), 1);
-      // console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
 
       this.setState({
-        // tableData: this.state.posts.filter((e) => { return e.post_status === type; })
         tableData: newTable.filter((e) => { return e.post_status === type; }),
       });
     }
@@ -164,7 +160,6 @@ class TabelaPosts extends React.Component {
   }
 
   checkFilter(e, type) {
-    // console.log(this.state.tableData);
     if (this.state.check === null || this.state.check === e.target) {
       this.setState({ check: e.target });
     } else {
@@ -206,7 +201,6 @@ class TabelaPosts extends React.Component {
   }
 
   filtrar() {
-    // console.log(this.state.tableData)
     this.setState({ paginaAtual: 0 });
     this.currentPage(0);
     var conjuntoUniverso = [];
@@ -257,7 +251,7 @@ class TabelaPosts extends React.Component {
           // eslint-disable-next-line array-callback-return
           processfinished.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
-        } else {
+        } else if (status === "Arquivado") {
           const processFiled = conjuntoUniverso.filter((e) => { return e.post_status === "Arquivado"; });
           // eslint-disable-next-line array-callback-return
           processFiled.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
