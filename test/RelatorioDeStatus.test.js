@@ -5,7 +5,7 @@ require("jsdom-global")();
 import { act, Simulate } from "react-dom/test-utils";
 import React from "react";
 import {render, unmountComponentAtNode } from "react-dom";
-import RelatorioDeDados from "../src/components/pages/RelatorioDeDados";
+import RelatorioDeStatus from "../src/components/pages/RelatorioDeStatus";
 import apiPostagem from "../src/services/apiPostagem";
 // import apiPostagem from "../../servitextContentces/apiPostagem";
 
@@ -148,7 +148,7 @@ describe("Dashboard page", function(){
             sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData()));
                 
             await act(async () => {
-                render(<RelatorioDeDados />, container);
+                render(<RelatorioDeStatus />, container);
             });
 
             assert(apiPostagem.get.calledOnce);
@@ -157,77 +157,64 @@ describe("Dashboard page", function(){
     describe("Active submition", function(){
         it("Should trigger click", async function(){
             sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData()));
-            var clock = sinon.useFakeTimers({
-                now: 1607461879000,
-                shouldAdvanceTime: false
-            });
             // var time = new Date();
             // console.log(clock);
 
             await act(async () => {
-                render(<RelatorioDeDados />, container);
+                render(<RelatorioDeStatus />, container);
             });
 
-            // TESTE CARDS DADOS ANUAIS
+            // Simular dados anuais
             await act(async () => {
                 Simulate.click(container.querySelectorAll("ul a")[3]);
             });
-
-            var dashCard1 = container.querySelector(".card-1 h5");
-            var dashCard2 = container.querySelector(".card-2 h5");
-            var dashCard3 = container.querySelector(".card-3 h5");
-            var dashCard4 = container.querySelector(".card-4 h5");
+            var dashCard1 = container.querySelector(".card1Status h5");
+            var dashCard2 = container.querySelector(".card2Status h5");
+            var dashCard3 = container.querySelector(".card3Status h5");
+            var dashCard4 = container.querySelector(".card4Status h5");
             assert.equal(dashCard1.textContent, "7");
-            assert.equal(dashCard2.textContent, "2");
-            assert.equal(dashCard3.textContent, "5");
-            assert.equal(dashCard4.textContent, "5");
+            assert.equal(dashCard2.textContent, "0");
+            assert.equal(dashCard3.textContent, "0");
+            assert.equal(dashCard4.textContent, "0");
 
-            // rank de likes anual
-            // var rank = container.querySelectorAll("tbody tr");
-
-
-            // TESTE CARDS DADOS MENSAIS
+            // Simular dados mensais
             await act(async () => {
                 Simulate.click(container.querySelectorAll("ul a")[2]);
             });
-
-            var dashCard1 = container.querySelector(".card-1 h5");
-            var dashCard2 = container.querySelector(".card-2 h5");
-            var dashCard3 = container.querySelector(".card-3 h5");
-            var dashCard4 = container.querySelector(".card-4 h5");
+            var dashCard1 = container.querySelector(".card1Status h5");
+            var dashCard2 = container.querySelector(".card2Status h5");
+            var dashCard3 = container.querySelector(".card3Status h5");
+            var dashCard4 = container.querySelector(".card4Status h5");
             assert.equal(dashCard1.textContent, "7");
-            assert.equal(dashCard2.textContent, "2");
-            assert.equal(dashCard3.textContent, "5");
-            assert.equal(dashCard4.textContent, "5");
+            assert.equal(dashCard2.textContent, "0");
+            assert.equal(dashCard3.textContent, "0");
+            assert.equal(dashCard4.textContent, "0");
 
-            // TESTE CARDS DADOS SEMANAIS
+            // Simular dados semanais
             await act(async () => {
                 Simulate.click(container.querySelectorAll("ul a")[1]);
             });
-
-            var dashCard1 = container.querySelector(".card-1 h5");
-            var dashCard2 = container.querySelector(".card-2 h5");
-            var dashCard3 = container.querySelector(".card-3 h5");
-            var dashCard4 = container.querySelector(".card-4 h5");
+            var dashCard1 = container.querySelector(".card1Status h5");
+            var dashCard2 = container.querySelector(".card2Status h5");
+            var dashCard3 = container.querySelector(".card3Status h5");
+            var dashCard4 = container.querySelector(".card4Status h5");
             assert.equal(dashCard1.textContent, "7");
-            assert.equal(dashCard2.textContent, "2");
-            assert.equal(dashCard3.textContent, "5");
-            assert.equal(dashCard4.textContent, "5");
+            assert.equal(dashCard2.textContent, "0");
+            assert.equal(dashCard3.textContent, "0");
+            assert.equal(dashCard4.textContent, "0");
 
-            // TESTE CARDS DADOS DIARIOS
+           // Simular dados diarios
             await act(async () => {
                 Simulate.click(container.querySelectorAll("ul a")[0]);
             });
-
-            var dashCard1 = container.querySelector(".card-1 h5");
-            var dashCard2 = container.querySelector(".card-2 h5");
-            var dashCard3 = container.querySelector(".card-3 h5");
-            var dashCard4 = container.querySelector(".card-4 h5");
-            assert.equal(dashCard1.textContent, "6");
-            assert.equal(dashCard2.textContent, "2");
-            assert.equal(dashCard3.textContent, "4");
-            assert.equal(dashCard4.textContent, "5");
-            
+            var dashCard1 = container.querySelector(".card1Status h5");
+            var dashCard2 = container.querySelector(".card2Status h5");
+            var dashCard3 = container.querySelector(".card3Status h5");
+            var dashCard4 = container.querySelector(".card4Status h5");
+            assert.equal(dashCard1.textContent, "0");
+            assert.equal(dashCard2.textContent, "0");
+            assert.equal(dashCard3.textContent, "0");
+            assert.equal(dashCard4.textContent, "0");
         })
     })
 });
