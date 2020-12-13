@@ -251,7 +251,7 @@ class RelatorioDeDados extends React.Component {
           </div>
           {/* rank */}
           <div class="col-4 rank">
-            <h4>Registros com o maior apoio</h4>
+            <h4 className="dadosH4"><strong>Registros com o maior apoio</strong></h4>
             <table className="table-rank">
               <thead>
                 <tr className="rank-cab">
@@ -273,7 +273,7 @@ class RelatorioDeDados extends React.Component {
               </tbody>
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
-            <div style={{ float: "right", fontSize: "16px" }}>
+            <div className="visualizar" style={{ float: "right", fontSize: "16px" }}>
               <Link to="/TabelaPosts">Visualizar todos</Link>
             </div>
           </div>
