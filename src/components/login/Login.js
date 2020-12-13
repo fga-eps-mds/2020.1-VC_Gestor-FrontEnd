@@ -207,7 +207,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
+      <div className="login" style={{width:"100vw",height:"80vh",display:"flex",justifyContent:"center", alignItems:"center"}}>
         <div className="login-form">
           {this.switchRender()}
         </div>
