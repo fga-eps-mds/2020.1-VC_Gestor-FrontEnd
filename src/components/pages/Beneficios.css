@@ -23,6 +23,7 @@
     box-sizing: border-box;
     color: #f3f3f3;
     text-align: center !important;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .cardTextBenefits{
@@ -36,6 +37,7 @@
     /* border-radius: 15px; */
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .card-header_ {
@@ -47,6 +49,7 @@
     box-sizing: border-box;
     color: #f3f3f3;
     text-align: center !important;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .formsBenefits{
@@ -79,6 +82,7 @@
     margin: 10px 20px 10px 20px;
     width: 100%;
     background-color: #00a6eb;
+    border-color: #00a6eb;
 }
 
 #submit{

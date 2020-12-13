@@ -16,7 +16,7 @@ body{
   width: 30rem;
   border-radius: 12px;
   box-shadow: 4px 4px #E5E8EF;
-  font-family: "Montserrat", sans-serif;
+  font-family: "UnB-Office", sans-serif;
 }
 .login-input{
   margin-top: 0em;
@@ -28,26 +28,26 @@ body{
 }
 
 .button-next{
-  background-color: #0F4C75;
+  background-color: #003366;
   font-size: 1em;
   color: white;
   height: 4rem;
   border-radius: 10px;
 }
 .button-next:hover{
-  background-color: #155290;
+  background-color: #0068b4;
   color: white;
 }
 
 .button-send{
-  background-color: #0F4C75;
+  background-color: #003366;
   font-size: 1em;
   color: white;
   height: 4rem;
   border-radius: 10px;
 }
 .button-send:hover{
-  background-color: #155290;
+  background-color: #0068b4;
   color: white;
 }
 
@@ -61,7 +61,7 @@ body{
 
 .reset{
   font-size: 1em;
-  color: blue;
+  color: #2e1d86;
 }
 .reset:hover{
   color: darkblue;

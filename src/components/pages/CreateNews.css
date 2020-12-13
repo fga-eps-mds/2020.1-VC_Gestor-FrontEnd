@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    font-family: 'UnB-Office', sans-serif;
 }
  
 .cardHeaderNews {
@@ -19,6 +20,7 @@
     box-sizing: border-box;
     color: #f3f3f3;
     text-align: center !important;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .textNews {
@@ -32,6 +34,7 @@
     /* border-radius: 15px; */
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .newsForm{
@@ -65,10 +68,10 @@
     margin: 20px 20px 10px 20px;
     background-color: #0068b4 !important;
     border: none;
+    font-family: 'UnBPro', sans-serif;
 }
 
-#imgNews{
-    
+#imgNews{   
     margin: 0px 20px 0px 40px;
     width: 125px;
     height: 125px;
