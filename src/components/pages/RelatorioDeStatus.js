@@ -185,28 +185,28 @@ class RelatorioDeStatus extends React.Component {
       }
     };
     return (<>
-      <div class="card text-center" id="graph">
-        <div style={{ marginBottom: "10px" }} class="card-header card-dates">
+      <div className="card text-center" id="graph">
+        <div style={{ marginBottom: "10px" }} className="card-header card-dates">
           <div id="title-header">{title}</div>
-          <ul class="nav nav-pills card-header-tabs">
-            <li class="nav-item" style={"hoje" === this.state.active ? { textDecoration: "underline" } : null}>
-              <a class="nav-link" aria-current="true" href="#!"
+          <ul className="nav nav-pills card-header-tabs">
+            <li className="nav-item" style={"hoje" === this.state.active ? { textDecoration: "underline" } : null}>
+              <a className="nav-link" aria-current="true" href="#!"
                 onClick={() => { changeGraph(3); }}>
                 <span>Hoje</span>
               </a>
             </li>
-            <li class="nav-item" style={"semanal" === this.state.active ? { textDecoration: "underline" } : null}>
-              <a class="nav-link" href="#!" onClick={() => { changeGraph(2); }}>
+            <li className="nav-item" style={"semanal" === this.state.active ? { textDecoration: "underline" } : null}>
+              <a className="nav-link" href="#!" onClick={() => { changeGraph(2); }}>
                 <span>Semanal</span>
               </a>
             </li>
-            <li class="nav-item" style={"mensal" === this.state.active ? { textDecoration: "underline" } : null}>
-              <a class="nav-link" href="#!" onClick={() => { changeGraph(1); }}>
+            <li className="nav-item" style={"mensal" === this.state.active ? { textDecoration: "underline" } : null}>
+              <a className="nav-link" href="#!" onClick={() => { changeGraph(1); }}>
                 <span>Mensal</span>
               </a>
             </li>
-            <li class="nav-item" style={"anual" === this.state.active ? { textDecoration: "underline" } : null}>
-              <a class="nav-link" href="#!" onClick={() => { changeGraph(0); }}>
+            <li className="nav-item" style={"anual" === this.state.active ? { textDecoration: "underline" } : null}>
+              <a className="nav-link" href="#!" onClick={() => { changeGraph(0); }}>
                 <span>Anual</span>
               </a>
             </li>
@@ -249,51 +249,51 @@ class RelatorioDeStatus extends React.Component {
   render() {
     return (
       <div style={{ display: "inline", width: "98%" }}>
-        <div class="row cards">
+        <div className="row cards">
           {/* Card 1 */}
-          <div class="col-sm-3">
-            <div class="card card1Status">
-              <div class="card-body">
-                <h4 class="card-title">Publicações Aguardando</h4>
-                <p class="card-text">
+          <div className="col-sm-3">
+            <div className="card card1Status">
+              <div className="card-body">
+                <h4 className="card-title">Publicações Aguardando</h4>
+                <div className="card-text">
                   <h5>{this.state.waiting}</h5>
-                </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Card 2 */}
-          <div class="col-sm-3">
-            <div class="card card2Status">
-              <div class="card-body">
-                <h4 class="card-title">Publicações em Andamento</h4>
-                <p class="card-text">
+          <div className="col-sm-3">
+            <div className="card card2Status">
+              <div className="card-body">
+                <h4 className="card-title">Publicações em Andamento</h4>
+                <div className="card-text">
                   <h5>{this.state.current}</h5>
-                </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Card 3 */}
-          <div class="col-sm-3">
-            <div class="card card3Status">
-              <div class="card-body">
-                <h4 class="card-title">Publicações Resolvidas</h4>
-                <p class="card-text">
+          <div className="col-sm-3">
+            <div className="card card3Status">
+              <div className="card-body">
+                <h4 className="card-title">Publicações Resolvidas</h4>
+                <div className="card-text">
                   <h5>{this.state.solved}</h5>
-                </p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Card 4 */}
-          <div class="col-sm-3">
-            <div class="card card4Status">
-              <div class="card-body">
-                <h4 class="card-title">Publicações Arquivadas</h4>
-                <p class="card-text">
-                  <h5>{this.state.archived}</h5>
-                </p>
+          <div className="col-sm-3">
+            <div className="card card4Status">
+              <div className="card-body">
+                <h4 className="card-title">Publicações Arquivadas</h4>
+                <div className="card-text">
+                  <h5 className="h5-card4">{this.state.archived}</h5>
+                </div>
               </div>
             </div>
           </div>
