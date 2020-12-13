@@ -137,12 +137,13 @@ class TabelaPosts extends React.Component {
   }
 
   filterStatus(e, type) {
-    const array = this.state.filters;
-    const index = array.indexOf(type);
+    var array = this.state.filters;
+    var index = array.indexOf(type);
+    var newTable = this.state.posts;
     if (e.target.checked === true) {
       array.push(type);
       this.setState({
-        tableData: this.state.posts.filter((e) => { return e.status === type; }),
+        tableData: newTable.filter((e) => { return e.post_status === type; }),
         filters: array
       });
     } else {
@@ -150,8 +151,9 @@ class TabelaPosts extends React.Component {
         this.state.filters.slice(index, 1);
       }
       array.splice(array.indexOf(type), 1);
+
       this.setState({
-        tableData: this.state.posts.filter((e) => { return e.status === type; })
+        tableData: newTable.filter((e) => { return e.post_status === type; }),
       });
     }
     this.filtrar();
@@ -249,7 +251,7 @@ class TabelaPosts extends React.Component {
           // eslint-disable-next-line array-callback-return
           processfinished.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
           // eslint-disable-next-line array-callback-return
-        } else {
+        } else if (status === "Arquivado") {
           const processFiled = conjuntoUniverso.filter((e) => { return e.post_status === "Arquivado"; });
           // eslint-disable-next-line array-callback-return
           processFiled.forEach((e) => { if (e.length !== 0) { conjuntoStatus.push(e); } });
@@ -295,7 +297,7 @@ class TabelaPosts extends React.Component {
 
   showPagination() {
     return (
-      <Pagination className='pagination'>
+      <Pagination className="pagination">
         <Pagination.First onClick={() => this.currentPage(0)} />
         <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
           this.currentPage(this.state.paginaAtual - 1) : null} />
@@ -349,8 +351,8 @@ class TabelaPosts extends React.Component {
               </div>
               <div className="menu-txt">
                 <input id="Arquivados" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
-                  onClick={(e) => this.filterStatus(e, "Arquivados")} />
-                <label className="label-txt" for="Arquivados">Arquivados</label>
+                  onClick={(e) => this.filterStatus(e, "Arquivado")} />
+                <label className="label-txt" for="Arquivado">Arquivados</label>
               </div>
               <div className='button-anuncio'>Categoria</div>
               <div className="menu-txt">
@@ -390,8 +392,8 @@ class TabelaPosts extends React.Component {
               </div>
               <div className="menu-txt">
                 <input id="Alimentação nos Campi" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
-                  onClick={(e) => this.checkFilter(e, "Alimentação nos Campi")} />
-                <label className="label-txt" for="Alimentação nos Campi" id="8">Alimentação nos Campi</label>
+                  onClick={(e) => this.checkFilter(e, "Alimentação nos campi")} />
+                <label className="label-txt" for="Alimentação nos campi" id="8">Alimentação nos Campi</label>
               </div>
               <div className="menu-txt">
                 <input id="Saúde e Seguridade" type="checkbox" defaultChecked={false} style={{ margin: "8px" }}
