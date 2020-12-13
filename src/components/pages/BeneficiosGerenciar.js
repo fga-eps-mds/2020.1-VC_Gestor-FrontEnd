@@ -9,7 +9,7 @@ class BeneficiosGerenciar extends React.Component {
       benefits: null
     };
     //this.getBenefits();
-    this.colors = ["#6FB1DE", "#438ABB", "#226D9F", "#0F4C75"];
+    this.colors = ["#00a6eb", "#0068b4", "#003366", "#2e1d86"];
   }
 
   async getBenefits(){

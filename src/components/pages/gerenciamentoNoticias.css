@@ -1,5 +1,5 @@
 .pagination-button{
-    background-color: #438ABB;
+    background-color: #0068b4;
     color: white;
     font-size: 15px;
     font-weight: bolder;
@@ -29,7 +29,7 @@
     padding: 30px;
 }
 .tabela-noticias-cab th{
-    background-color: #438ABB;
+    background-color: #0068b4;
 }
 
 th{
@@ -38,11 +38,11 @@ th{
 }
 
 tr:nth-child(even):hover{
-    background-color: #5EB2F2;
+    background-color: #00a6eb;
     color: white;
 }
 tr:nth-child(odd):hover{
-    background-color: #5EB2F2;
+    background-color: #00a6eb;
     color: white;
 }
 
