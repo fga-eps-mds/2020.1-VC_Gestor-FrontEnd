@@ -29,7 +29,7 @@ class BeneficiosGerenciar extends React.Component {
         await alert("Beneficio apagado com sucesso");
         var beneficios = this.state.benefits.filter((benefit) => benefit.benefit_id !== benefitId);
         await this.setState({benefits: beneficios}, () => {
-          this.getBenefits();
+          this.componentDidMount();
           });
         // await this.getBenefits();
       }

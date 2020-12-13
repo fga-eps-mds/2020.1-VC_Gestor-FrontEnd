@@ -40,7 +40,7 @@ class TabelaPosts extends React.Component {
     // var slice = response.data.rows.slice(this.state.offset, this.state.offset + this.state.perPage)
     const total = Math.ceil(response.data.length / this.state.perPage)
     const numRows = response.data.length;
-    console.log( response.data);
+    // console.log( response.data);
     const arrayPages = [];
     for (let i = 0; i < total; i++) {
       arrayPages.push(i);
@@ -142,7 +142,7 @@ class TabelaPosts extends React.Component {
     var newTable = this.state.posts;
     if (e.target.checked === true) {
       array.push(type);
-      console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
+      // console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
       this.setState({
         tableData: newTable.filter((e) => { return e.post_status === type; }),
         // this.state.posts.filter((e) => { return e.post_status === type; }),
@@ -153,7 +153,7 @@ class TabelaPosts extends React.Component {
         this.state.filters.slice(index, 1);
       }
       array.splice(array.indexOf(type), 1);
-      console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
+      // console.log(this.state.posts.filter((e) => { return e.post_status === type; }));
 
       this.setState({
         // tableData: this.state.posts.filter((e) => { return e.post_status === type; })
@@ -164,7 +164,7 @@ class TabelaPosts extends React.Component {
   }
 
   checkFilter(e, type) {
-    console.log(this.state.tableData)
+    // console.log(this.state.tableData);
     if (this.state.check === null || this.state.check === e.target) {
       this.setState({ check: e.target });
     } else {
@@ -206,8 +206,7 @@ class TabelaPosts extends React.Component {
   }
 
   filtrar() {
-    console.log(this.state.tableData)
-
+    // console.log(this.state.tableData)
     this.setState({ paginaAtual: 0 });
     this.currentPage(0);
     var conjuntoUniverso = [];
@@ -304,7 +303,7 @@ class TabelaPosts extends React.Component {
 
   showPagination() {
     return (
-      <Pagination className='pagination'>
+      <Pagination className="pagination">
         <Pagination.First onClick={() => this.currentPage(0)} />
         <Pagination.Prev onClick={() => (this.state.paginaAtual !== 0) ?
           this.currentPage(this.state.paginaAtual - 1) : null} />

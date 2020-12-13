@@ -124,13 +124,13 @@ tr:nth-child(odd):hover{
     cursor: pointer;
 }
 .pagination {
-    padding-left: 0;
     list-style: none;
     border-radius: .25rem;
     justify-content: center;
     margin-top: 10px;
-    text-align: center;
-    left: 40%;
+    /* text-align: center; */
+    display: flex;
+    margin-left: 245%;
 }
 
 .menu-txt{
