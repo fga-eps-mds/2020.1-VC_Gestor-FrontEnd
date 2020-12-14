@@ -4,7 +4,7 @@ import "./RelatorioDeDados.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faThumbsUp, faCommentAlt, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import apiPostagem from "../../services/apiPostagem";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Router } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
@@ -274,7 +274,7 @@ class RelatorioDeDados extends React.Component {
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
             <div className="visualizar" style={{ float: "right", fontSize: "16px" }}>
-              <Link to="/TabelaPosts">Visualizar todos</Link>
+              <Router to="/TabelaPosts">Visualizar todos</Router>
             </div>
           </div>
         </div>
