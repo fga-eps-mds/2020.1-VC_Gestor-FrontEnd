@@ -16,10 +16,10 @@
     border-radius: 20%; 
     border: none;
     width: 100%;
-    background-color: #0068b4 !important;
+    background-color: #0068b4;
     box-sizing: border-box;
     color: #f3f3f3;
-    text-align: center !important;
+    text-align: center;
     font-family: 'UnBPro', sans-serif;
 }
 
@@ -66,7 +66,7 @@
 #buttonNews{
     align-items: center;
     margin: 20px 20px 10px 20px;
-    background-color: #0068b4 !important;
+    background-color: #0068b4;
     border: none;
     font-family: 'UnBPro', sans-serif;
 }
