@@ -155,7 +155,7 @@ describe("Dashboard page", function(){
         });      
     });
     describe("Active submition", function(){
-        it("Should trigger click", async function(){
+        it("Should trigger click status", async function(){
             sinon.replace(apiPostagem, "get", sinon.fake.resolves(dashboardData()));
             // var time = new Date();
             // console.log(clock);
@@ -198,7 +198,7 @@ describe("Dashboard page", function(){
             var dashCard2 = container.querySelector(".card2Status h5");
             var dashCard3 = container.querySelector(".card3Status h5");
             var dashCard4 = container.querySelector(".card4Status h5");
-            assert.equal(dashCard1.textContent, "7");
+            assert.equal(dashCard1.textContent, "6");
             assert.equal(dashCard2.textContent, "0");
             assert.equal(dashCard3.textContent, "0");
             assert.equal(dashCard4.textContent, "0");
