@@ -144,7 +144,7 @@ class RelatorioDeDados extends React.Component {
                 <div className="card-text">
                   <h5>{this.state.newPosts}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@ class RelatorioDeDados extends React.Component {
                 <div className="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@ class RelatorioDeDados extends React.Component {
                 <div className="card-text">
                   <h5>{this.state.likes}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ class RelatorioDeDados extends React.Component {
         </div>
       </div>
     );
-  }
+  } 
 }
 
 export default RelatorioDeDados;
