@@ -14,6 +14,15 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
     font-family: "UnBPro", sans-serif;
+    height: 100%;
+}
+
+.card-1 h6{
+    margin-top: 7%;
+}
+
+.card-1 h5{
+    margin-top: 8%;
 }
 
 .card-2{
@@ -23,6 +32,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
     font-family: "UnBPro", sans-serif;
+    max-height: 100%;
 }
 
 .card-3{
@@ -32,6 +42,15 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
     font-family: "UnBPro", sans-serif;
+    height: 100%;
+}
+
+.card-3 h6{
+    margin-top: 7%;
+}
+
+.card-3 h5{
+    margin-top: 8%;
 }
 
 .card-4{
@@ -41,6 +60,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
     font-family: "UnBPro", sans-serif;
+    height: 100%;
 }
 
 .table-rank{

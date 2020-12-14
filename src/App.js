@@ -27,7 +27,7 @@ const MyRoute = ({ component: Component, ...rest }) => (
     <Navbar style={{ backgroundColor: "#003366", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
       <div style={{ width: "30%" }}>
       </div>
-      <a href="/" style={{ width: "55%", textAlign: "center", fontWeight: "600", fontFamily: "UnBPro", fontSize: "calc(28px + 6 * ((100vw - 320px) / 680))", color: "white", textDecoration: "none" }}>
+      <a href="/" style={{ width: "500%", textAlign: "center", fontWeight: "600", fontFamily: "UnBPro, sans-serif", fontSize: "calc(22px + 6 * ((100vw - 320px) / 680))", color: "white", textDecoration: "none" }}>
         <img src={process.env.PUBLIC_URL + "/img/logobranca.png"} alt=" " style={{ width: "68px", height: "59", marginRight: "10px" }} />
         Vamos Cuidar
       </a>
