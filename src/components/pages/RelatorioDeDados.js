@@ -89,7 +89,8 @@ class RelatorioDeDados extends React.Component {
   changeDate(event, dia, type) {
     this.dateShow = event;
     var newPostsCount = this.state.posts.filter((e) => { return e.post_created_at >= event });
-    var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
+    // var newTableRank = newPostsCount.sort((a, b) => { return a["likes"] < b["likes"] ? 1 : -1; });
+    var newTableRank = newPostsCount.sort((a, b) => { return a.post_support_number < b.post_support_number ? 1 : -1; });
     var likesCount = 0;
     // newTableRank.map(valor => {return likesCount += parseInt(valor.likes, 10);});
     newTableRank.forEach((valor) => { return likesCount += valor.post_support_number; });
@@ -133,14 +134,14 @@ class RelatorioDeDados extends React.Component {
     let that = this;
     return (
       <div style={{ display: "inline", width: "98%" }}>
-        <div class="row cards">
+        <div className="row cards">
           {/* Card 1 */}
-          <div class="col-sm-3">
-            <div class="card card-1">
-              <div class="card-body">
+          <div className="col-sm-3">
+            <div className="card card-1">
+              <div className="card-body">
                 <FontAwesomeIcon icon={faCommentAlt} style={{ width: "60px", height: "40px", float: "right", marginTop: "20px", color: "#226D9F", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-                <h4 class="card-title">Novas Postagens</h4>
-                <p class="card-text">
+                <h4 className="card-title">Novas Postagens</h4>
+                <div className="card-text">
                   <h5>{this.state.newPosts}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
@@ -148,12 +149,12 @@ class RelatorioDeDados extends React.Component {
             </div>
           </div>
           {/* Card 2 */}
-          <div class="col-sm-3">
-            <div class="card card-2">
-              <div class="card-body">
+          <div className="col-sm-3">
+            <div className="card card-2">
+              <div className="card-body">
                 <FontAwesomeIcon icon={faUserSecret} style={{ width: "40px", height: "40px", float: "right", marginTop: "20px", color: "#35a2eb", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-                <h4 class="card-title">Novas Postagens Anônimas</h4>
-                <p class="card-text">
+                <h4 className="card-title">Novas Postagens Anônimas</h4>
+                <div className="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
@@ -161,12 +162,12 @@ class RelatorioDeDados extends React.Component {
             </div>
           </div>
           {/* Card 3 */}
-          <div class="col-sm-3">
-            <div class="card card-3">
-              <div class="card-body">
+          <div className="col-sm-3">
+            <div className="card card-3">
+              <div className="card-body">
                 <FontAwesomeIcon icon={faThumbsUp} style={{ width: "60px", height: "40px", float: "right", marginTop: "20px", color: "#35a2eb", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-                <h4 class="card-title">Novos Votos de Apoio</h4>
-                <p class="card-text">
+                <h4 className="card-title">Novos Votos de Apoio</h4>
+                <div className="card-text">
                   <h5>{this.state.likes}</h5>
                   <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </p>
@@ -174,46 +175,46 @@ class RelatorioDeDados extends React.Component {
             </div>
           </div>
           {/* Card 4 */}
-          <div class="col-sm-3">
-            <div class="card card-4">
-              <div class="card-body">
+          <div className="col-sm-3">
+            <div className="card card-4">
+              <div className="card-body">
                 <FontAwesomeIcon icon={faUsers} style={{ width: "60px", height: "40px", float: "right", marginTop: "20px", color: "#a7d8f9", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))" }} />
-                <h4 class="card-title">Total de Usuários</h4>
-                <p class="card-text">
+                <h4 className="card-title">Total de Usuários</h4>
+                <div className="card-text">
                   <h5>{this.state.totalUsers}</h5>
                   <h6 style={{ color: "rgba(0, 0, 0, .0)" }}>{this.dateShow.getDate()}</h6>
-                </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         {/* parte do grafico */}
 
-        <div class="row cards" style={{height:"500px"}}>
+        <div className="row cards" style={{height:"500px"}}>
           {/* Card 1 */}
-          <div class="col-8" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <div class="card text-center"  id="graph" >
-              <div class="card-header card-dates">
+          <div className="col-8" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <div className="card text-center"  id="graph" >
+              <div className="card-header card-dates">
                 <div id="title-header">Gráfico de Registros</div>
-                <ul class="nav nav-pills card-header-tabs">
-                  <li class="nav-item" style={"hoje" === this.state.active ? { textDecoration: "underline" } : null}>
-                    <a class="nav-link" aria-current="true" href="#!"
+                <ul className="nav nav-pills card-header-tabs">
+                  <li className="nav-item" style={"hoje" === this.state.active ? { textDecoration: "underline" } : null}>
+                    <a className="nav-link" aria-current="true" href="#!"
                       onClick={() => this.changeDate(new Date(this.today.getTime() - 1000 * 60 * 60 * 24), "hoje", 3)}>
                       <span>Hoje</span>
                     </a>
                   </li>
-                  <li class="nav-item" style={"semanal" === this.state.active ? { textDecoration: "underline" } : null}>
-                    <a class="nav-link" href="#!" onClick={() => this.changeDate(new Date(this.today.getTime() - 1000 * 60 * 60 * 24 * 7), "semanal", 2)}>
+                  <li className="nav-item" style={"semanal" === this.state.active ? { textDecoration: "underline" } : null}>
+                    <a className="nav-link" href="#!" onClick={() => this.changeDate(new Date(this.today.getTime() - 1000 * 60 * 60 * 24 * 7), "semanal", 2)}>
                       <span>Semanal</span>
                     </a>
                   </li>
-                  <li class="nav-item" style={"mensal" === this.state.active ? { textDecoration: "underline" } : null}>
-                    <a class="nav-link" href="#!" onClick={() => this.changeDate(new Date(new Date().setMonth(this.today.getMonth() - 1)), "mensal", 1)}>
+                  <li className="nav-item" style={"mensal" === this.state.active ? { textDecoration: "underline" } : null}>
+                    <a className="nav-link" href="#!" onClick={() => this.changeDate(new Date(new Date().setMonth(this.today.getMonth() - 1)), "mensal", 1)}>
                       <span>Mensal</span>
                     </a>
                   </li>
-                  <li class="nav-item" style={"anual" === this.state.active ? { textDecoration: "underline" } : null}>
-                    <a class="nav-link" href="#!" onClick={() => this.changeDate(new Date(new Date().setFullYear(this.today.getFullYear() - 1)), "anual", 0)}>
+                  <li className="nav-item" style={"anual" === this.state.active ? { textDecoration: "underline" } : null}>
+                    <a className="nav-link" href="#!" onClick={() => this.changeDate(new Date(new Date().setFullYear(this.today.getFullYear() - 1)), "anual", 0)}>
                       <span>Anual</span>
                     </a>
                   </li>
@@ -263,13 +264,12 @@ class RelatorioDeDados extends React.Component {
               <tbody>
 
                 {this.state.tableRank.slice(0,5).map((post) => (
-                  <>
                     <tr key={post._id} onClick={() => this.showPost(post._id)}>
                       <td >{post.post_title}</td>
                       <td >{post.post_description}</td>
                       <td >{post.post_support_number}</td>
                     </tr>
-                  </>))}
+                  ))}
               </tbody>
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
