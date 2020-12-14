@@ -20,7 +20,7 @@ body {
 
 #link-sidebar{
     text-decoration: none;
-    font-size: calc(14px + 8 * ((100vw - 320px) / 680));
+    font-size: calc(10px + 8 * ((100vw - 320px) / 680));
     font-weight: 600;
     font-family: 'UnB-Office', sans-serif;
     color: black;
