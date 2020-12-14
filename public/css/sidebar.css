@@ -71,3 +71,7 @@ body {
 #changeOnHover:hover{
     cursor: pointer;
 }
+
+SubItem{
+    margin-left: 3px;
+}

@@ -22,9 +22,9 @@ function Item(props) {
 
 function SubItem(props) {
     return (<>
-        <Link to={props.href} id="Sublink-sidebar" style={{ display: "flex", alignItems: "right", minWidth: "130px", maxWidth:"205px", width: "14vw" }}>
-            <div style={{minWidth:"28px", maxWidth:"46px"}}></div>
-            <div>{props.title}</div>
+        <Link to={props.href} id="Sublink-sidebar" style={{ alignItems: "center", minWidth: "130px", maxWidth:"205px", width: "14vw" }}>
+            <div style={{marginwidth:"3vw", minWidth:"28px", maxWidth:"60px"}}></div>
+            <div style={{marginLeft: "2px"}}>{props.title}</div>
         </Link>
     </>);
 };
@@ -49,7 +49,7 @@ class Sidebar extends React.Component {
             title: "Notícias",
             icon: faBell,
             options :[{
-                title: "Criação de Notícias",
+                title:"Criação de Notícias",
                 href: "/CreateNews"
             },{
                 title: "Gerenciamento de Notícias",
@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
                 title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
-                title: "Gerenciar Benefícios",
+                title: "Gerenciamento de Benefícios",
                 href: "/BeneficiosGerenciar"
             }]
         }, {

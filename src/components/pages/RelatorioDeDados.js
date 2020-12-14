@@ -192,7 +192,7 @@ class RelatorioDeDados extends React.Component {
 
         <div className="row cards" style={{height:"500px"}}>
           {/* Card 1 */}
-          <div className="col-8" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+          <div className="col-8" style={{justifyContent:"center",alignItems:"center"}}>
             <div className="card text-center"  id="graph" >
               <div className="card-header card-dates">
                 <div id="title-header">Gráfico de Registros</div>
