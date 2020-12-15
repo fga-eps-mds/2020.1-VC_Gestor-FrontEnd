@@ -3,6 +3,7 @@
     justify-content:left;
     background-color: beige;
     display:flex;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .card-Titulo{
@@ -11,6 +12,7 @@
     align-items: flex-start;
     width: 100%;
     position: relative;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .modal {
@@ -22,6 +24,7 @@
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .salve-button {
@@ -29,22 +32,24 @@
     display: block;
     font-size: 14px;
     padding: 13px;
-    background: #0F4C75;
+    background: #003366;
     color: #fff;
     border: none;
     outline: none;
     border-radius: 0.25rem;
+    font-family: 'UnBPro', sans-serif;
 }
 .close-button {
     position: relative;
     display: block;
     font-size: 14px;
     padding: 13px;
-    background: slategray;
+    background: #5d5d5d;
     color: #fff;
     border: none;
     outline: none;
     border-radius: 0.25rem;
+    font-family: 'UnBPro', sans-serif;
 }
 .modal-footer {
     position: relative;
@@ -54,6 +59,7 @@
     width: 100%;
     margin: 0;
     padding: 1.875rem 0 0;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .fotos{

@@ -7,6 +7,8 @@ import apiPostagem from "../../services/apiPostagem";
 import { Link, Redirect } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { withRouter } from "react-router-dom";
+
 
 function generateGraphs(dataset) {
   let today = new Date();
@@ -109,6 +111,11 @@ class RelatorioDeDados extends React.Component {
       showPostId: true,
       idPost: id
     });
+  }
+
+  changePage(){
+    // this.props.history.push("/TabelaPosts");
+    this.props.history.push("/TabelaPosts");
   }
 
   render() {
@@ -274,7 +281,8 @@ class RelatorioDeDados extends React.Component {
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
             <div style={{ float: "right", fontSize: "16px" }}>
-              {/* <Link to="/TabelaPosts">Visualizar todos</Link> */}
+              <a className="LinkGeral" onClick={() => this.changePage()}>Visualizar todos</a>
+              {/* {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null} */}
             </div>
           </div>
         </div>

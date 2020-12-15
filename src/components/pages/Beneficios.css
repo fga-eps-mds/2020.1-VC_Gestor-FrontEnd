@@ -19,10 +19,11 @@
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border-radius: 20%; 
     width: 100%;
-    background-color: #438ABB !important;
+    background-color: #00a6eb;
     box-sizing: border-box;
     color: #f3f3f3;
     text-align: center !important;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .cardTextBenefits{
@@ -36,6 +37,7 @@
     /* border-radius: 15px; */
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .card-header_ {
@@ -43,15 +45,15 @@
     border-radius: 20%; 
     width: 100%;
     margin-top: -10%;
-    background-color: #438ABB !important;
-    box-sizing: border-box;
+    background-color: #00a6eb;
     color: #f3f3f3;
     text-align: center !important;
+    font-family: 'UnBPro', sans-serif;
 }
 
 .formsBenefits{
     width: 100%;
-    background-color: red;
+    /* background-color: red; */
 }
 
 #title_{
@@ -74,10 +76,12 @@
     margin: 10px 20px 10px 20px;
     width: 100%;
 }
-.button_{
+#button_{
     align-items: center;
     margin: 10px 20px 10px 20px;
     width: 100%;
+    background-color: #00a6eb;
+    border-color: #00a6eb;
 }
 
 #submit{
@@ -97,10 +101,10 @@
     text-decoration: none;
 }
 .wrongFormat{
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  box-shadow: 0 0 5px #00a6eb;
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
-  border: 1px solid rgba(81, 203, 238, 1);
+  border: 1px solid #00a6eb;
 }
 
 .cardEdit {
@@ -117,4 +121,8 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px; 
     box-sizing: border-box;
+}
+
+.cardBenefit{
+    font-family: 'UnBPro', sans-serif;
 }
