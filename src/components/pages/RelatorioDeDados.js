@@ -4,9 +4,11 @@ import "./RelatorioDeDados.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faThumbsUp, faCommentAlt, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import apiPostagem from "../../services/apiPostagem";
-import { Link, Redirect, Router } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { withRouter } from "react-router-dom";
+
 
 function generateGraphs(dataset) {
   let today = new Date();
@@ -111,6 +113,10 @@ class RelatorioDeDados extends React.Component {
     });
   }
 
+  changePage(){
+    this.props.history.push("/TabelaPosts");
+  }
+
   render() {
     let data = [[0, 0]];
     if (this.state.graph !== undefined) {
@@ -143,7 +149,7 @@ class RelatorioDeDados extends React.Component {
                 <h4 className="card-title">Novas Postagens</h4>
                 <div className="card-text">
                   <h5>{this.state.newPosts}</h5>
-                  <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                  <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </div>
               </div>
             </div>
@@ -156,7 +162,7 @@ class RelatorioDeDados extends React.Component {
                 <h4 className="card-title">Novas Postagens Anônimas</h4>
                 <div className="card-text">
                   <h5>{this.state.newPostsAnon}</h5>
-                  <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                  <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </div>
               </div>
             </div>
@@ -169,7 +175,7 @@ class RelatorioDeDados extends React.Component {
                 <h4 className="card-title">Novos Votos de Apoio</h4>
                 <div className="card-text">
                   <h5>{this.state.likes}</h5>
-                  <h6>A partir de {this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
+                  <h6>{this.dateShow.getDate()}/{this.dateShow.getMonth() + 1}/{this.dateShow.getFullYear()}</h6>
                 </div>
               </div>
             </div>
@@ -192,7 +198,7 @@ class RelatorioDeDados extends React.Component {
 
         <div className="row cards" style={{height:"500px"}}>
           {/* Card 1 */}
-          <div className="col-8" style={{justifyContent:"center",alignItems:"center"}}>
+          <div className="col-8" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
             <div className="card text-center"  id="graph" >
               <div className="card-header card-dates">
                 <div id="title-header">Gráfico de Registros</div>
@@ -251,8 +257,8 @@ class RelatorioDeDados extends React.Component {
             </div>
           </div>
           {/* rank */}
-          <div class="col-4 rank">
-            <h4 className="dadosH4"><strong>Registros com o maior apoio</strong></h4>
+          <div className="col-4 rank">
+            <h4>Registros com o maior apoio</h4>
             <table className="table-rank">
               <thead>
                 <tr className="rank-cab">
@@ -273,14 +279,14 @@ class RelatorioDeDados extends React.Component {
               </tbody>
             </table>
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
-            <div className="visualizar" style={{ float: "right", fontSize: "16px" }}>
-              <Router to="/TabelaPosts">Visualizar todos</Router>
+            <div style={{ float: "right", fontSize: "16px" }}>
+              <a className="LinkGeral" onClick={() => this.changePage()}>Visualizar todos</a>
             </div>
           </div>
         </div>
       </div>
     );
-  } 
+  }
 }
 
-export default RelatorioDeDados;
+export default withRouter (RelatorioDeDados);

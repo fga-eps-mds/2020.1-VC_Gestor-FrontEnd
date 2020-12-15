@@ -141,3 +141,13 @@
 .visualizar{
     font-family: "UnBPro", sans-serif;
 }
+
+.LinkGeral:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.LinkGeral:hover{
+    color: #104e7b;
+    cursor: pointer;
+}
