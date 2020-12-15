@@ -114,6 +114,7 @@ class RelatorioDeDados extends React.Component {
   }
 
   changePage(){
+    // this.props.history.push("/TabelaPosts");
     this.props.history.push("/TabelaPosts");
   }
 
@@ -281,6 +282,7 @@ class RelatorioDeDados extends React.Component {
             {this.state.showPostId ? <Redirect to={{ pathname: `/Anuncio/${this.state.idPost}` }} /> : null}
             <div style={{ float: "right", fontSize: "16px" }}>
               <a className="LinkGeral" onClick={() => this.changePage()}>Visualizar todos</a>
+              {/* {this.state.showNewsEdit ? <Redirect to={{pathname: `/NewsEdit/${this.state.idNews}`}}/> : null} */}
             </div>
           </div>
         </div>
@@ -289,4 +291,4 @@ class RelatorioDeDados extends React.Component {
   }
 }
 
-export default withRouter (RelatorioDeDados);
+export default RelatorioDeDados;
