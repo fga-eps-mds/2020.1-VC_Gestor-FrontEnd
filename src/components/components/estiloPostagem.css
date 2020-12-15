@@ -1,6 +1,6 @@
 .button-anuncio {
     padding: 10px 25px;
-    background-color: #0F4C75;
+    background-color: #003366;
     border: none;
     text-align: center;
     color: #FFF;
@@ -10,11 +10,14 @@
     height: 45px;
     border-radius: 6px;
     margin-bottom: 20px;
+    font-family: "UnBPro", sans-serif;
+}
 
-}
 .button-anuncio:hover {
-    background-color: #70B4E6;
+    background-color: #0068b4;
+    font-family: "UnBPro", sans-serif;
 }
+
 .menu-anuncio {
     float: left;
     padding: 10px 15px;
@@ -27,6 +30,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     left: 0;
+    font-family: "UnBPro", sans-serif;
 }
   
 .Abas-contain {
@@ -36,15 +40,16 @@
     cursor: pointer;
     text-align: center;
     font-size: 17px;
+    font-family: "UnBPro", sans-serif;
 }
 
 .Abas-contain-active {
-    border: 1px solid #5EB2F2;
+    border: 1px solid #0068b4;
 }
 .titulo-conteudo {
     font-size: 17px;
     padding: 10px 25px;
-    background-color: #5EB2F2;
+    background-color: #0068b4;
     border: none;
     color: #FFF;
     font-weight: 300px;
@@ -53,7 +58,9 @@
     width: 120px;
     height: 45px;
     border-radius: 6px;
+    font-family: "UnBPro", sans-serif;
 }
+
 .table{
     left: 300px;
     font-family: 'Roboto', sans-serif;
@@ -62,27 +69,34 @@
     border: none;
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    font-family: "UnBPro", sans-serif;
 }
+
 .table-cab{
-    background-color: #0F4C75;
+    background-color: #003366;
     color: #fff;
     border-radius: 10px;
     width: auto;
     align-items: center;  
-
+    font-family: "UnBPro", sans-serif;
 }
+
 th{
-    background-color: #0F4C75;
+    background-color: #003366;
     color: white;
+    font-family: "UnBPro", sans-serif;
 }
 
 tr:nth-child(even):hover{
-    background-color: #5EB2F2;
+    background-color: #0068b4;
     color: white;
+    font-family: "UnBPro", sans-serif;
 }
+
 tr:nth-child(odd):hover{
-    background-color: #5EB2F2;
+    background-color: #0068b4;
     color: white;
+    font-family: "UnBPro", sans-serif;
 }
 
 .modal {
@@ -93,16 +107,20 @@ tr:nth-child(odd):hover{
     border-radius: 10px;
     box-shadow: 0 8px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+    font-family: "UnBPro", sans-serif;
 }
+
 .salve-button {
     font-size: 14px;
     padding: 15px;
-    background: #0F4C75;
+    background: #003366;
     color: #fff;
     border: none;
     outline: none;
     border-radius: 0.25rem;
+    font-family: "UnBPro", sans-serif;
 }
+
 .close-button {
     font-size: 14px;
     padding: 10px;
@@ -111,7 +129,9 @@ tr:nth-child(odd):hover{
     border: none;
     outline: none;
     border-radius: 0.25rem;
+    font-family: "UnBPro", sans-serif;
 }
+
 .modal-footer {
     display: flex;
     align-items: center;
@@ -119,7 +139,9 @@ tr:nth-child(odd):hover{
     width: 100%;
     margin: 0;
     padding: 1.875rem 0 0;
+    font-family: "UnBPro", sans-serif;
 }
+
 .table-cab .a{
     cursor: pointer;
 }

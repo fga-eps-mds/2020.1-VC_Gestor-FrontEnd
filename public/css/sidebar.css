@@ -20,9 +20,9 @@ body {
 
 #link-sidebar{
     text-decoration: none;
-    font-size: calc(14px + 8 * ((100vw - 320px) / 680));
+    font-size: calc(10px + 8 * ((100vw - 320px) / 680));
     font-weight: 600;
-    font-family: 'Tinos', serif;
+    font-family: 'UnB-Office', sans-serif;
     color: black;
 }
 
@@ -35,7 +35,7 @@ body {
     text-decoration: none;
     font-size: calc(8px + 5 * ((100vw - 320px) / 680));
     font-weight: 400;
-    font-family: 'Abel', sans-serif;
+    font-family: 'UnbPro', sans-serif;
     color: black;
 }
 
@@ -70,4 +70,8 @@ body {
 
 #changeOnHover:hover{
     cursor: pointer;
+}
+
+SubItem{
+    margin-left: 3px;
 }

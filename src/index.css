@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_Regular.otf) format('opentype');
+
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_Light.otf) format('opentype');
+
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_Italic.otf) format('opentype');
+
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_Bold.otf) format('opentype');
+
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_BoldItalic.otf) format('opentype');
+
+  font-family: 'UnbPro';
+  src: local('UnbPro'), url(./fonts/UnBPro_Black.otf) format('opentype');
+
+  font-family: 'Unb-Office';
+  src: local('Unb-Office'), url(./UnB-Office_Regular.ttf) format('truetype');
+
+  font-family: 'Unb-Office';
+  src: local('Unb-Office'), url(./UnB-Office_Italic.ttf) format('truetype');
+
+  font-family: 'Unb-Office';
+  src: local('Unb-Office'), url(./UnB-Office_Bold.ttf) format('truetype');
+}

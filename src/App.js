@@ -24,10 +24,10 @@ import { LinkContainer } from "react-router-bootstrap";
 const MyRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (<>
     { isLogged() ? <>
-    <Navbar style={{ backgroundColor: "#0F4C75", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
+    <Navbar style={{ backgroundColor: "#003366", color: "white", borderBottom: "3px solid Silver", justifyContent: "center" }} >
       <div style={{ width: "30%" }}>
       </div>
-      <a href="/" style={{ width: "55%", textAlign: "center", fontWeight: "600", fontFamily: "Big Shoulders Display", fontSize: "calc(28px + 6 * ((100vw - 320px) / 680))", color: "white", textDecoration: "none" }}>
+      <a href="/" style={{ width: "500%", textAlign: "center", fontWeight: "600", fontFamily: "UnBPro, sans-serif", fontSize: "calc(22px + 6 * ((100vw - 320px) / 680))", color: "white", textDecoration: "none" }}>
         <img src={process.env.PUBLIC_URL + "/img/logobranca.png"} alt=" " style={{ width: "68px", height: "59", marginRight: "10px" }} />
         Vamos Cuidar
       </a>
@@ -70,9 +70,9 @@ class App extends React.Component {
           <MyRoute exact path='/Registration' component={Registration} />
           <MyRoute exact path='/TabelaPosts' component={TabelaPosts} />
           <MyRoute exact path='/Anuncio/:post_id' component={Anuncio} />
-          <MyRoute exact path='/Home' component={Home} />
+          <MyRoute exact path='/Home' component={RelatorioDeDados} />
           <MyRoute exact path='/Perfil' component={Perfil} />
-          <MyRoute exact path='/' component={Home} />
+          <MyRoute exact path='/' component={RelatorioDeDados} />
           <MyRoute exact path='*' component={p404} />
         </Switch>
       </BrowserRouter>

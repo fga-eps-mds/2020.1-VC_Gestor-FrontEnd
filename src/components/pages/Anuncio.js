@@ -64,7 +64,7 @@ class Anuncio extends React.Component {
           <Modal.Title>
             <FontAwesomeIcon icon={faUserCircle} style={{ width: "50px", height: "50px", marginRight: "10px" }} />
             {posts.post_author}<br/>
-            <h6><strong>{posts.post_created_at}</strong></h6>
+            <h6>{posts.post_created_at}</h6>
           </Modal.Title>
         </Modal.Header>
 

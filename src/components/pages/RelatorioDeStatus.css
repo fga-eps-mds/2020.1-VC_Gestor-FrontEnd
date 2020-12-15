@@ -1,68 +1,77 @@
 .cards{
     margin-top: 1px;
-    }
-    .cards h5{
+}
+
+.cards h5{
     font-size: 30px;
     font-weight: bold;
-    }
+    font-family: "UnBPro", sans-serif;
+}
     
-    .card1Status{
-    background-color: #6FB1DE;
+.card1Status{
+    background-color: #00a6eb;
     color: #E2E2E2;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
-    }
+    font-family: "UnBPro", sans-serif;
+}
     
-    .card2Status{
-    background-color:#438ABB;;
+.card2Status{
+    background-color:#0068b4;;
     color: #E2E2E2;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
-    }
+    font-family: "UnBPro", sans-serif;
+}
     
-    .card3Status{
-    background-color: #226D9F;
+.card3Status{
+    background-color: #104e7b;
     color: #E2E2E2;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
-    }
+    font-family: "UnBPro", sans-serif;
+}
     
-    .card4Status{
-    background-color: #0F4C75;
+.card4Status{
+    background-color: #003366;
     color: #E2E2E2;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     border: none;
-    }
+    font-family: "UnBPro", sans-serif;
+ }
     
-    .card-header-tabs{
+.card-header-tabs{
     float: right;
-    }
+}
     
-    .card-header-tabs a{
+.card-header-tabs a{
     font-style: normal;
-    color: #454242;
-    }
+    color: #5d5d5d;
+    font-family: "UnBPro", sans-serif;
+}
     
-    .card-header-tabs a:hover {
-    background-color: #226D9F;
+.card-header-tabs a:hover {
+    background-color: #00a6eb;
     color: #FCFCFC;
-    }
+    font-family: "UnBPro", sans-serif;
+}
 
-    #title-header{
-        float: left;
-        height: 100%;
-        margin-top: 5px;
-        font-weight: bold;
-        font-size: 20px;
-        color: black;
-    }
+#title-header{
+    float: left;
+    height: 100%;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    font-family: "UnBPro", sans-serif;
+ }
     
-    #graph{
-        margin-top: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    }
+#graph{
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}

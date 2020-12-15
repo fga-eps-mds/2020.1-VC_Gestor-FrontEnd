@@ -12,7 +12,7 @@ function Icon(props) {
 
 function Item(props) {
     return (<>
-        <div onClick={props.onClick} id="link-sidebar" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", minWidth: "130px", maxWidth:"205px", width: "14vw" }}>
+        <div onClick={props.onClick} id="link-sidebar" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", minWidth: "130px", maxWidth:"205px" }}>
             <FontAwesomeIcon icon={props.icon} style={{ width: "20px", marginRight: "10px" }} />
             {props.title}
             {props.options ? <Icon selected={props.selected}/> : <div style={{ width: "20px" }}></div>}
@@ -22,9 +22,9 @@ function Item(props) {
 
 function SubItem(props) {
     return (<>
-        <Link to={props.href} id="Sublink-sidebar" style={{ display: "flex", alignItems: "center", minWidth: "130px", maxWidth:"205px", width: "14vw" }}>
-            <div style={{width:"3vw", minWidth:"28px", maxWidth:"46px"}}></div>
-            <div>{props.title}</div>
+        <Link to={props.href} id="Sublink-sidebar" style={{ alignItems: "center", minWidth: "130px", maxWidth:"205px", width: "14vw" }}>
+            <div style={{marginwidth:"3vw", minWidth:"28px", maxWidth:"60px"}}></div>
+            <div style={{marginLeft: "2px"}}>{props.title}</div>
         </Link>
     </>);
 };
@@ -49,7 +49,7 @@ class Sidebar extends React.Component {
             title: "Notícias",
             icon: faBell,
             options :[{
-                title: "Criação Notícias",
+                title:"Criação de Notícias",
                 href: "/CreateNews"
             },{
                 title: "Gerenciamento de Notícias",
@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
                 title: "Criação de Benefício",
                 href: "/BeneficiosCriar"
             },{
-                title: "Gerenciar Benefícios",
+                title: "Gerenciamento de Benefícios",
                 href: "/BeneficiosGerenciar"
             }]
         }, {

@@ -88,7 +88,7 @@ class GerenciamentoNoticias extends React.Component {
     return (<>
       <Card style={{ width: "100%" }}>
         <Card.Body>
-          <Card.Header className="titulo-card" >Gerenciamento de Notícias</Card.Header>
+          {/* <Card.Header className="titulo-card" ></Card.Header> */}
           <div className="card-text">
             <table className="tabela-noticias">
                 <thead>

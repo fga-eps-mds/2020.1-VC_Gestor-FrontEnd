@@ -292,7 +292,7 @@ class RelatorioDeStatus extends React.Component {
               <div className="card-body">
                 <h4 className="card-title">Publicações Arquivadas</h4>
                 <div className="card-text">
-                  <h5 className="h5-card4">{this.state.archived}</h5>
+                  <h5>{this.state.archived}</h5>
                 </div>
               </div>
             </div>
